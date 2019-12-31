@@ -5,7 +5,7 @@ EAPI=7
 
 inherit acct-user
 
-DESCRIPTION="An user for music player daemon scrobbler (mpdscribble)"
+DESCRIPTION="A user for music player daemon scrobbler (mpdscribble)"
 ACCT_USER_ID=46
 ACCT_USER_GROUPS=( audio )
 
