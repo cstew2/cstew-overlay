@@ -6,9 +6,7 @@ EAPI="7"
 PYTHON_COMPAT=(python3_{5,6,7})
 PYTHON_REQ_USE="threads(+)"
 
-FORTRAN_NEEDED=lapack
-
-inherit distutils-r1 flag-o-matic fortran-2 multiprocessing toolchain-funcs
+inherit distutils-r1 cmake-utils
 
 DESCRIPTION="Tensor Computation and Deep Neural Network python library"
 HOMEPAGE="https://pytorch.org/"
@@ -17,53 +15,55 @@ SRC_URI="https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="doc cuda lapack mpi test"
+IUSE="doc cuda ffmpeg gflags glog lapack leveldb lmdb mkl mpi protobuf opencl opencv redis tbb test zmq"
 RESTRICT="!test? ( test )"
 
-RDEPEND="virtual/lapack
-		 virtual/cblas
-		 virtual/blas
-		 mpi? (
-			  virtual/mpi
+RDEPEND="
+		cuda? (
+			 sci-libs/magma
+			 dev-libs/cudnn
+			 >=dev-util/nvidia-cuda-toolkit-9.0.176
 		 )
-		 dev-libs/protobuf
-		 dev-libs/protobuf-c
+		 ffmpeg? ( virtual/ffmpeg )
+		 gflags? ( dev-cpp/gflags )
+		 glog?   ( dev-cpp/glog )
+		 leveldb? ( dev-libs/leveldb )
+		 lmdb? ( dev-db/lmdb )
+		 mkl? ( sci-libs/mkl )
+		 !mkl? ( virtual/blas )
+		 mpi? ( virtual/mpi )
+		 opencl? ( virtual/opencl )
+		 opencv? ( media-libs/opencv )
+		 protobuf? ( dev-libs/protobuf )
+		 redis? ( dev-db/redis )
+		 tbb? ( dev-cpp/tbb )
+		 zmq? ( net-libs/zeromq )
 		 dev-util/cpuinfo-collection
 		 dev-python/numpy
 		 dev-python/pyyaml
-		 dev-python/setuptools
 		 dev-python/cffi
-		 cuda? (
-			 sci-libs/magma
-			 >=dev-util/nvidia-cuda-toolkit-9.0.176
-		 )
+		 sys-process/numactl
 		 doc? (
 			 dev-python/sphinx
 			 dev-python/sphinx_rtd_theme
 		 )"
-DEPEND="${RDEPEND}"
-BDEPEND=""
+DEPEND="${RDEPEND}
+		dev-util/ninja
+		dev-python/setuptools
+		test? ( dev-python/pytest )"
 
-src_unpack() {
-	default
+src_configure() {
+	mycmakeargs+=(-DCMAKE_THREAD_PREFER_PTHREAD=TRUE
+				  -DTHREADS_PREFER_PTHREAD_FLAG=TRUE
+				  -DCMAKE_EXE_LINKER_FLAGS=-lpthread)
+	cmake-utils_src_configure
+	distutils-r1_src_configure
 }
 
-python_compile() {
-	default
+src_compile() {
+	distutils-r1_python_compile
 }
 
-python_test() {
-	default
-}
-
-python_install() {
-	default
-}
-
-python_install_all() {
-	#if use doc; then
-		#something
-	#fi
-
-	distutils-r1_python_install_all
+src_install() {
+	cmake-utils_src_install
 }
