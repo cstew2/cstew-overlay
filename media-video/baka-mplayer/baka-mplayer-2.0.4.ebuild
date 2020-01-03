@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-inherit qmake-utils
+inherit qmake-utils xdg-utils
 
 DESCRIPTION="Cross-platform libmpv-based multimedia player with uncluttered design"
 HOMEPAGE="http://bakamplayer.u8sand.net/"
@@ -31,7 +31,7 @@ DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/Baka-MPlayer-${PV}"
 
-PATCHES=( "${FILESDIR}/${P}-gcc5.patch" "${FILESDIR}/${P}-mpv23.patch" )
+PATCHES=( "${FILESDIR}/${P}-gcc5.patch" )
 
 src_prepare() {
 	default
@@ -48,4 +48,12 @@ src_configure() {
 		lrelease="$(qt5_get_bindir)"/lrelease \
 		lupdate="$(qt5_get_bindir)"/lupdate \
 		src/Baka-MPlayer.pro
+}
+
+pkg_postinst() {
+	xdg_icon_cache_update
+}
+
+pkg_postrm() {
+	xdg_icon_cache_update
 }

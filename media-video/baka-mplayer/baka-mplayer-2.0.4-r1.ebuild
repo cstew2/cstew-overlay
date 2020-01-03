@@ -3,21 +3,21 @@
 
 EAPI=7
 
-inherit qmake-utils git-r3 xdg-utils
+inherit qmake-utils xdg-utils
 
 DESCRIPTION="Cross-platform libmpv-based multimedia player with uncluttered design"
 HOMEPAGE="http://bakamplayer.u8sand.net/"
-EGIT_REPO_URI="https://github.com/u8sand/Baka-MPlayer.git"
+SRC_URI="https://github.com/u8sand/Baka-MPlayer/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 BDEPEND="
 	dev-qt/linguist-tools:5
-	virtual/pkgconfig"
-
+	virtual/pkgconfig
+"
 RDEPEND="
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5
@@ -29,7 +29,9 @@ RDEPEND="
 	x11-libs/libX11"
 DEPEND="${RDEPEND}"
 
-S="${WORKDIR}/baka-mplayer-${PV}"
+S="${WORKDIR}/Baka-MPlayer-${PV}"
+
+PATCHES=( "${FILESDIR}/${P}-gcc5.patch" "${FILESDIR}/${P}-mpv23.patch" )
 
 src_prepare() {
 	default
