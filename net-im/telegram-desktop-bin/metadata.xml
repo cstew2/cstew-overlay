@@ -8,5 +8,8 @@
   <upstream>
     <remote-id type="github">telegramdesktop/tdesktop</remote-id>
   </upstream>
+  <use>
+    <flag name="dbus">Build with dbus support</flag>
+  </use>
 </pkgmetadata>
 
