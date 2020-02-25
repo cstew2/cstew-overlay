@@ -1,5 +1,0 @@
-*telegram-desktop-bin-1.9.3 (04 Jan 2020)
-
-  04 Jan 2020;  <loki@gentoo.org> +telegram-desktop-bin-1.9.3.ebuild,
-  -telegram-desktop-bin-1.8.13.ebuild, metadata.xml:
-  net-im/telegram-desktop-bin: 1.9.4 version

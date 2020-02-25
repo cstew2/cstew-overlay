@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -6,7 +6,7 @@ VIRTUALX_REQUIRED="pgo"
 WANT_AUTOCONF="2.1"
 MOZ_ESR=""
 
-PYTHON_COMPAT=( python3_{5,6,7} )
+PYTHON_COMPAT=( python3_{6,7} )
 PYTHON_REQ_USE='ncurses,sqlite,ssl,threads(+)'
 
 # This list can be updated with scripts/get_langs.sh from the mozilla overlay
@@ -51,11 +51,11 @@ KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86"
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="accessibility bindist clang cpu_flags_x86_avx2 debug dbus eme-free geckodriver
-	 +gmp-autoupdate hardened hwaccel jack lto cpu_flags_arm_neon pgo
-	 pulseaudio +screenshot selinux startup-notification +system-av1
-	 +system-harfbuzz +system-icu +system-jpeg +system-libevent
-	 +system-sqlite +system-libvpx +system-webp test wayland wifi"
+IUSE="bindist clang cpu_flags_x86_avx2 dbus debug eme-free geckodriver
+	+gmp-autoupdate hardened hwaccel jack lto cpu_flags_arm_neon pgo
+	pulseaudio +screenshot selinux startup-notification +system-av1
+	+system-harfbuzz +system-icu +system-jpeg +system-libevent
+	+system-sqlite +system-libvpx +system-webp test wayland wifi"
 
 REQUIRED_USE="pgo? ( lto )"
 
@@ -70,7 +70,7 @@ SRC_URI="${SRC_URI}
 CDEPEND="
 	>=dev-libs/nss-3.47.1
 	>=dev-libs/nspr-4.23
-	accessibility? ( dev-libs/atk )
+	dev-libs/atk
 	dev-libs/expat
 	>=x11-libs/cairo-1.10[X]
 	>=x11-libs/gtk+-2.18:2
@@ -113,6 +113,8 @@ CDEPEND="
 	system-webp? ( >=media-libs/libwebp-1.0.2:0= )
 	wifi? (
 		kernel_linux? (
+				sys-apps/dbus
+				dev-libs/dbus-glib
 			net-misc/networkmanager
 		)
 	)
@@ -542,20 +544,8 @@ src_configure() {
 		python/mozbuild/mozbuild/controller/building.py || \
 		die "Failed to disable ccache stats call"
 
-	if use wifi ; then
-		mozconfig_use_enable wifi necko-wifi
-	else
-		mozconfig_annotate '' --disable-necko-wifi
-	fi
-
-	if use !dbus ; then
-		mozconfig_annotate '' --disable-dbus
-		eapply "files/remove_dbus_dependency.patch"
-	fi
-
-	if use !accessibility ; then
-		eapply "files/remove_atk_dependency.patch"
-	fi
+	mozconfig_use_enable dbus
+	mozconfig_use_enable wifi necko-wifi
 
 	mozconfig_use_enable geckodriver
 

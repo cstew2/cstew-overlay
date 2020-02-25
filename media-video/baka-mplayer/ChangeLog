@@ -1,7 +1,0 @@
-*baka-mplayer-2.0.4-r1 (03 Jan 2020)
-
-  03 Jan 2020;  <loki@gentoo.org> +baka-mplayer-2.0.4-r1.ebuild,
-  baka-mplayer-2.0.4.ebuild, baka-mplayer-9999.ebuild:
-  media-video/baka-mplayer: rebump for 2.0.4  Reverted 2.0.4 to it's former
-  state and added 2.0.4-r1 with mpv23 fix. Fixed QA warning about xdg icons
-  given by emerge as well.
