@@ -6,6 +6,6 @@
     <name>Christopher Steward</name>
   </maintainer>
   <upstream>
-    <remote-id type="github">dh4/mupen64plus-qt</remote-id>
+    <remote-id type="github">mupen64plus/mupen64plus-rsp-cxd4</remote-id>
   </upstream>
 </pkgmetadata>

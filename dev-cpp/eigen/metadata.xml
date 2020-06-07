@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>cstew764@gmail.com</email>
+    <name>Christopher Steward</name>
+    <description>local repo Gentoo Overlay</description>
+  </maintainer>
+  <use>
+    <flag name="c++11">Build using the C++11 standard</flag>
+    <flag name="cuda">Build with cuda support</flag>
+    <flag name="openmp">Build with openmp support</flag>
+  </use>
+  <upstream>
+    <remote-id type="bitbucket">eigen/eigen</remote-id>
+  </upstream>
+</pkgmetadata>

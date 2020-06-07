@@ -6,6 +6,6 @@
     <name>Christopher Steward</name>
   </maintainer>
   <upstream>
-    <remote-id type="github">dh4/mupen64plus-qt</remote-id>
+    <remote-id type="github">ata4/angrylion-rdp-plus</remote-id>
   </upstream>
 </pkgmetadata>
