@@ -1,0 +1,11 @@
+diff --git a/wiringPiD/drcNetCmd.h b/wiringPiD/drcNetCmd.h
+index 23f7dc1..3a903cc 100644
+--- a/wiringPiD/drcNetCmd.h
++++ b/wiringPiD/drcNetCmd.h
+@@ -40,5 +40,5 @@ struct drcNetComStruct
+   uint32_t pin ;
+   uint32_t cmd ;
+   uint32_t data ;
+-} comDat ;
++} ;
+ 
