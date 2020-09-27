@@ -7,41 +7,41 @@ PYTHON_COMPAT=(python{3_5,3_6,3_7,3_8})
 
 inherit git-r3 cmake
 
-DESCRIPTION=""
+DESCRIPTION="place-and-route tool"
 HOMEPAGE="https://github.com/YosysHQ/nextpnr"
 EGIT_REPO_URI="https://github.com/YosysHQ/nextpnr.git"
 
-LICENSE=""
+LICENSE="ISC"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="fpga_all fpga_generic fpga_ice40 fpga_ecp5"
+IUSE="all_fpgas generic ice40 ecp5"
 
-DEPEND="dev-util/cmake
-		dev-qt/qtcore:5
+DEPEND="dev-qt/qtcore:5
 		dev-libs/boost[python]
 		dev-cpp/eigen
 		dev-embedded/yosys
-		fpga_ice40 ? ( dev/embedded/icestorm  )
-		fpga_exp5 ? ( dev/embedded/prjtrellis )
+		ice40 ? ( dev-embedded/icestorm  )
+		ecp5 ? ( dev-embedded/prjtrellis )
+		all_fpgas ? ( dev-embedded/icestorm
+					  dev-embedded/prjtrellis )
 		"
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
-
 src_configure() {
-	if use fpga_all ; then
+	if use all_fpgas ; then
 		local mycmakeargs=(
 			-DARCH=all
 		)
-	elif use fpga_generic ; then
+	elif use generic ; then
 		local mycmakeargs=(
 			-DARCH=generic
 		)
-	elif use fpga_ice40 ; then
+	elif use ice40 ; then
 		local mycmakeargs=(
 			-DARCH=ice40
 		)
-	elif use fpga_ecp5 ; then
+	elif use ecp5 ; then
 		local mycmakeargs=(
 			-DARCH=ecp5
 		)

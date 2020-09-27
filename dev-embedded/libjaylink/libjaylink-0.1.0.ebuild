@@ -3,7 +3,7 @@
 
 EAPI="6"
 
-inherit autotools eutils ltprune
+inherit autotools eutils
 
 DESCRIPTION="Library to access J-Link devices"
 HOMEPAGE="https://gitlab.zapb.de/zapb/libjaylink"

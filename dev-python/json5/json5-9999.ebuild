@@ -11,7 +11,7 @@ DESCRIPTION="A JSON5 serializer and parser library for Python 3 written in Cytho
 HOMEPAGE="https://github.com/Kijewski/pyjson5"
 EGIT_REPO_URI="https://github.com/Kijewski/pyjson5.git"
 
-LICENSE="Apache"
+LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"

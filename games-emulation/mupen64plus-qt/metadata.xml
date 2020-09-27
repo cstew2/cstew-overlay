@@ -5,7 +5,4 @@
     <email>cstew764@gmail.com</email>
     <name>Christopher Steward</name>
   </maintainer>
-  <upstream>
-    <remote-id type="github">dh4/mupen64plus-qt</remote-id>
-  </upstream>
 </pkgmetadata>

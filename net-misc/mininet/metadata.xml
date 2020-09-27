@@ -4,10 +4,5 @@
   <maintainer type="person">
     <email>cstew764@gmail.com</email>
     <name>Christopher Steward</name>
-    <description>local repo Gentoo Overlay</description>
   </maintainer>
-  <use>
-    <flag name="tools">Enable the support for the mininet tools</flag>
-    <flag name="xhost">Enable support for xhost></flag>
-  </use>
 </pkgmetadata>

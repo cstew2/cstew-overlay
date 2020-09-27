@@ -9,9 +9,9 @@ inherit git-r3 autotools
 
 DESCRIPTION="Open Source Verilog and SystemC Software - Serious Tools for Real Projects"
 HOMEPAGE="https://www.veripool.org/"
-EGIT_REPO_URI="https://git.veripool.org/git/verilator"
+EGIT_REPO_URI="https://git.veripool.org/git/verilator.git"
 
-LICENSE=""
+LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
@@ -19,10 +19,11 @@ IUSE=""
 DEPEND="dev-lang/perl
 		dev-util/google-perftools
 		sys-process/numactl
-		sys-devel/flex
-		sys-devel/bison"
+		"
 RDEPEND="${DEPEND}"
-BDEPEND=""
+BDEPEND="sys-devel/flex
+		 sys-devel/bison
+		 "
 
 src_prepare() {
 	default

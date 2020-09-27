@@ -1,0 +1,13 @@
+diff --git a/setup.py b/setup.py
+index deed4839..d45b1b33 100644
+--- a/setup.py
++++ b/setup.py
+@@ -23,7 +23,7 @@ setuptools.setup(
+     long_description=long_description,
+     long_description_content_type="text/markdown",
+     url="https://github.com/SymbiFlow/prjxray",
+-    packages=['prjxray'],
++    packages=['prjxray', 'utils'],
+     classifiers=[
+         "Programming Language :: Python :: 3",
+         "License :: OSI Approved :: ISC License",

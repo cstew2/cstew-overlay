@@ -7,13 +7,13 @@ PYTHON_COMPAT=(python{3_6,3_7,3_8})
 
 inherit git-r3
 
-DESCRIPTION="yosys – Yosys Open SYnthesis Suite. This is a framework for RTL synthesis tools."
-HOMEPAGE="http://www.clifford.at/yosys/"
+DESCRIPTION="yosys - Yosys Open SYnthesis Suite. This is a framework for RTL synthesis tools."
+HOMEPAGE="https://www.clifford.at/yosys/"
 EGIT_REPO_URI="https://github.com/YosysHQ/${PN}.git"
 
-LICENSE=""
+LICENSE="ISC"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 IUSE=""
 
 DEPEND="sys-devel/bison
@@ -22,23 +22,23 @@ DEPEND="sys-devel/bison
 		sys-apps/gawk
 		dev-libs/libffi
 		media-gfx/graphviz
-		>=dev-lang/python-3.6
 		dev-libs/boost[python,zlib]
 		sys-libs/zlib
 		dev-lang/tcl
-		dev-util/gperf
 		dev-embedded/abc
+		media-gfx/xdot
 		"
 RDEPEND="${DEPEND}"
-BDEPEND="dev-util/pkgconfig"
+BDEPEND="virtual/pkgconfig
+		 sys-devel/bison
+		 sys-devel/flex
+		 dev-util/gperf
+		"
 
 src_compile() {
 	emake ABCEXTERNAL=/usr/bin/abc all
 }
 
 src_install() {
-	dobin yosys
-	dobin yosys-config
-	dobin yosys-filterlib
-	dobin yosys-smtbmc
+	emake ABCEXTERNAL=/usr/bin/abc DESTDIR="${D}" PREFIX=/usr install
 }

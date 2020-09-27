@@ -11,70 +11,58 @@ DESCRIPTION="Documenting the Xilinx 7-series bit-stream format."
 HOMEPAGE="https://symbiflow.github.io/prjxray-db/"
 EGIT_REPO_URI="https://github.com/SymbiFlow/prjxray.git"
 
-LICENSE=""
+LICENSE="ISC"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test fuzzers artix7 artix7_100t artix7_200t kintex7 zynq7 zynq7010"
 
-DEPEND="dev-python/pyyaml
-		dev-python/junit-xml
-		dev-python/numpy
-		dev-python/intervaltree
-		dev-python/openpyxl
-		dev-python/ordered-set
-		dev-python/parse
-		dev-python/progressbar2
-		dev-python/json5
-		dev-python/pytest
-		dev-python/pyyaml
-		dev-python/simplejson
-		dev-python/sympy
-		dev-python/textx
-		dev-python/yapf
+DEPEND="dev-embedded/yosys
+		dev-embedded/fasm
+		dev-embedded/sdf-timing
+		dev-cpp/abseil-cpp
+		dev-cpp/gtest
+		dev-cpp/gflags
+		dev-cpp/yaml-cpp
 		"
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
 src_configure() {
-		if use test ; then
+	if use test ; then
 		local mycmakeargs=(
 			-DPRJXRAY_BUILD_TESTING=ON
 		)
-		fi
+	fi
 
-		cmake_src_configure
+	cmake_src_configure
 }
 
 src_compile() {
-	emake build
+	cmake_src_compile
 
 	if use fuzzers ; then
 		if use artix7 ; then
-			source ${S}/settings/artix7.sh
+			source "${S}/settings/artix7.sh"
 		elif use artix7_100t ; then
-			source ${S}/settings/artix7_100t.sh
+			source "${S}/settings/artix7_100t.sh"
 		elif use artix7_200t ; then
-			source ${S}/settings/artix7_200t.sh
+			source "${S}/settings/artix7_200t.sh"
 		elif use kintex7 ; then
-			source ${S}/settings/kintex7.sh
+			source "${S}/settings/kintex7.sh"
 		elif use zynq7 ; then
-			source ${S}/settings/zynq7.sh
+			source "${S}/settings/zynq7.sh"
 		elif use zynq7010 ; then
-			source ${S}/settings/zynq7010.sh
+			source "${S}/settings/zynq7010.sh"
 		else
-			source ${S}/settings/artix7.sh
+			source "${S}/settings/artix7.sh"
 		fi
 
-		cd ${S}/fuzzers/
-		emake
+		cd "${S}/fuzzers/"
+		emake build
 	fi
 }
 
 src_install() {
-	dobin ${S}/build/tools/xc7frames2bit
-	dobin ${S}/build/tools/frame_address_decoder
-	dobin ${S}/build/tools/bittool
-	dobin ${S}/build/tools/gen_part_base_yaml
-	dobin ${S}/build/tools/bitread
-	dobin ${S}/build/tools/xc7patch
+	cmake_src_install
+	dolib.so "${WORKDIR}/${P}_build/lib/liblibprjxray.so"
 }

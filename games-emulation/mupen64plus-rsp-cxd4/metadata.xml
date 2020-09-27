@@ -5,7 +5,4 @@
     <email>cstew764@gmail.com</email>
     <name>Christopher Steward</name>
   </maintainer>
-  <upstream>
-    <remote-id type="github">mupen64plus/mupen64plus-rsp-cxd4</remote-id>
-  </upstream>
 </pkgmetadata>

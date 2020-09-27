@@ -3,9 +3,9 @@
 
 EAPI=7
 
-inherit git-r3 cmake-utils
+inherit git-r3 cmake
 
-DESCRIPTION="A low-level N64 video emulation plugin, based on the pixel-perfect angrylion RDP plugin with some improvements."
+DESCRIPTION="A low-level N64 video emulation plugin (based on angrylion RDP)"
 HOMEPAGE="https://github.com/ata4/angrylion-rdp-plus"
 EGIT_REPO_URI="https://github.com/ata4/angrylion-rdp-plus.git"
 

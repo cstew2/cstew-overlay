@@ -1,0 +1,14 @@
+diff --git a/configure.ac b/configure.ac
+index 1f6ec61..fd702cc 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -29,6 +29,9 @@ AC_CHECK_HEADERS([ctype.h getopt.h locale.h math.h signal.h stdio.h stdlib.h   \
+ #-------------------------------------------------------------------------------
+ #                                                         Checks for system libs
+ #-------------------------------------------------------------------------------
++AC_SEARCH_LIBS([cbreak], [tinfow tinfo],,
++    AC_MSG_ERROR([Cannot find a library providing cbreak]))
++
+ AC_CHECK_FUNC(initscr,,
+ [
+   available_ncurses="none"

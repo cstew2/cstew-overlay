@@ -5,7 +5,7 @@ EAPI="5"
 
 EGIT_REPO_URI="https://gitlab.zapb.de/libjaylink/libjaylink.git"
 
-inherit git-r3 autotools eutils ltprune
+inherit git-r3 autotools eutils
 
 DESCRIPTION="Library to access J-Link devices"
 HOMEPAGE="https://gitlab.zapb.de/libjaylink/libjaylink"
@@ -24,9 +24,4 @@ src_prepare() {
 
 src_configure() {
 	econf $(use_enable static-libs static)
-}
-
-src_install() {
-	default
-	prune_libtool_files
 }

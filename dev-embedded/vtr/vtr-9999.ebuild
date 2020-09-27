@@ -11,24 +11,27 @@ DESCRIPTION="Verilog to Routing -- Open Source CAD Flow for FPGA Research"
 HOMEPAGE="https://verilogtorouting.org/"
 EGIT_REPO_URI="https://github.com/verilog-to-routing/vtr-verilog-to-routing.git"
 
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="doc test"
 
-DEPEND="sys-devel/flex
-		sys-devel/bison
-		dev-util/cmake
-		media-libs/freetype
-		x11-libs/libxft
+DEPEND="media-libs/freetype
+		x11-libs/libXft
 		media-libs/fontconfig
-		x11-libs/gtk+
+		x11-libs/gtk+:3
 		dev-lang/perl
-		docs? ( app-doc/doxygen
+		test? (
+			  dev-lang/perl
+		)
+		"
+RDEPEND="${DEPEND}"
+BDEPEND="sys-devel/flex
+		 sys-devel/bison
+		 dev-util/cmake
+		 doc? ( app-doc/doxygen
 				dev-python/sphinx
 				dev-python/sphinx_rtd_theme
 				dev-python/recommonmark
-		)"
-
-RDEPEND="${DEPEND}"
-BDEPEND=""
+			  )
+		"

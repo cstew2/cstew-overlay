@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="A suite of utilities for programming Xilinx FPGAs, CPLDs, and EEPROMs with JTAG"
 HOMEPAGE="https://sourceforge.net/projects/xc3sprog/"
@@ -11,15 +11,15 @@ SRC_URI="https://github.com/matrix-io/{PN}/archive/v${PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64"
-IUSE=""
+KEYWORDS="~amd64"
+IUSE="ftdi ftd2xx"
 
-DEPEND="dev-embedded/libftdi
-		dev-embedded/libftd2xx
+DEPEND="ftdi? ( dev-embedded/libftdi:1 )
+		ftd2xx? ( dev-embedded/libftd2xx )
 		dev-embedded/wiringPi
-		dev-libs/libusb-compat"
+		virtual/libusb:0"
 RDEPEND="${DEPEND}"
-BDEPEND="dev-util/pkgconfig"
+BDEPEND="virtual/pkgconfig"
 
 src_configure() {
 	local mycmakeargs=(

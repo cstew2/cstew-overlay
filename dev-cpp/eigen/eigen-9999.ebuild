@@ -1,10 +1,10 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 FORTRAN_NEEDED="test"
-inherit cmake-utils git-r3 cuda fortran-2
+inherit cmake git-r3 cuda fortran-2
 
 DESCRIPTION="C++ template library for linear algebra"
 HOMEPAGE="http://eigen.tuxfamily.org/"
@@ -12,7 +12,7 @@ EGIT_REPO_URI="https://gitlab.com/libeigen/${PN}.git"
 
 LICENSE="MPL-2.0"
 SLOT="3"
-KEYWORDS="amd64 ~arm arm64 ~ia64 ppc ~ppc64 ~sparc x86 ~amd64-linux ~x86-linux"
+KEYWORDS="~amd64"
 IUSE="altivec c++11 cpu_flags_arm_neon cuda debug doc openmp test" #zvector vsx
 RESTRICT="!test? ( test )"
 

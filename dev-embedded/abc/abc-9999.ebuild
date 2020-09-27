@@ -9,7 +9,7 @@ DESCRIPTION="ABC: System for Sequential Logic Synthesis and Formal Verification"
 HOMEPAGE="https://github.com/YosysHQ/abc"
 EGIT_REPO_URI="https://github.com/YosysHQ/abc.git"
 
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
@@ -17,8 +17,8 @@ IUSE=""
 DEPEND="sys-libs/readline
 	   "
 RDEPEND="${DEPEND}"
-BDEPEND="dev-util/pkgconfig"
+BDEPEND="virtual/pkgconfig"
 
 src_install() {
-	dobin ${S}/abc
+	dobin "${S}/abc"
 }

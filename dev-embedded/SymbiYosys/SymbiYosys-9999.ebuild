@@ -11,7 +11,7 @@ DESCRIPTION="SymbiYosys (sby) -- Front-end for Yosys-based formal verification f
 HOMEPAGE="https://github.com/YosysHQ/SymbiYosys"
 EGIT_REPO_URI="https://github.com/YosysHQ/SymbiYosys.git"
 
-LICENSE=""
+LICENSE="ISC"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
@@ -19,7 +19,11 @@ IUSE=""
 DEPEND="dev-embedded/yosys
 	   "
 RDEPEND="${DEPEND}"
-BDEPEND="dev-util/pkgconfig"
+BDEPEND="virtual/pkgconfig"
+
+src_compile() {
+	:;
+}
 
 src_install() {
 	emake install PREFIX=/usr DESTDIR="${D}"

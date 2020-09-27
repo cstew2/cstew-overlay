@@ -1,0 +1,22 @@
+diff --git a/fasm/__init__.py b/fasm/__init__.py
+index cf5e1cf..6606a53 100644
+--- a/fasm/__init__.py
++++ b/fasm/__init__.py
+@@ -10,7 +10,7 @@
+ # SPDX-License-Identifier: ISC
+ 
+ from __future__ import print_function
+-import textx
++from textx import metamodel_from_file
+ import os.path
+ import argparse
+ from collections import namedtuple
+@@ -119,7 +119,7 @@ def set_feature_model_to_tuple(set_feature_model):
+ 
+ 
+ def get_fasm_metamodel():
+-    return textx.metamodel_from_file(
++    return metamodel_from_file(
+         file_name=os.path.join(os.path.dirname(__file__), 'fasm.tx'),
+         skipws=False)
+ 

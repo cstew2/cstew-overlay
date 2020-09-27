@@ -13,13 +13,12 @@ EGIT_REPO_URI="https://github.com/kyrus/python-junit-xml.git"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE="test"
 
-DEPEND="dev-python/six
-		test? ( dev-python/flake8
+DEPEND="dev-python/six"
+RDEPEND="${DEPEND}"
+BDEPEND="test? ( dev-python/flake8
 				dev-python/pytest-sugar
 				dev-python/pytest-flake8 )
-	   "
-RDEPEND="${DEPEND}"
-BDEPEND=""
+		"

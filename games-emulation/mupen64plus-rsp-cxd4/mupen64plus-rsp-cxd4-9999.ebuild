@@ -9,7 +9,7 @@ DESCRIPTION="Exemplary MSP communications simulator using a normalized VU."
 HOMEPAGE="https://github.com/mupen64plus/mupen64plus-rsp-cxd4"
 EGIT_REPO_URI="https://github.com/mupen64plus/mupen64plus-rsp-cxd4.git"
 
-LICENSE="CC0"
+LICENSE="CC0-1.0"
 SLOT="0"
 KEYWORDS=""
 IUSE=""

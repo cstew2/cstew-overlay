@@ -7,11 +7,11 @@ PYTHON_COMPAT=(python{3_5,3_6,3_7,3_8})
 
 inherit git-r3
 
-DESCRIPTION="Project IceStorm - Lattice iCE40 FPGAs Bitstream Documentaion (Reverse Engineered)"
+DESCRIPTION="Lattice iCE40 FPGAs Bitstream Documentaion (Reverse Engineered)"
 HOMEPAGE="https://github.com/YosysHQ/icestorm"
 EGIT_REPO_URI="https://github.com/YosysHQ/icestorm.git"
 
-LICENSE=""
+LICENSE="ISC"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""

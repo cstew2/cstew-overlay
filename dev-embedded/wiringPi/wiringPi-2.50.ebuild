@@ -3,10 +3,10 @@
 
 EAPI=7
 
-MY_P=final_official_${PV}
+MY_P="final_official_${PV}"
 
-DESCRIPTION="PIN based GPIO access library written in C for the SoC devices used in all Raspberry Pi."
-HOMEPAGE="wiringPi.com"
+DESCRIPTION="PIN based GPIO library written in C for the SoC devices used in all Raspberry Pi"
+HOMEPAGE="http://www.wiringPi.com"
 SRC_URI="https://github.com/${PN}/${PN}/archive/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"
@@ -38,11 +38,11 @@ src_compile() {
 src_install() {
 	cd "${S}/wiringPi"
 	doheader *.h
-	dolib.so libwiringPi.so.${PV}
-	dosym /usr/lib64/libwiringPi.so.${PV} /usr/lib64/libwiringPi.so
+	dolib.so "libwiringPi.so.${PV}"
+	dosym "${ED%/}/usr/lib64/libwiringPi.so.${PV} /usr/lib64/libwiringPi.so"
 
 	cd "${S}/devLib"
 	doheader *.h
-	dolib.so libwiringPiDev.so.${PV}
-	dosym /usr/lib64/libwiringPiDev.so.${PV} /usr/lib64/libwiringPiDev.so
+	dolib.so "libwiringPiDev.so.${PV}"
+	dosym "${ED%/}/usr/lib64/libwiringPiDev.so.${PV} /usr/lib64/libwiringPiDev.so"
 }

@@ -5,9 +5,4 @@
     <email>cstew764@gmail.com</email>
     <name>Christopher Steward</name>
   </maintainer>
-  <longdescription lang="en">
-    Propriety programming language developed by Wolfram Research for general
-    scientific computing including neural networks, machine learning,
-    image processing, geometry, data science, visualizations, and others.
-  </longdescription>
 </pkgmetadata>

@@ -5,7 +5,4 @@
     <email>cstew764@gmail.com</email>
     <name>Christopher Steward</name>
   </maintainer>
-  <upstream>
-    <remote-id type="github">ata4/angrylion-rdp-plus</remote-id>
-  </upstream>
 </pkgmetadata>

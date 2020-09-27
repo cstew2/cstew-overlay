@@ -11,7 +11,7 @@ DESCRIPTION=" Project X-Ray Database: XC7 Series "
 HOMEPAGE="https://github.com/SymbiFlow/prjxray-db"
 EGIT_REPO_URI="https://github.com/SymbiFlow/prjxray-db.git"
 
-LICENSE=""
+LICENSE="CC0-1.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
@@ -22,13 +22,13 @@ RDEPEND="${DEPEND}"
 BDEPEND=""
 
 src_compile() {
-	:;
+	python3 xilinx/python/bbaexport.py --device xc7a35tcsg324-1 --bba xilinx/xc7a35t.bba
 }
 
 src_install() {
 	dodoc README.md
-	mkdir -p ${D}/usr/share/x-ray/database/
-	cp -r ${S}/artix7 ${D}/usr/share/x-ray/database/
-	cp -r ${S}/kintex7 ${D}/usr/share/x-ray/database/
-	cp -r ${S}/zynq7 ${D}/usr/share/x-ray/database/
+	mkdir -p "${D}/usr/share/x-ray/database/"
+	cp -r "${S}/artix7 ${D}/usr/share/x-ray/database/"
+	cp -r "${S}/kintex7 ${D}/usr/share/x-ray/database/"
+	cp -r "${S}/zynq7 ${D}/usr/share/x-ray/database/"
 }

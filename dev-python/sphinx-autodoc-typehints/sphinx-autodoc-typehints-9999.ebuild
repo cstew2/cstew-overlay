@@ -11,7 +11,7 @@ DESCRIPTION="Type hints support for the Sphinx autodoc extension"
 HOMEPAGE="https://github.com/agronholm/sphinx-autodoc-typehints"
 EGIT_REPO_URI="https://github.com/agronholm/sphinx-autodoc-typehints.git"
 
-LICENSE="Apache"
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"

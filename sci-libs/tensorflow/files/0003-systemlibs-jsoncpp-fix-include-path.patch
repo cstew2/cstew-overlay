@@ -1,0 +1,157 @@
+From 24505488cc2b4f06d1bd67e0f64bf4b139eb896e Mon Sep 17 00:00:00 2001
+From: Jason Zaman <jason@perfinion.com>
+Date: Sun, 22 Mar 2020 08:55:23 +0800
+Subject: [PATCH 3/5] systemlibs: jsoncpp: fix include path
+
+The path to jsoncpp when installed on the system are
+jsoncpp/json/json.h, the bundled jsoncpp starts with include/.
+Use bazel's include_prefix and strip_include_prefix to make the
+bundled use the correct paths.
+
+Signed-off-by: Jason Zaman <jason@perfinion.com>
+---
+ .../core/platform/cloud/gcs_file_system.cc    |  2 +-
+ .../platform/cloud/google_auth_provider.cc    |  2 +-
+ tensorflow/core/platform/cloud/oauth_client.h |  2 +-
+ .../profiler/convert/trace_events_to_json.cc  |  2 +-
+ .../convert/trace_events_to_json_test.cc      |  2 +-
+ .../core/profiler/internal/tfprof_timeline.h  |  2 +-
+ third_party/jsoncpp.BUILD                     |  2 ++
+ third_party/systemlibs/jsoncpp.BUILD          | 27 -------------------
+ 8 files changed, 8 insertions(+), 33 deletions(-)
+
+diff --git a/tensorflow/core/platform/cloud/gcs_file_system.cc b/tensorflow/core/platform/cloud/gcs_file_system.cc
+index 18b7ef02b6..8ae0935975 100644
+--- a/tensorflow/core/platform/cloud/gcs_file_system.cc
++++ b/tensorflow/core/platform/cloud/gcs_file_system.cc
+@@ -26,7 +26,7 @@ limitations under the License.
+ #include <io.h>  // for _mktemp
+ #endif
+ #include "absl/base/macros.h"
+-#include "include/json/json.h"
++#include "jsoncpp/json/json.h"
+ #include "tensorflow/core/lib/gtl/map_util.h"
+ #include "tensorflow/core/platform/cloud/curl_http_request.h"
+ #include "tensorflow/core/platform/cloud/file_block_cache.h"
+diff --git a/tensorflow/core/platform/cloud/google_auth_provider.cc b/tensorflow/core/platform/cloud/google_auth_provider.cc
+index e8546ca022..557c4098d7 100644
+--- a/tensorflow/core/platform/cloud/google_auth_provider.cc
++++ b/tensorflow/core/platform/cloud/google_auth_provider.cc
+@@ -24,7 +24,7 @@ limitations under the License.
+ #include <utility>
+ 
+ #include "absl/strings/match.h"
+-#include "include/json/json.h"
++#include "jsoncpp/json/json.h"
+ #include "tensorflow/core/platform/base64.h"
+ #include "tensorflow/core/platform/env.h"
+ #include "tensorflow/core/platform/errors.h"
+diff --git a/tensorflow/core/platform/cloud/oauth_client.h b/tensorflow/core/platform/cloud/oauth_client.h
+index ed8bf25725..b74d4eab26 100644
+--- a/tensorflow/core/platform/cloud/oauth_client.h
++++ b/tensorflow/core/platform/cloud/oauth_client.h
+@@ -18,7 +18,7 @@ limitations under the License.
+ 
+ #include <memory>
+ 
+-#include "include/json/json.h"
++#include "jsoncpp/json/json.h"
+ #include "tensorflow/core/platform/cloud/http_request.h"
+ #include "tensorflow/core/platform/env.h"
+ #include "tensorflow/core/platform/status.h"
+diff --git a/tensorflow/core/profiler/convert/trace_events_to_json.cc b/tensorflow/core/profiler/convert/trace_events_to_json.cc
+index e545bc3384..65ec46f17d 100644
+--- a/tensorflow/core/profiler/convert/trace_events_to_json.cc
++++ b/tensorflow/core/profiler/convert/trace_events_to_json.cc
+@@ -17,7 +17,7 @@ limitations under the License.
+ 
+ #include "absl/strings/str_cat.h"
+ #include "absl/strings/str_format.h"
+-#include "include/json/json.h"
++#include "jsoncpp/json/json.h"
+ #include "tensorflow/core/protobuf/trace_events.pb.h"
+ 
+ namespace tensorflow {
+diff --git a/tensorflow/core/profiler/convert/trace_events_to_json_test.cc b/tensorflow/core/profiler/convert/trace_events_to_json_test.cc
+index da8d57f6f3..2e72cb1cdb 100644
+--- a/tensorflow/core/profiler/convert/trace_events_to_json_test.cc
++++ b/tensorflow/core/profiler/convert/trace_events_to_json_test.cc
+@@ -15,7 +15,7 @@ limitations under the License.
+ 
+ #include "tensorflow/core/profiler/convert/trace_events_to_json.h"
+ 
+-#include "include/json/json.h"
++#include "jsoncpp/json/json.h"
+ #include "tensorflow/core/platform/protobuf.h"
+ #include "tensorflow/core/platform/test.h"
+ #include "tensorflow/core/protobuf/trace_events.pb.h"
+diff --git a/tensorflow/core/profiler/internal/tfprof_timeline.h b/tensorflow/core/profiler/internal/tfprof_timeline.h
+index 834e3c9be9..782104715d 100644
+--- a/tensorflow/core/profiler/internal/tfprof_timeline.h
++++ b/tensorflow/core/profiler/internal/tfprof_timeline.h
+@@ -17,7 +17,7 @@ limitations under the License.
+ #define TENSORFLOW_CORE_PROFILER_INTERNAL_TFPROF_TIMELINE_H_
+ 
+ #include "absl/strings/str_cat.h"
+-#include "include/json/json.h"
++#include "jsoncpp/json/json.h"
+ #include "tensorflow/core/framework/graph.pb.h"
+ #include "tensorflow/core/framework/step_stats.pb.h"
+ #include "tensorflow/core/profiler/internal/tfprof_node_show.h"
+diff --git a/third_party/jsoncpp.BUILD b/third_party/jsoncpp.BUILD
+index cf3cba0555..640a3700dd 100644
+--- a/third_party/jsoncpp.BUILD
++++ b/third_party/jsoncpp.BUILD
+@@ -26,7 +26,9 @@ cc_library(
+         "-DJSON_USE_EXCEPTION=0",
+         "-DJSON_HAS_INT64",
+     ],
++    include_prefix = "jsoncpp",
+     includes = ["include"],
++    strip_include_prefix = "include",
+     visibility = ["//visibility:public"],
+     deps = [":private"],
+ )
+diff --git a/third_party/systemlibs/jsoncpp.BUILD b/third_party/systemlibs/jsoncpp.BUILD
+index 7d54f9289b..b5951e3a34 100644
+--- a/third_party/systemlibs/jsoncpp.BUILD
++++ b/third_party/systemlibs/jsoncpp.BUILD
+@@ -5,35 +5,8 @@ filegroup(
+     visibility = ["//visibility:public"],
+ )
+ 
+-HEADERS = [
+-    "include/json/allocator.h",
+-    "include/json/assertions.h",
+-    "include/json/autolink.h",
+-    "include/json/config.h",
+-    "include/json/features.h",
+-    "include/json/forwards.h",
+-    "include/json/json.h",
+-    "include/json/reader.h",
+-    "include/json/value.h",
+-    "include/json/version.h",
+-    "include/json/writer.h",
+-]
+-
+-genrule(
+-    name = "link_headers",
+-    outs = HEADERS,
+-    cmd = """
+-      for i in $(OUTS); do
+-        i=$${i##*/}
+-        ln -sf $(INCLUDEDIR)/jsoncpp/json/$$i $(@D)/include/json/$$i
+-      done
+-    """,
+-)
+-
+ cc_library(
+     name = "jsoncpp",
+-    hdrs = HEADERS,
+-    includes = ["."],
+     linkopts = ["-ljsoncpp"],
+     visibility = ["//visibility:public"],
+ )
+-- 
+2.24.1
+
