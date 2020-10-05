@@ -112,7 +112,6 @@ RDEPEND="
 	dev-libs/libpcre
 	dev-libs/nsync
 	dev-libs/openssl:0=
-	>=dev-libs/protobuf-3.8.0:=
 	>=dev-libs/re2-0.2019.06.01
 	media-libs/giflib
 	media-libs/libjpeg-turbo
@@ -137,7 +136,6 @@ RDEPEND="
 		>=dev-python/numpy-1.19[${PYTHON_USEDEP}]
 		>=dev-python/google-pasta-0.1.8[${PYTHON_USEDEP}]
 		dev-python/opt-einsum[${PYTHON_USEDEP}]
-		>=dev-python/protobuf-python-3.8.0[${PYTHON_USEDEP}]
 		dev-python/six[${PYTHON_USEDEP}]
 		dev-python/termcolor[${PYTHON_USEDEP}]
 		>=dev-python/grpcio-1.28[${PYTHON_USEDEP}]
@@ -157,7 +155,6 @@ PDEPEND="python? (
 	)"
 BDEPEND="
 	app-arch/unzip
-	>=dev-libs/protobuf-3.8.0
 	dev-java/java-config
 	dev-lang/swig
 	>=dev-util/bazel-3.0
