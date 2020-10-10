@@ -13,7 +13,7 @@ EGIT_REPO_URI="https://github.com/SymbiFlow/prjxray.git"
 
 LICENSE="ISC"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS=""
 IUSE="test fuzzers artix7 artix7_100t artix7_200t kintex7 zynq7 zynq7010"
 
 DEPEND="dev-embedded/fasm

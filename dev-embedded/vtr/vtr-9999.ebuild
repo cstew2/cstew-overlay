@@ -13,7 +13,7 @@ EGIT_REPO_URI="https://github.com/verilog-to-routing/vtr-verilog-to-routing.git"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE="doc test"
 
 DEPEND="media-libs/freetype

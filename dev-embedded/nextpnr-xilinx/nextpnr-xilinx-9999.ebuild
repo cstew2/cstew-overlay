@@ -13,7 +13,7 @@ EGIT_REPO_URI="https://github.com/daveshah1/nextpnr-xilinx.git"
 
 LICENSE="ISC"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE=""
 
 DEPEND="dev-qt/qtcore:5

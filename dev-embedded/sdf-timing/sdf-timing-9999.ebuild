@@ -13,7 +13,7 @@ EGIT_REPO_URI="https://github.com/SymbiFlow/python-sdf-timing.git"
 
 LICENSE="ISC"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE=""
 
 DEPEND="dev-python/pytest

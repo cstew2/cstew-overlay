@@ -13,7 +13,7 @@ EGIT_REPO_URI="https://github.com/YosysHQ/nextpnr.git"
 
 LICENSE="ISC"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE="all_fpgas generic ice40 ecp5"
 
 DEPEND="dev-qt/qtcore:5

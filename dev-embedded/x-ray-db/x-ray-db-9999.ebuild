@@ -13,7 +13,7 @@ EGIT_REPO_URI="https://github.com/SymbiFlow/prjxray-db.git"
 
 LICENSE="CC0-1.0"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE=""
 
 DEPEND="dev-embedded/x-ray

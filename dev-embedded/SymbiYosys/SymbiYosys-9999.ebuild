@@ -13,7 +13,7 @@ EGIT_REPO_URI="https://github.com/YosysHQ/SymbiYosys.git"
 
 LICENSE="ISC"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE=""
 
 DEPEND="dev-embedded/yosys

@@ -13,7 +13,7 @@ EGIT_REPO_URI="https://github.com/YosysHQ/${PN}.git"
 
 LICENSE="ISC"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS=""
 IUSE=""
 
 DEPEND="sys-devel/bison
