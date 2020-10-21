@@ -24,6 +24,9 @@ BDEPEND=""
 S="${WORKDIR}/SuiteSparse-5.8.1/SPQR"
 
 src_compile() {
+	cd ..
+	eapply "${FILESDIR}/no_cuda-arch-3.5.patch"
+	cd "${S}"
 	emake library
 }
 

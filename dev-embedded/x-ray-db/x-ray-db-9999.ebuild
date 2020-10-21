@@ -22,13 +22,13 @@ RDEPEND="${DEPEND}"
 BDEPEND=""
 
 src_compile() {
-	python3 xilinx/python/bbaexport.py --device xc7a35tcsg324-1 --bba xilinx/xc7a35t.bba
+	:;
 }
 
 src_install() {
 	dodoc README.md
 	mkdir -p "${D}/usr/share/x-ray/database/"
-	cp -r "${S}/artix7 ${D}/usr/share/x-ray/database/"
-	cp -r "${S}/kintex7 ${D}/usr/share/x-ray/database/"
-	cp -r "${S}/zynq7 ${D}/usr/share/x-ray/database/"
+	cp -r "${S}/artix7" "${D}/usr/share/x-ray/database/"
+	cp -r "${S}/kintex7" "${D}/usr/share/x-ray/database/"
+	cp -r "${S}/zynq7" "${D}/usr/share/x-ray/database/"
 }

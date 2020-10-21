@@ -25,6 +25,6 @@ src_prepare() {
 }
 
 src_install() {
-	default
+	dobin dwl
 	save_config config.h
 }

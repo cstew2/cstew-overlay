@@ -18,6 +18,8 @@ BDEPEND="virtual/pkgconfig"
 
 S="${WORKDIR}/SuiteSparse-5.8.1/SuiteSparse_config"
 
+PATCHES=( "${FILESDIR}/no_cuda-arch-3.5.patch" )
+
 src_compile() {
 	emake static
 }

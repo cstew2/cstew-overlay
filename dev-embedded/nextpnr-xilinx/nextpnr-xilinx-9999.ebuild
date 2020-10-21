@@ -43,7 +43,7 @@ src_compile() {
 	--device xc7a100tfgg676-1 \
 	--bba "${S}/xilinx/xc7a100t.bba"
 
-	"${WORKDIR}/${P}_build"/bbasm --le -v --files "${S}/xilinx/xc7a100t.bba ${S}/xilinx/xc7a100t.bin"
+	"${WORKDIR}/${P}_build"/bbasm --le -v --files "${S}/xilinx/xc7a100t.bba" "${S}/xilinx/xc7a100t.bin"
 }
 
 src_install() {
@@ -51,6 +51,6 @@ src_install() {
 	dobin "${WORKDIR}/${P}_build"/bbasm
 
 	mkdir -p "${D}/usr/share/x-ray/chipdb/artix7/"
-	cp "${S}/xilinx/xc7a100t.bba ${D}/usr/share/x-ray/chipdb/artix7/"
-	cp "${S}/xilinx/xc7a100t.bin ${D}/usr/share/x-ray/chipdb/artix7/"
+	cp "${S}/xilinx/xc7a100t.bba" "${D}/usr/share/x-ray/chipdb/artix7/"
+	cp "${S}/xilinx/xc7a100t.bin" "${D}/usr/share/x-ray/chipdb/artix7/"
 }
