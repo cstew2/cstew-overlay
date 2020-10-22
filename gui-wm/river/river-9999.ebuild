@@ -11,16 +11,26 @@ EGIT_REPO_URI="https://github.com/ifreund/river.git"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
-IUSE=""
+IUSE="doc"
 
 RDEPEND="gui-libs/wlroots
-		 dev-libs/wayland-protocols
-		 dev-lang/zig-9999
-		 x11-libs/xkbcommon
-		 dev-libs/libevdev
-		 x11-libs/pixman
-		"
+	 dev-libs/wayland-protocols
+	 =dev-lang/zig-9999
+	 x11-libs/libxkbcommon
+	 dev-libs/libevdev
+	 x11-libs/pixman
+	"
 DEPEND="${RDEPEND}
-		virtual/pkg-config
-		docs? ( app-text/scdoc )
-	   "
+	virtual/pkgconfig
+	doc? ( app-text/scdoc )
+       "
+
+src_compile() {
+    zig build -Drelease-safe=true
+}
+
+src_install() {
+    dobin zig-cache/bin/river
+    dobin zig-cache/bin/riverctl
+    dobin zig-cache/bin/rivertile
+}
