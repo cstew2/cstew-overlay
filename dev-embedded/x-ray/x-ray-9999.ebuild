@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -14,7 +14,7 @@ EGIT_REPO_URI="https://github.com/SymbiFlow/prjxray.git"
 LICENSE="ISC"
 SLOT="0"
 KEYWORDS=""
-IUSE="test fuzzers artix7 artix7_100t artix7_200t kintex7 zynq7 zynq7010"
+IUSE="test"
 
 DEPEND="dev-embedded/yosys
 		dev-embedded/fasm
@@ -26,10 +26,12 @@ DEPEND="dev-embedded/yosys
 		"
 RDEPEND="${DEPEND}"
 BDEPEND=""
+PATCHES=( "${FILESDIR}/use_system_libs.patch" )
+
 
 src_configure() {
 	if use test ; then
-		local mycmakeargs=(
+		mycmakeargs+=(
 			-DPRJXRAY_BUILD_TESTING=ON
 		)
 	fi
@@ -39,27 +41,6 @@ src_configure() {
 
 src_compile() {
 	cmake_src_compile
-
-	if use fuzzers ; then
-		if use artix7 ; then
-			source "${S}/settings/artix7.sh"
-		elif use artix7_100t ; then
-			source "${S}/settings/artix7_100t.sh"
-		elif use artix7_200t ; then
-			source "${S}/settings/artix7_200t.sh"
-		elif use kintex7 ; then
-			source "${S}/settings/kintex7.sh"
-		elif use zynq7 ; then
-			source "${S}/settings/zynq7.sh"
-		elif use zynq7010 ; then
-			source "${S}/settings/zynq7010.sh"
-		else
-			source "${S}/settings/artix7.sh"
-		fi
-
-		cd "${S}/fuzzers/"
-		emake build
-	fi
 }
 
 src_install() {

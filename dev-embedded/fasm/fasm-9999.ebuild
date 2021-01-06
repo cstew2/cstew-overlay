@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=(python{3_5,3_6,3_7,3_8})
+PYTHON_COMPAT=(python{3_6,3_7,3_8,3_9})
 
 inherit git-r3 distutils-r1
 
@@ -17,8 +17,7 @@ KEYWORDS=""
 IUSE=""
 
 DEPEND="dev-python/textx
-	   "
+		dev-java/antlr
+		dev-cpp/gtest"
 RDEPEND="${DEPEND}"
 BDEPEND=""
-
-PATCHES=( "${FILESDIR}/fix_textx_calls.patch" )

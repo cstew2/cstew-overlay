@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -14,7 +14,7 @@ EGIT_REPO_URI="https://github.com/SymbiFlow/prjxray.git"
 LICENSE="ISC"
 SLOT="0"
 KEYWORDS=""
-IUSE="test fuzzers artix7 artix7_100t artix7_200t kintex7 zynq7 zynq7010"
+IUSE=""
 
 DEPEND="dev-embedded/fasm
 		dev-embedded/sdf-timing
