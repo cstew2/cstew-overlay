@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-inherit cmake
+inherit cmake-utils
 
 DESCRIPTION="A suite of utilities for programming Xilinx FPGAs, CPLDs, and EEPROMs with JTAG"
 HOMEPAGE="https://sourceforge.net/projects/xc3sprog/"
