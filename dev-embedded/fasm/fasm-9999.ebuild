@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -18,6 +18,15 @@ IUSE=""
 
 DEPEND="dev-python/textx
 		dev-java/antlr
+		dev-cpp/antlr-cpp
 		dev-cpp/gtest"
 RDEPEND="${DEPEND}"
 BDEPEND=""
+
+python_compile() {
+	distutils-r1_python_compile --antlr-runtime=shared
+}
+
+python_install() {
+	distutils-r1_python_install --antlr-runtime=shared
+}
