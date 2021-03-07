@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>cstew764@gmail.com</email>
+    <name>Christopher Steward</name>
+  </maintainer>
+  <use>
+    <flag name="cuda">Enable CUDA backend</flag>
+    <flag name="opencl">Enable OpenCL backend</flag>
+    <flag name="mpi">Enable MPI backend</flag>
+  </use>
+</pkgmetadata>
