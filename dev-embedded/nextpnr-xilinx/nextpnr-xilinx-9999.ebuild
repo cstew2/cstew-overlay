@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=(python{3_5,3_6,3_7,3_8})
+PYTHON_COMPAT=(python{3_8,3_9})
 
 inherit git-r3 cmake python-r1
 
@@ -14,17 +14,18 @@ EGIT_REPO_URI="https://github.com/daveshah1/nextpnr-xilinx.git"
 LICENSE="ISC"
 SLOT="0"
 KEYWORDS=""
-IUSE=""
 
-DEPEND="dev-qt/qtcore:5
-		dev-libs/boost[python]
-		dev-cpp/eigen
+DEPEND="dev-cpp/eigen
 		dev-embedded/yosys
 		dev-embedded/x-ray
 		dev-embedded/x-ray-db
+		dev-libs/boost[python]
+		dev-qt/qtcore:5
 		"
 RDEPEND="${DEPEND}"
-BDEPEND="dev-util/cmake"
+BDEPEND=""
+
+PATCHES=( "${FILESDIR}/new_layout.patch" )
 
 src_configure() {
 	local mycmakeargs=(
@@ -39,11 +40,12 @@ src_compile() {
 	cmake_src_compile
 
 	python3 "${S}/xilinx/python/bbaexport.py" \
-	--xray /usr/share/x-ray/database/artix7 \
-	--device xc7a100tfgg676-1 \
-	--bba "${S}/xilinx/xc7a100t.bba"
+			--xray /usr/share/x-ray/database/artix7 \
+			--metadata /usr/share/x-ray/metadata/artix7 \
+			--device xc7a100tfgg676-2\
+			--bba "${S}/xilinx/xc7a100t.bba"
 
-	"${WORKDIR}/${P}_build"/bbasm --le -v --files "${S}/xilinx/xc7a100t.bba" "${S}/xilinx/xc7a100t.bin"
+	"${WORKDIR}"/"${P}_build"/bbasm --le -v --files "${S}/xilinx/xc7a100t.bba" "${S}/xilinx/xc7a100t.bin"
 }
 
 src_install() {

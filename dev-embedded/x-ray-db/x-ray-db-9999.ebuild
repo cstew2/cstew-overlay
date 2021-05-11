@@ -1,23 +1,19 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=(python{3_5,3_6,3_7,3_8})
-
 inherit git-r3
 
-DESCRIPTION=" Project X-Ray Database: XC7 Series "
+DESCRIPTION="Project X-Ray Database: XC7 Series"
 HOMEPAGE="https://github.com/SymbiFlow/prjxray-db"
 EGIT_REPO_URI="https://github.com/SymbiFlow/prjxray-db.git"
 
 LICENSE="CC0-1.0"
 SLOT="0"
 KEYWORDS=""
-IUSE=""
 
-DEPEND="dev-embedded/x-ray
-	   "
+DEPEND=""
 RDEPEND="${DEPEND}"
 BDEPEND=""
 

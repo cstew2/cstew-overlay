@@ -110,7 +110,7 @@ DEPEND="${RDEPEND}
 BDEPEND=">=dev-util/meson-0.49.2
 	virtual/pkgconfig"
 
-PATCHES=( "${FILESDIR}/mpd-getsocket-fix.patch" )
+PATCHES=()
 
 pkg_setup() {
 	if use eventfd; then

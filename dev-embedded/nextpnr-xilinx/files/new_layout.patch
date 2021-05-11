@@ -1,0 +1,30 @@
+diff --git a/xilinx/python/xilinx_device.py b/xilinx/python/xilinx_device.py
+index 8e429d37..e467daf8 100644
+--- a/xilinx/python/xilinx_device.py
++++ b/xilinx/python/xilinx_device.py
+@@ -1,4 +1,5 @@
+ import json
++import yaml
+ import os
+ from tileconn import apply_tileconn
+ from parse_sdf import parse_sdf_file
+@@ -454,7 +455,10 @@ def import_device(name, prjxray_root, metadata_root):
+ 	# Load intent JSON
+ 	with open(metadata_root + "/wire_intents.json", "r") as ijf:
+ 		ij = json.load(ijf)
+-	with open(prjxray_root + "/" + name + "/tilegrid.json") as gf:
++	with open(prjxray_root + "/mapping/parts.yaml") as mapf:
++		mapy = yaml.safe_load(mapf)
++		shortname = mapy[name]["device"]
++	with open(prjxray_root + "/" + shortname + "/tilegrid.json") as gf:
+ 		tgj = json.load(gf)
+ 	for tile, tiledata in sorted(tgj.items()):
+ 		x = int(tiledata["grid_x"])
+@@ -493,6 +497,6 @@ def import_device(name, prjxray_root, metadata_root):
+ 			if sl[2] == "site":
+ 				continue # header
+ 			d.sites_by_name[sl[2]].package_pin = sl[0]
+-	with open(prjxray_root + "/" + name + "/tileconn.json", "r") as tcf:
++	with open(prjxray_root + "/" + shortname + "/tileconn.json", "r") as tcf:
+ 		apply_tileconn(tcf, d)
+ 	return d

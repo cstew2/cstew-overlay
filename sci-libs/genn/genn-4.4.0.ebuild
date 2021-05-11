@@ -3,10 +3,9 @@
 
 EAPI=7
 
-FORTRAN_NEEDED="test"
 inherit cuda
 
-DESCRIPTION="GeNN is a GPU Neuronal Network simulation using code generation for CUDA"
+DESCRIPTION="A GPU Neuronal Network simulation using code generation for CUDA"
 HOMEPAGE="https://genn-team.github.io/genn/"
 SRC_URI="https://github.com/genn-team/genn/archive/${PV}.tar.gz"
 
@@ -25,14 +24,18 @@ DEPEND="
 src_prepare() {
 	cuda_src_prepare
 	default
+	#use lib64 for building makefile
 	sed -i -e 's~$(PREFIX)/lib~$(PREFIX)/lib64~' Makefile
+
+	#use lib64 for code generation common makefile
+	sed -i -e 's~$(GENN_DIR)/lib~$(GENN_DIR)/lib64~' src/genn/MakefileCommon
 }
 
 src_compile() {
 	local myopts=()
 	use cuda && myopts+=(CUDA_PATH="${EPREFIX}"/opt/cuda/)
 	use opencl && myopts+=(OPENCL_PATH="${EPREFIX}"/usr/include/CL)
-	use mpi && myopts+=(MPI_ENABLE=1)
+	#use mpi && myopts+=(MPI_ENABLE=1)
 	emake "${myopts[@]}" all
 }
 

@@ -1,0 +1,22 @@
+From 4506de7e2b1e3f3d4f9b65b41b74adfebe8a0718 Mon Sep 17 00:00:00 2001
+From: Justin Findlay <justin@findlay.space>
+Date: Mon, 23 Oct 2017 18:25:09 -0700
+Subject: [PATCH] backend.py prevent stack trace when not given overlay
+
+---
+ g_sorcery/backend.py | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/g_sorcery/backend.py b/g_sorcery/backend.py
+index 809ff18..accb43c 100644
+--- a/g_sorcery/backend.py
++++ b/g_sorcery/backend.py
+@@ -617,6 +617,8 @@ def __call__(self, args, config, global_config):
+             Exit status.
+         """
+         args = self.parser.parse_args(args)
++        if not args.overlay:
++            self.parser.error("No overlay specified")
+         info_f = FileJSON(os.path.join(args.overlay, self.sorcery_dir),
+                           "info.json", ["repositories"])
+         self.info = info_f.read()

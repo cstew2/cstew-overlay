@@ -5,9 +5,9 @@ EAPI=7
 
 inherit cmake-utils
 
-DESCRIPTION="A suite of utilities for programming Xilinx FPGAs, CPLDs, and EEPROMs with JTAG"
+DESCRIPTION="A suite of utilities for programming Xilinx FPGAs"
 HOMEPAGE="https://sourceforge.net/projects/xc3sprog/"
-SRC_URI="https://github.com/matrix-io/{PN}/archive/v${PV}.tar.gz"
+SRC_URI="https://github.com/matrix-io/${PN}/archive/v${PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

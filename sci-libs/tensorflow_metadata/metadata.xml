@@ -5,7 +5,4 @@
     <email>cstew764@gmail.com</email>
     <name>Christopher Steward</name>
   </maintainer>
-  <use>
-    <flag name="test">Build and run tests</flag>
-  </use>
 </pkgmetadata>

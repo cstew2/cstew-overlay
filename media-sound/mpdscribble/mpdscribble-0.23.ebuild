@@ -3,38 +3,25 @@
 
 EAPI=7
 
-inherit git-r3 meson ninja-utils
+inherit meson ninja-utils
 
 DESCRIPTION="An MPD client that submits information to Audioscrobbler"
 HOMEPAGE="https://www.musicpd.org/clients/mpdscribble/"
-EGIT_REPO_URI="https://github.com/MusicPlayerDaemon/mpdscribble.git"
+SRC_URI="https://www.musicpd.org/download/${PN}/${PV}/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
-IUSE="+acct"
+KEYWORDS="~amd64 ~ppc ~x86"
+IUSE=""
 
 RDEPEND=">=media-libs/libmpdclient-2.5
 	>=dev-libs/boost-1.62
 	dev-libs/libgcrypt
-	>=net-misc/curl-7.18
-	acct? ( acct-user/mpdscribble )"
-DEPEND="${RDEPEND}
-	dev-util/ninja"
-
-src_prepare() {
-	default
-}
-
-src_configure() {
-	meson_src_configure
-}
-
-src_compile() {
-	eninja -C "${BUILD_DIR}"
-}
+	>=net-misc/curl-7.18"
+DEPEND="${RDEPEND}"
 
 src_install() {
+	default
 	meson_src_install
 	rm -r "${D}/usr/share/doc/mpdscribble"
 	dodoc AUTHORS NEWS README.rst
