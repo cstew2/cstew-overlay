@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="Universal utility for programming FPGA"
 HOMEPAGE="https://sourceforge.net/projects/xc3sprog/"

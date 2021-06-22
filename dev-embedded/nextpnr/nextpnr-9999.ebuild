@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=(python{3_8,3_9})
+PYTHON_COMPAT=(python3_{8,9})
 
 inherit git-r3 cmake
 
@@ -21,9 +21,9 @@ DEPEND="dev-qt/qtcore:5
 		dev-cpp/eigen
 		dev-embedded/yosys
 		ice40? ( dev-embedded/icestorm  )
-		ecp5? ( dev-embedded/prjtrellis )
+		ecp5? ( dev-embedded/trellis )
 		all_fpgas? ( dev-embedded/icestorm
-					  dev-embedded/prjtrellis )
+					 dev-embedded/trellis )
 		"
 RDEPEND="${DEPEND}"
 BDEPEND=""

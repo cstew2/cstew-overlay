@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python{3_8,3_9} )
+PYTHON_COMPAT=( python3_{8,9} )
 DISTUTILS_USE_SETUPTOOLS=no
 
 inherit distutils-r1 prefix
@@ -16,7 +16,7 @@ LICENSE="GPL-2"
 SLOT="0"
 IUSE="bson git test"
 RESTRICT="!test? ( test )"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="~amd64"
 
 DEPEND="bson? ( dev-python/pymongo[${PYTHON_USEDEP}] )
 	git? ( dev-vcs/git )

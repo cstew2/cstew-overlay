@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=(python{3_7,3_8,3_9})
+PYTHON_COMPAT=( python3_{8,9,10} )
 
 inherit distutils-r1
 
@@ -20,11 +20,11 @@ DEPEND="dev-python/numpy
 		dev-python/sympy
 		dev-python/pyparsing
 		dev-python/jinja
-		test? ( dev-python/pytest
-				dev-python/pytest-xdist )
 		docs? ( dev-python/sphinx
-				dev-python/ipython )"
+				dev-python/ipython )
+	   "
 RDEPEND="${DEPEND}"
-BDEPEND=""
+BDEPEND="test? ( dev-python/pytest
+				 dev-python/pytest-xdist )"
 
 S="${WORKDIR}/${PN}2-${PV}"

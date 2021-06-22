@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=(python{3_8,3_9})
+PYTHON_COMPAT=(python3_{8,9,10})
 
 inherit git-r3 distutils-r1
 
@@ -18,12 +18,10 @@ IUSE="test"
 
 DEPEND="dev-python/ply
 		dev-python/pyjson
-		test? ( dev-python/pytest
-				dev-python/tox
-				dev-python/yapf )
 		"
-
 RDEPEND="${DEPEND}"
-BDEPEND=""
+BDEPEND="test? ( dev-python/pytest
+				 dev-python/tox
+				 dev-python/yapf )"
 
 PATCHES=( "${FILESDIR}/remove-testing.patch" )

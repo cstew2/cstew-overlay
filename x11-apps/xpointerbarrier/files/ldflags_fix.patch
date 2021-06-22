@@ -1,0 +1,13 @@
+diff --git a/Makefile b/Makefile
+index 373408b..ec4dc0d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -18,7 +18,7 @@ man1dir = $(mandir)/man1
+ .PHONY: clean install installdirs
+ 
+ $(__NAME__): $(__NAME__).c
+-	$(CC) $(CFLAGS) $(LDFLAGS) -D__NAME__=\"$(__NAME__)\" -o $@ $<
++	$(CC) $(CFLAGS) $< $(LDFLAGS) -D__NAME__=\"$(__NAME__)\" -o $@ 
+ 
+ clean:
+ 	rm -f $(__NAME__)

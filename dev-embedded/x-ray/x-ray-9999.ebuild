@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=(python{3_5,3_6,3_7,3_8})
+PYTHON_COMPAT=(python3_{8,9,10})
 
 inherit git-r3 cmake
 
@@ -27,7 +27,6 @@ DEPEND="dev-embedded/yosys
 RDEPEND="${DEPEND}"
 BDEPEND=""
 PATCHES=( "${FILESDIR}/use_system_libs.patch" )
-
 
 src_configure() {
 	if use test ; then

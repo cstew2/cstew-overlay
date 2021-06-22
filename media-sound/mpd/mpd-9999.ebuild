@@ -11,7 +11,7 @@ EGIT_REPO_URI="https://github.com/MusicPlayerDaemon/MPD.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~ppc ~ppc64 ~x86"
+KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~x86"
 IUSE="+alsa ao +audiofile bzip2 cdio chromaprint +cue +curl doc +dbus
 	+eventfd expat faad +ffmpeg +fifo flac fluidsynth gme +icu +id3tag +inotify
 	+ipv6 jack lame libmpdclient libsamplerate libsoxr +mad mikmod mms
@@ -39,6 +39,7 @@ RESTRICT="!test? ( test )"
 RDEPEND="
 	acct-user/mpd
 	sys-libs/liburing
+	>=dev-libs/libfmt-7.1.2
 	alsa? (
 		media-libs/alsa-lib
 		media-sound/alsa-utils

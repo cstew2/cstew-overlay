@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -28,21 +28,21 @@ PATCHES=(
 )
 
 src_compile() {
-	cd "${S}/wiringPi"
+	cd "${S}"/wiringPi
 	emake
 
-	cd "${S}/devLib"
+	cd "${S}"/devLib
 	emake
 }
 
 src_install() {
-	cd "${S}/wiringPi"
+	cd "${S}"/wiringPi
 	doheader *.h
-	dolib.so "libwiringPi.so.${PV}"
-	dosym "${ED%/}/usr/lib64/libwiringPi.so.${PV} /usr/lib64/libwiringPi.so"
+	dolib.so libwiringPi.so."${PV}"
+	dosym "${ED%/}"/usr/lib64/libwiringPi.so."${PV}" /usr/lib64/libwiringPi.so
 
 	cd "${S}/devLib"
 	doheader *.h
 	dolib.so "libwiringPiDev.so.${PV}"
-	dosym "${ED%/}/usr/lib64/libwiringPiDev.so.${PV} /usr/lib64/libwiringPiDev.so"
+	dosym "${ED%/}"/usr/lib64/libwiringPiDev.so."${PV}" /usr/lib64/libwiringPiDev.so
 }

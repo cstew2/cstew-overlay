@@ -3,13 +3,13 @@
 
 EAPI=7
 
-PYTHON_COMPAT=(python{3_8,3_9})
+PYTHON_COMPAT=(python3_{8,9,10})
 
 inherit git-r3 cmake python-r1
 
 DESCRIPTION="Experimental place-and-route tool for Xilinx devices"
-HOMEPAGE="https://github.com/daveshah1/nextpnr-xilinx"
-EGIT_REPO_URI="https://github.com/daveshah1/nextpnr-xilinx.git"
+HOMEPAGE="https://github.com/gatecat/nextpnr-xilinx"
+EGIT_REPO_URI="https://github.com/gatecat/nextpnr-xilinx.git"
 
 LICENSE="ISC"
 SLOT="0"

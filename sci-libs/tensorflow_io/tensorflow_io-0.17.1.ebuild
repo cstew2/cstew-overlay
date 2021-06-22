@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=(python{3_8})
+PYTHON_COMPAT=(python{3_8,3_9})
 
 inherit distutils-r1 bazel
 
@@ -11,7 +11,7 @@ bazel_external_uris=""
 
 DESCRIPTION="Dataset, streaming, and file system extensions maintained by TensorFlow SIG-IO"
 HOMEPAGE="https://github.com/tensorflow/io"
-SRC_URI="https://github.com/tensorflow/metadata/archive/v${PV}.tar.gz
+SRC_URI="https://github.com/tensorflow/io/archive/v${PV}.tar.gz
 		${bazel_external_uris}"
 
 LICENSE="Apache-2.0"
