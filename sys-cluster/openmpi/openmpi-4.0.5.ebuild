@@ -50,7 +50,7 @@ CDEPEND="
 	dev-libs/libltdl:0[${MULTILIB_USEDEP}]
 	>=sys-apps/hwloc-2.0.2[${MULTILIB_USEDEP}]
 	>=sys-libs/zlib-1.2.8-r1[${MULTILIB_USEDEP}]
-	cuda? ( >=dev-util/nvidia-cuda-toolkit-6.5.19-r1:= )
+	cuda? ( >=dev-util/nvidia-cuda-toolkit-6.5.19-r1:* )
 	openmpi_fabrics_ofed? ( || ( sys-cluster/rdma-core sys-fabric/ofed:* ) )
 	openmpi_fabrics_knem? ( sys-cluster/knem )
 	openmpi_fabrics_psm? ( sys-fabric/infinipath-psm:* )

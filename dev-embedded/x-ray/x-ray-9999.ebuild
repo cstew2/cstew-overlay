@@ -35,6 +35,8 @@ src_configure() {
 		)
 	fi
 
+	sed -i 's/CMAKE_CXX_STANDARD 14/CMAKE_CXX_STANDARD 17/' CMakeLists.txt || die
+
 	cmake_src_configure
 }
 

@@ -11,13 +11,13 @@ EGIT_REPO_URI="https://github.com/MusicPlayerDaemon/MPD.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~x86"
+KEYWORDS=""
 IUSE="+alsa ao +audiofile bzip2 cdio chromaprint +cue +curl doc +dbus
 	+eventfd expat faad +ffmpeg +fifo flac fluidsynth gme +icu +id3tag +inotify
 	+ipv6 jack lame libmpdclient libsamplerate libsoxr +mad mikmod mms
 	modplug mpg123 musepack +network nfs openal opus oss pipe pulseaudio qobuz
 	recorder samba selinux sid signalfd sndfile soundcloud sqlite systemd
-	test tidal twolame udisks unicode vorbis wavpack webdav wildmidi upnp
+	test twolame udisks unicode vorbis wavpack webdav wildmidi upnp
 	zeroconf zip zlib"
 
 OUTPUT_PLUGINS="alsa ao fifo jack network openal oss pipe pulseaudio recorder"
@@ -92,8 +92,6 @@ RDEPEND="
 	soundcloud? ( >=dev-libs/yajl-2:= )
 	sqlite? ( dev-db/sqlite:3 )
 	systemd? ( sys-apps/systemd )
-	tidal? ( dev-libs/yajl
-		net-misc/curl )
 	twolame? ( media-sound/twolame )
 	udisks? ( sys-fs/udisks:2 )
 	upnp? ( net-libs/libupnp:0 )
@@ -233,7 +231,6 @@ src_configure() {
 	emesonargs+=(
 		-Dqobuz=$(usex qobuz enabled disabled)
 		-Dsoundcloud=$(usex soundcloud enabled disabled)
-		-Dtidal=$(usex tidal enabled disabled)
 	)
 
 	emesonargs+=(

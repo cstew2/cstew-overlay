@@ -1,9 +1,9 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=(python3_{8,9,10})
+PYTHON_COMPAT=(python3_{9,10})
 
 inherit git-r3 cmake python-r1
 
@@ -25,11 +25,13 @@ DEPEND="dev-cpp/eigen
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
-PATCHES=( "${FILESDIR}/new_layout.patch" )
+PATCHES=( "${FILESDIR}/new_layout.patch"
+		  "${FILESDIR}/new_eigen.patch" )
 
 src_configure() {
 	local mycmakeargs=(
 		-DARCH=xilinx
+		-DEIGEN3_INCLUDE_DIRS=/usr/include/eigen3
 	)
 
 	cmake_src_configure

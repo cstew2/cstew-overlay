@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -21,6 +21,8 @@ DEPEND="dev-qt/qtcore:5
 		dev-qt/qtsql:5
 		dev-libs/quazip"
 RDEPEND="${DEPEND}"
+
+PATCHES=( "${FILESDIR}/quazip.patch" )
 
 src_configure() {
 	eqmake5

@@ -1,0 +1,48 @@
+diff --git a/mupen64plus-qt.pro b/mupen64plus-qt.pro
+index 7be60cc..5ffd41c 100644
+--- a/mupen64plus-qt.pro
++++ b/mupen64plus-qt.pro
+@@ -83,10 +83,11 @@ win32|macx|linux_quazip_static {
+             system("dpkg -l | grep libquazip-qt5-dev | grep ^ii > /dev/null") {
+                 LIBS += -lquazip-qt5
+             } else {
+-                LIBS += -lquazip5
++            LIBS += -lquazip5
+             }
+         } else {
+-            LIBS += -lquazip5
++            INCLUDEPATH += /usr/include/QuaZip-Qt5-1.1/   
++            LIBS += -lquazip1-qt5
+         }
+     }
+ }
+diff --git a/src/common.cpp b/src/common.cpp
+index 3ffdb7c..a9615ab 100644
+--- a/src/common.cpp
++++ b/src/common.cpp
+@@ -40,8 +40,8 @@
+ #include <QLocale>
+ #include <QSize>
+ 
+-#include <quazip5/quazip.h>
+-#include <quazip5/quazipfile.h>
++#include <quazip/quazip.h>
++#include <quazip/quazipfile.h>
+ 
+ #ifdef Q_OS_WIN
+ #include <QCoreApplication>
+diff --git a/src/emulation/emulatorhandler.cpp b/src/emulation/emulatorhandler.cpp
+index 2f89307..db2296a 100644
+--- a/src/emulation/emulatorhandler.cpp
++++ b/src/emulation/emulatorhandler.cpp
+@@ -38,8 +38,8 @@
+ #include <QFile>
+ #include <QMessageBox>
+ 
+-#include <quazip5/quazip.h>
+-#include <quazip5/quazipfile.h>
++#include <quazip/quazip.h>
++#include <quazip/quazipfile.h>
+ 
+ 
+ EmulatorHandler::EmulatorHandler(QWidget *parent) : QObject(parent)
