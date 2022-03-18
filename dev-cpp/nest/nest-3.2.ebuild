@@ -38,8 +38,3 @@ BDEPEND="test? ( dev-python/pytest
 				 dev-python/pytest-xdist )"
 
 S="${WORKDIR}/${PN}-simulator-${PV}"
-
-src_configure() {
-
-	default
-}
