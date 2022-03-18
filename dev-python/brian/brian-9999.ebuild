@@ -5,13 +5,13 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_{8,9,10} )
 
-inherit distutils-r1
+inherit distutils-r1 git-r3
 
-DESCRIPTION="Brian is a free, open source simulator for spiking neural networks."
+DESCRIPTION="Brian 2 frontend to the GeNN simulator"
 HOMEPAGE="https://github.com/brian-team/brian2"
-SRC_URI="https://github.com/brian-team/brian2/archive/refs/tags/${PV}.tar.gz"
+EGIT_REPO_URI="https://github.com/brian-team/brian2.git"
 
-LICENSE="CeCILL-2"
+LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="docs test"

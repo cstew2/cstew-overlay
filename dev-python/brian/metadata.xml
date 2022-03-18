@@ -5,4 +5,7 @@
     <email>cstew764@gmail.com</email>
     <name>Christopher Steward</name>
   </maintainer>
+  <use>
+	<flag name="docs">Install documentation</flag>
+  </use>
 </pkgmetadata>
