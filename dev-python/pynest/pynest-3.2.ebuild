@@ -37,10 +37,8 @@ src_configure() {
 }
 
 src_compile() {
-	cmake_src_compile
 	cd pynest
 	distutils-r1_src_compile
-	cythonize pynestkernel.pyx
 }
 
 src_install() {
