@@ -31,10 +31,40 @@ DEPEND="sys-cluster/openmpi
 		docs? ( dev-python/PyYAML
 				dev-python/sphinx
 				dev-python/ipython )
-		python?	( dev-python/numpy
+		python? ( dev-python/numpy
 				  dev-python/scipy )"
 RDEPEND="${DEPEND}"
 BDEPEND="test? ( dev-python/pytest
 				 dev-python/pytest-xdist )"
 
+PATCHES=( "${FILESDIR}/python-lib.patch" )
+
 S="${WORKDIR}/${PN}-simulator-${PV}"
+
+src_configure() {
+	default
+	local python="OFF"
+	if use python; then
+		local python="ON"
+	fi
+	local mycmakeargs=(
+		-Dwith-python=${python}
+	)
+	cmake_src_configure
+
+	cd pynest
+	cp setup.py.in setup.py
+	distutils-r1_src_configure
+}
+
+src_compile() {
+	cmake_src_compile
+	cd pynest
+	distutils-r1_src_compile
+}
+
+src_install() {
+	cmake_src_install
+	cd pynest
+	distutils-r1_src_install
+}

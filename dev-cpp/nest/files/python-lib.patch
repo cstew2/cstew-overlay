@@ -1,0 +1,124 @@
+diff --git a/cmake/ProcessOptions.cmake b/cmake/ProcessOptions.cmake
+index 66a5f4ed2..96eb45597 100644
+--- a/cmake/ProcessOptions.cmake
++++ b/cmake/ProcessOptions.cmake
+@@ -243,6 +243,8 @@ function( NEST_PROCESS_STATIC_LIBRARIES )
+           "\$ORIGIN/../../${CMAKE_INSTALL_LIBDIR}/nest"
+           # for pynestkernel: origin at <prefix>/lib/python3.x/site-packages/nest
+           "\$ORIGIN/../../../nest"
++	  #
++	  "\$ORIGIN/../../../../lib64/nest/"
+           PARENT_SCOPE )
+     endif ()
+ 
+@@ -392,9 +394,9 @@ function( NEST_PROCESS_WITH_PYTHON )
+   elseif ( ${with-python} STREQUAL "ON" )
+ 
+     # Localize the Python interpreter and ABI
+-    find_package( Python 3.8 QUIET COMPONENTS Interpreter Development.Module )
++    find_package( Python 3.9 QUIET COMPONENTS Interpreter Development.Module NumPy EXACT)
+     if ( NOT Python_FOUND )
+-      find_package( Python 3.8 REQUIRED Interpreter Development )
++      find_package( Python 3.9 REQUIRED Interpreter Development)
+       string( CONCAT PYABI_WARN "Could not locate Python ABI"
+         ", using shared libraries and header file instead."
+         " Please clear your CMake cache and build folder and verify that CMake"
+@@ -451,7 +453,7 @@ endfunction()
+ 
+ function( NEST_POST_PROCESS_WITH_PYTHON )
+   if ( Python_FOUND )
+-    set( PYEXECDIR "${CMAKE_INSTALL_LIBDIR}/python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}/site-packages" PARENT_SCOPE )
++    set( PYEXECDIR "lib/python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}/site-packages" PARENT_SCOPE )
+   endif()
+ endfunction()
+ 
+diff --git a/doc/CMakeLists.txt b/doc/CMakeLists.txt
+index 2ad7d764b..4a638c613 100644
+--- a/doc/CMakeLists.txt
++++ b/doc/CMakeLists.txt
+@@ -42,19 +42,10 @@ if ( NOT CMAKE_CROSSCOMPILING )
+     # Copy the local doc/help directory to the global installation
+     # directory for documentation.
+     install( DIRECTORY "${PROJECT_BINARY_DIR}/doc/help"
+-      DESTINATION "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_DOCDIR}"
++      DESTINATION "${CMAKE_INSTALL_DOCDIR}"
+       OPTIONAL
+       )
+ 
+-    # Update the global help index to include all help files in
+-    # the global installation directory for documentation.
+-    install( CODE
+-      "execute_process(
+-         COMMAND ${Python_EXECUTABLE} -B generate_helpindex.py \"${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_DOCDIR}\"
+-         WORKING_DIRECTORY \"${PROJECT_SOURCE_DIR}/doc/slihelp_generator\"
+-         )"
+-      )
+-
+   endif ()
+ 
+ endif ()
+diff --git a/pynest/CMakeLists.txt b/pynest/CMakeLists.txt
+index 1815f7870..d508cc583 100644
+--- a/pynest/CMakeLists.txt
++++ b/pynest/CMakeLists.txt
+@@ -79,21 +79,6 @@ if ( HAVE_PYTHON )
+       PATTERN "versionchecker.py.in" EXCLUDE
+   )
+   install( TARGETS pynestkernel DESTINATION ${PYEXECDIR}/nest/ )
+-  install( CODE "
+-      execute_process(
+-          COMMAND ${PYTHON} ${CMAKE_CURRENT_BINARY_DIR}/setup.py install_egg_info
+-            --install-dir=${CMAKE_INSTALL_PREFIX}/${PYEXECDIR}
+-          WORKING_DIRECTORY \"${CMAKE_INSTALL_PREFIX}/${PYEXECDIR}\"
+-      )
+-      # Use Python's standard library `pkg_resources` module to find
+-      # the install requirements of `nest` as specified in `setup.py`.
+-      # Then feed them into the stdin pipe of `pip install`.
+-      execute_process(
+-          COMMAND ${PYTHON} -c \"import pkg_resources as pkg; print('\\\\n'.join(str(r) for r in pkg.get_distribution('nest-simulator').requires()))\"
+-          COMMAND ${PYTHON} -m pip install -r /dev/stdin
+-      )
+-      "
+-  )
+ 
+   install( DIRECTORY examples/
+       DESTINATION ${CMAKE_INSTALL_DOCDIR}/examples/pynest
+diff --git a/pynest/nest/math/hl_api_math.py b/pynest/nest/math/hl_api_math.py
+index 554d46b17..5344c6e90 100644
+--- a/pynest/nest/math/hl_api_math.py
++++ b/pynest/nest/math/hl_api_math.py
+@@ -19,7 +19,7 @@
+ # You should have received a copy of the GNU General Public License
+ # along with NEST.  If not, see <http://www.gnu.org/licenses/>.
+ 
+-from ..ll_api import sli_func
++from nest.ll_api import sli_func
+ 
+ __all__ = [
+     'exp',
+diff --git a/pynest/nest/versionchecker.py.in b/pynest/nest/versionchecker.py.in
+index 0d71dde2a..440e8dbbf 100644
+--- a/pynest/nest/versionchecker.py.in
++++ b/pynest/nest/versionchecker.py.in
+@@ -25,6 +25,8 @@ Check that the Python compiletime and runtime versions match.
+ 
+ """
+ 
++import sys
++
+ v_major_mismatch = sys.version_info.major != @Python_VERSION_MAJOR@
+ v_minor_mismatch = sys.version_info.minor != @Python_VERSION_MINOR@
+ if v_major_mismatch or v_minor_mismatch:
+diff --git a/pynest/setup.py.in b/pynest/setup.py.in
+index 44f35b46f..f290fecb6 100644
+--- a/pynest/setup.py.in
++++ b/pynest/setup.py.in
+@@ -23,7 +23,7 @@ from setuptools import setup
+ 
+ setup(
+     name = 'nest-simulator',
+-    version = '@NEST_VERSION@@githash@',
++    version = '3.2',
+     description = 'Python bindings for NEST',
+     author = 'The NEST Initiative',
+     url = 'https://www.nest-simulator.org',
