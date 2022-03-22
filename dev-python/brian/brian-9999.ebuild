@@ -27,4 +27,4 @@ RDEPEND="${DEPEND}"
 BDEPEND="test? ( dev-python/pytest
 				 dev-python/pytest-xdist )"
 
-S="${WORKDIR}/${PN}2-${PV}"
+S="${WORKDIR}/${PN}-${PV}"

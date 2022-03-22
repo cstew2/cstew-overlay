@@ -15,34 +15,44 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="dev-cpp/nest"
+DEPEND="=dev-cpp/nest-${PV}
+		dev-python/cython
+		dev-python/numpy
+		dev-python/scipy"
 RDEPEND="${DEPEND}"
 BDEPEND=""
+
+PATCHES=( "${FILESDIR}/cythonize.patch" )
 
 S="${WORKDIR}/nest-simulator-${PV}"
 
 src_prepare() {
-	default
 	cmake_src_prepare
+	#distutils-r1_src_prepare
 	cd pynest
-	distutils-r1_src_prepare
+	cp setup.py.in setup.py
 }
 
 src_configure() {
-	default
 	cmake_src_configure
-	cd pynest || die
-	cp ../../nest-simulator-${PV}_build/pynest/setup.py ./ || die
+	cd pynest
 	distutils-r1_src_configure
 }
 
 src_compile() {
+	cp "${WORKDIR}/nest-simulator-${PV}_build/libnestutil/config.h" "${S}/libnestutil/config.h"
 	cd pynest
 	distutils-r1_src_compile
 }
 
 src_install() {
 	default
-	cd pynest
 	distutils-r1_src_install
+	dosym "${get_libdir}/nest/libmodels.so" "${python_get_sitedir}/nest/libmodels.so"
+	dosym "${get_libdir}/nest/libmodels.so" "${python_get_sitedir}/nest/libmodels.so"
+	dosym "${get_libdir}/nest/libnest.so" "${python_get_sitedir}/nest/libnest.so"
+	dosym "${get_libdir}/nest/libsli_readline.so" "${python_get_sitedir}/nest/libsli_readline.so"
+	dosym "${get_libdir}/nest/libnestkernel.so" "${python_get_sitedir}/nest/libnestkernel.so"
+	dosym "${get_libdir}/nest/libnestutil.so" "${python_get_sitedir}/nest/libnestutil.so"
+	dosym "${get_libdir}/nest/libsli.so" "${python_get_sitedir}/nest/libsli.so"
 }

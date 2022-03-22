@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -20,7 +20,7 @@ DEPEND="dev-embedded/fasm
 		dev-python/simplejson
 		dev-python/intervaltree
 		dev-python/sympy
-		dev-python/textx
+		dev-python/textX
 		"
 RDEPEND="${DEPEND}"
 BDEPEND=""

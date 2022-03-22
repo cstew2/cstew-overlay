@@ -9,7 +9,7 @@ inherit distutils-r1
 
 DESCRIPTION="LEMS interpreter implemented in Python"
 HOMEPAGE="https://github.com/LEMS/pylems"
-SRC_URI="https://github.com/brian-team/pylems/archive/refs/tags/${PV}.tar.gz"
+SRC_URI="https://github.com/LEMS/pylems/archive/refs/tags/v${PV}.tar.gz"
 
 LICENSE="CeCILL-2"
 SLOT="0"

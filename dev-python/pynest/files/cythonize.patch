@@ -1,0 +1,41 @@
+diff --git a/pynest/setup.py.in b/pynest/setup.py.in
+index 44f35b46f..22245b297 100644
+--- a/pynest/setup.py.in
++++ b/pynest/setup.py.in
+@@ -19,17 +19,26 @@
+ # You should have received a copy of the GNU General Public License
+ # along with NEST.  If not, see <http://www.gnu.org/licenses/>.
+ 
+-from setuptools import setup
++from setuptools import setup, Extension
++from Cython.Build import cythonize
++
++extensions = [
++    Extension("pynestkernel", ["pynestkernel.pyx"],
++        include_dirs=['../pynest', '../sli', '../nestkernel', '../nest',
++                      '../models', '../libnestutil', '../thirdparty'],
++        libraries=['-Wl,--no-as-needed', '-undefined dynamic_lookup'],
++        library_dirs=[]),
++]
+ 
+ setup(
+     name = 'nest-simulator',
+-    version = '@NEST_VERSION@@githash@',
++    version = '3.2',
+     description = 'Python bindings for NEST',
+     author = 'The NEST Initiative',
+     url = 'https://www.nest-simulator.org',
+     license = 'GPLv2+',
+     packages = ['nest', 'nest.lib'],
+-    install_requires = ['numpy', 'scipy'],
++    install_requires = ['numpy', 'scipy', 'Cython'],
+     extras_require = {'test': ['junitparser', 'matplotlib', 'pytest']},
+     classifiers = [
+         'Development Status :: 6 - Mature',
+@@ -57,4 +66,6 @@ setup(
+         'Source': 'https://github.com/nest/nest-simulator',
+         'Documentation': 'https://nest-simulator.readthedocs.io/'
+     },
++    ext_modules = cythonize(extensions),
++    script_args = ["build_ext", "--inplace"]
+ )
