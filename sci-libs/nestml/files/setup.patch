@@ -1,0 +1,22 @@
+diff --git a/setup.py b/setup.py
+index afadb4b8..3f45532e 100755
+--- a/setup.py
++++ b/setup.py
+@@ -33,7 +33,7 @@ for dir_to_include in ["doc", "models", "extras"]:
+     for dirname, dirnames, filenames in os.walk(dir_to_include):
+         fileslist = []
+         for filename in filenames:
+-            fullname = os.path.join(dirname, filename)
++            fullname = "share/nest" + os.path.join(dirname, filename)
+             fileslist.append(fullname)
+         data_files.append((dirname, fileslist))
+ 
+@@ -47,7 +47,7 @@ setup(
+                 " appropriate numeric solver otherwise.",
+     license="GNU General Public License v2.0",
+     url="https://github.com/nest/nestml",
+-    packages=find_packages(),
++    packages=find_packages(exclude=['tests']),
+     package_data={"pynestml": ["codegeneration/resources_autodoc/*.jinja2",
+                                "codegeneration/resources_nest/point_neuron/*.jinja2",
+                                "codegeneration/resources_nest/point_neuron/common/*.jinja2",
