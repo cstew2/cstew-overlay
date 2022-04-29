@@ -20,4 +20,4 @@ DEPEND="dev-python/numpy
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
-S="${WORKDIR}/${P}"
+S="${WORKDIR}/python-${P}"
