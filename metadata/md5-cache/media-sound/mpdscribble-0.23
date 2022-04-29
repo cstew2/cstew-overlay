@@ -1,0 +1,14 @@
+BDEPEND=>=dev-util/meson-0.59.4 >=dev-util/ninja-1.8.2 dev-util/meson-format-array
+DEFINED_PHASES=compile configure install test
+DEPEND=>=media-libs/libmpdclient-2.5 >=dev-libs/boost-1.62 dev-libs/libgcrypt >=net-misc/curl-7.18
+DESCRIPTION=An MPD client that submits information to Audioscrobbler
+EAPI=7
+HOMEPAGE=https://www.musicpd.org/clients/mpdscribble/
+INHERIT=meson ninja-utils
+KEYWORDS=~amd64 ~ppc ~x86
+LICENSE=GPL-2
+RDEPEND=>=media-libs/libmpdclient-2.5 >=dev-libs/boost-1.62 dev-libs/libgcrypt >=net-misc/curl-7.18
+SLOT=0
+SRC_URI=https://www.musicpd.org/download/mpdscribble/0.23/mpdscribble-0.23.tar.xz
+_eclasses_=multiprocessing	61c959fc55c15c00bbb1079d6a71370b	ninja-utils	fef481272d4a8e136a7d8a0fb1329384	eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	toolchain-funcs	badd6e329e1f3e6bee99b35bf8763ce8	multilib	4a33c9008e5ee30cb8840a3fdc24df2b	python-utils-r1	59dddabd6a41ab69723654916142f63b	meson	2d8a51910bc57e004c37aa55c7d99ce4
+_md5_=c5afa270b3dc3171a4f1a16c4f4229dc

@@ -1,0 +1,11 @@
+BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=compile install unpack
+DESCRIPTION=Metadata for the nextpnr-xilinx xc7 flow
+EAPI=7
+HOMEPAGE=https://github.com/gatecat/nextpnr-xilinx-meta
+INHERIT=git-r3
+LICENSE=CC0-1.0
+PROPERTIES=live
+SLOT=0
+_eclasses_=git-r3	b9ac6f96d2a88edb5b351df634dc5e53
+_md5_=b0f83c219845453d23f14859e83c7c9a

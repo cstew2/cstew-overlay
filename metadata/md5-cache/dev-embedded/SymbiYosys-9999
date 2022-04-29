@@ -1,0 +1,13 @@
+BDEPEND=virtual/pkgconfig >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=compile install unpack
+DEPEND=dev-embedded/yosys
+DESCRIPTION=SymbiYosys (sby) -- Front-end for Yosys-based formal verification flows
+EAPI=7
+HOMEPAGE=https://github.com/YosysHQ/SymbiYosys
+INHERIT=git-r3
+LICENSE=ISC
+PROPERTIES=live
+RDEPEND=dev-embedded/yosys
+SLOT=0
+_eclasses_=git-r3	b9ac6f96d2a88edb5b351df634dc5e53
+_md5_=e8a10d08a1c874495009dfa664a69ad3

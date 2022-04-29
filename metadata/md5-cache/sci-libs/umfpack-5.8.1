@@ -1,0 +1,13 @@
+BDEPEND=virtual/pkgconfig doc? ( virtual/latex-base )
+DEFINED_PHASES=compile install
+DEPEND=sci-libs/amd sci-libs/suitesparseconfig virtual/blas cholmod? ( sci-libs/cholmod )
+DESCRIPTION=Unsymmetric multifrontal sparse LU factorization library
+EAPI=7
+HOMEPAGE=https://faculty.cse.tamu.edu/davis/suitesparse.html
+IUSE=doc +cholmod static-libs
+KEYWORDS=~amd64 ~arm ~arm64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x86-linux
+LICENSE=GPL-2+
+RDEPEND=sci-libs/amd sci-libs/suitesparseconfig virtual/blas cholmod? ( sci-libs/cholmod )
+SLOT=0
+SRC_URI=https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/v5.8.1.tar.gz
+_md5_=3b3c9a56d2e82209b3486411ef184551

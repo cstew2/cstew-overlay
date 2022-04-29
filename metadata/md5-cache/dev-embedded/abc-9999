@@ -1,0 +1,13 @@
+BDEPEND=virtual/pkgconfig >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=install unpack
+DEPEND=sys-libs/readline
+DESCRIPTION=ABC: System for Sequential Logic Synthesis and Formal Verification
+EAPI=7
+HOMEPAGE=https://github.com/YosysHQ/abc
+INHERIT=git-r3
+LICENSE=MIT
+PROPERTIES=live
+RDEPEND=sys-libs/readline
+SLOT=0
+_eclasses_=git-r3	b9ac6f96d2a88edb5b351df634dc5e53
+_md5_=79366f1580fcbf0424d52d6abaad91fe

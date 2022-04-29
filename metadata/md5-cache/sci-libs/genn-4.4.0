@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile install prepare
+DEPEND=cuda? ( dev-util/nvidia-cuda-toolkit ) opencl? ( virtual/opencl ) mpi? ( virtual/mpi )
+DESCRIPTION=A GPU Neuronal Network simulation using code generation for CUDA
+EAPI=8
+HOMEPAGE=https://genn-team.github.io/genn/
+INHERIT=cuda
+IUSE=cuda opencl mpi
+KEYWORDS=~amd64
+LICENSE=GPL-2
+SLOT=3
+SRC_URI=https://github.com/genn-team/genn/archive/4.4.0.tar.gz
+_eclasses_=toolchain-funcs	badd6e329e1f3e6bee99b35bf8763ce8	multilib	4a33c9008e5ee30cb8840a3fdc24df2b	flag-o-matic	a500d7cc40da3de38c361e889153bdf7	cuda	15edbf8fd9df209322f42c06ecf59a96
+_md5_=87d3cf5a382754b3b0071056cff8db7d

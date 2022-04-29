@@ -1,0 +1,13 @@
+BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=compile install unpack
+DEPEND=games-emulation/mupen64plus-core
+DESCRIPTION=Exemplary MSP communications simulator using a normalized VU.
+EAPI=7
+HOMEPAGE=https://github.com/mupen64plus/mupen64plus-rsp-cxd4
+INHERIT=git-r3
+LICENSE=CC0-1.0
+PROPERTIES=live
+RDEPEND=games-emulation/mupen64plus-core
+SLOT=0
+_eclasses_=git-r3	b9ac6f96d2a88edb5b351df634dc5e53
+_md5_=a74653896183655bc3f482dd96b4bc9f

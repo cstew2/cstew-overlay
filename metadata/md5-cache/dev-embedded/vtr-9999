@@ -1,0 +1,14 @@
+BDEPEND=sys-devel/flex sys-devel/bison dev-util/cmake doc? ( app-doc/doxygen dev-python/sphinx dev-python/sphinx_rtd_theme dev-python/recommonmark ) test? ( dev-lang/perl ) >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=unpack
+DEPEND=media-libs/freetype x11-libs/libXft media-libs/fontconfig x11-libs/gtk+:3 dev-lang/perl
+DESCRIPTION=Verilog to Routing -- Open Source CAD Flow for FPGA Research
+EAPI=7
+HOMEPAGE=https://verilogtorouting.org/
+INHERIT=git-r3
+IUSE=doc test
+LICENSE=MIT
+PROPERTIES=live
+RDEPEND=media-libs/freetype x11-libs/libXft media-libs/fontconfig x11-libs/gtk+:3 dev-lang/perl
+SLOT=0
+_eclasses_=git-r3	b9ac6f96d2a88edb5b351df634dc5e53
+_md5_=bd7ac537734c654f13852d52271df4a6
