@@ -11,7 +11,7 @@ HOMEPAGE="https://eigen.tuxfamily.org/index.php?title=Main_Page"
 EGIT_REPO_URI="https://gitlab.com/libeigen/${PN}.git"
 
 LICENSE="MPL-2.0"
-SLOT="3"
+SLOT=""
 KEYWORDS=""
 IUSE="cpu_flags_arm_neon cpu_flags_ppc_altivec cpu_flags_ppc_vsx cuda debug doc openmp test" #zvector
 
