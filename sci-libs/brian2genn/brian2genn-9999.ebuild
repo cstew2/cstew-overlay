@@ -16,7 +16,10 @@ SLOT="0"
 KEYWORDS=""
 IUSE="docs"
 
-DEPEND="sci-libs/brian
+KEYWORDS="~amd64"
+IUSE="docs"
+
+DEPEND=">=sci-libs/brian-2.5
 		dev-python/six
 		sci-libs/genn
 		docs? ( dev-python/sphinx
