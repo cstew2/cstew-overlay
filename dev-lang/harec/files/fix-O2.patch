@@ -1,0 +1,13 @@
+diff --git a/src/check.c b/src/check.c
+index dbd81d6..a18f976 100644
+--- a/src/check.c
++++ b/src/check.c
+@@ -3207,7 +3207,7 @@ check_function(struct context *ctx,
+ 
+ 	// TODO: Add function name to errors
+ 	if (decl->func.flags != 0) {
+-		const char *flag;
++		const char *flag = NULL;
+ 		switch (decl->func.flags) {
+ 		case FN_INIT:
+ 			flag = "@init";
