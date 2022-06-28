@@ -45,9 +45,9 @@ src_compile() {
 			--xray /usr/share/x-ray/database/artix7 \
 			--metadata /usr/share/x-ray/metadata/artix7 \
 			--device xc7a100tfgg676-2\
-			--bba "${S}/xilinx/xc7a100t.bba"
+			--bba "${S}/xilinx/xc7a100t.bba" || die
 
-	"${WORKDIR}"/"${P}_build"/bbasm --le -v --files "${S}/xilinx/xc7a100t.bba" "${S}/xilinx/xc7a100t.bin"
+	"${WORKDIR}"/"${P}_build"/bbasm --le -v --files "${S}/xilinx/xc7a100t.bba" "${S}/xilinx/xc7a100t.bin" || die
 }
 
 src_install() {
