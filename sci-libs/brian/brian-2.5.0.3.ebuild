@@ -5,15 +5,15 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_{8,9,10} )
 
-inherit distutils-r1 git-r3
+inherit distutils-r1
 
-DESCRIPTION="Brian 2 frontend to the GeNN simulator"
+DESCRIPTION="Brian is a free, open source simulator for spiking neural networks."
 HOMEPAGE="https://github.com/brian-team/brian2"
-EGIT_REPO_URI="https://github.com/brian-team/brian2.git"
+SRC_URI="https://github.com/brian-team/brian2/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 
-LICENSE="GPL-2"
+LICENSE="CeCILL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE="docs test"
 
 DEPEND="dev-python/numpy
@@ -27,4 +27,4 @@ RDEPEND="${DEPEND}"
 BDEPEND="test? ( dev-python/pytest
 				 dev-python/pytest-xdist )"
 
-S="${WORKDIR}/${PN}-${PV}"
+S="${WORKDIR}/${PN}2-${PV}"

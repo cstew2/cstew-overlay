@@ -5,15 +5,15 @@ EAPI=8
 
 PYTHON_COMPAT=( python3_{8,9,10} )
 
-inherit distutils-r1
+inherit distutils-r1 git-r3
 
 DESCRIPTION="Brian 2 frontend to the GeNN simulator"
 HOMEPAGE="https://github.com/brian-team/brian2genn"
-SRC_URI="https://github.com/brian-team/brian2genn/archive/refs/tags/${PV}.tar.gz"
+EGIT_REPO_URI="https://github.com/brian-team/brian2genn.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS=""
 IUSE="docs"
 
 DEPEND="sci-libs/brian
