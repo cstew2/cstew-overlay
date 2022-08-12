@@ -1,0 +1,25 @@
+# Copyright 1999-2022 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=7
+
+PYTHON_COMPAT=(python3_{9,10,11})
+
+inherit git-r3 distutils-r1
+
+DESCRIPTION="Beautiful spinners for terminal, IPython and Jupyter"
+HOMEPAGE="https://github.com/manrajgrover/halo"
+EGIT_REPO_URI="https://github.com/manrajgrover/halo.git"
+
+LICENSE="MIT"
+SLOT="0"
+KEYWORDS=""
+IUSE=""
+
+DEPEND="dev-python/six
+		dev-python/colorama
+		dev-python/termcolor
+		dev-python/spinners
+		dev-python/log-symbols"
+RDEPEND="${DEPEND}"
+BDEPEND=""

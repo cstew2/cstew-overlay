@@ -1,13 +1,12 @@
 diff --git a/src/check.c b/src/check.c
-index dbd81d6..a18f976 100644
+index dbd81d6..a240d6e 100644
 --- a/src/check.c
 +++ b/src/check.c
-@@ -3207,7 +3207,7 @@ check_function(struct context *ctx,
- 
- 	// TODO: Add function name to errors
- 	if (decl->func.flags != 0) {
--		const char *flag;
-+		const char *flag = NULL;
- 		switch (decl->func.flags) {
- 		case FN_INIT:
- 			flag = "@init";
+@@ -3219,6 +3219,7 @@ check_function(struct context *ctx,
+ 			flag = "@test";
+ 			break;
+ 		default:
++			flag = NULL;
+ 			expect(ctx, &adecl->loc, 0,
+ 				"Only one of @init, @fini, or @test may be used in a function declaration");
+ 		};
