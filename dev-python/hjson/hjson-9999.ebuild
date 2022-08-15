@@ -7,16 +7,14 @@ PYTHON_COMPAT=(python3_{9,10,11})
 
 inherit git-r3 distutils-r1
 
-DESCRIPTION="MILC is a framework for writing CLI applications in Python 3.6+"
-HOMEPAGE="https://milc.clueboard.co/"
-EGIT_REPO_URI="https://github.com/clueboard/milc.git"
+HOMEPAGE="https://hjson.github.io/"
+EGIT_REPO_URI="https://github.com/hjson/hjson-py.git"
 
-LICENSE="BSD"
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-DEPEND="dev-python/argcomplete
-		dev-python/halo"
+DEPEND=""
 RDEPEND="${DEPEND}"
 BDEPEND=""

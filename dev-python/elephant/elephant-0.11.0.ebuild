@@ -8,13 +8,18 @@ PYTHON_COMPAT=( python3_{8,9,10} )
 inherit distutils-r1
 
 DESCRIPTION="lazyarray provides a lazily-evaluated numerical array class"
-HOMEPAGE="https://github.com/NeuralEnsemble/lazyarray"
-SRC_URI="https://github.com/NeuralEnsemble/lazyarray/archive/refs/tags/0.5.0.tar.gz"
+HOMEPAGE="https://github.com/NeuralEnsemble/elephant.git"
+SRC_URI="https://github.com/NeuralEnsemble/elephant/archive/refs/tags/v0.11.1.tar.gz -> ${P}"
 LICENSE="CeCILL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
-DEPEND=""
+DEPEND="dev-python/scipy
+		dev-python.six
+		dev-python/neo
+		dev-python/numpy
+		dev-python/quantities
+		dev-python/tqdm"
 RDEPEND="${DEPEND}"
 BDEPEND=""

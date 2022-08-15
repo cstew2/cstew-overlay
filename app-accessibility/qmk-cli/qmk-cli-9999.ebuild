@@ -18,6 +18,13 @@ KEYWORDS=""
 IUSE=""
 
 DEPEND="dev-python/milc
-		dev-python/hid"
+		dev-python/hid
+		dev-python/usb
+		dev-python/hjson
+		dev-python/dotty-dict
+		dev-embedded/dfu-programmer
+		app-mobilephone/dfu-util
+		dev-libs/hidapi
+		dev-libs/libusb"
 RDEPEND="${DEPEND}"
 BDEPEND=""
