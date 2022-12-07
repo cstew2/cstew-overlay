@@ -1,0 +1,12 @@
+BDEPEND=>=app-editors/emacs-23.1:* >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=compile configure install postinst postrm prepare setup unpack
+DESCRIPTION=A major emacs mode for editing hare source code
+EAPI=8
+HOMEPAGE=https://git.sr.ht/~bbuccianti/hare-mode
+INHERIT=elisp git-r3
+LICENSE=GPL-3
+PROPERTIES=live
+RDEPEND=>=app-editors/emacs-23.1:*
+SLOT=0
+_eclasses_=elisp-common	79f8e13c80c89792e5c9b3fc8ef59f3b	elisp	c1c17e9c24d72d3bd58c611de8116fb6	git-r3	b9ac6f96d2a88edb5b351df634dc5e53
+_md5_=bbee01851e5606af272491f38857b775

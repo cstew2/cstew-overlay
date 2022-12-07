@@ -7,10 +7,10 @@ PYTHON_COMPAT=( python3_{8,9,10} )
 
 inherit distutils-r1
 
-DESCRIPTION="lazyarray provides a lazily-evaluated numerical array class"
+DESCRIPTION="Elephant is the Electrophysiology Analysis Toolkit"
 HOMEPAGE="https://github.com/NeuralEnsemble/elephant.git"
 SRC_URI="https://github.com/NeuralEnsemble/elephant/archive/refs/tags/v0.11.1.tar.gz -> ${P}"
-LICENSE="CeCILL-2"
+LICENSE="BSD-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
