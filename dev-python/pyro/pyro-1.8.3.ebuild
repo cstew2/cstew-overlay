@@ -9,7 +9,7 @@ inherit distutils-r1
 
 DESCRIPTION=""
 HOMEPAGE="https://www.mackelab.org/sbi/"
-SRC_URI="https://github.com/pyro-ppl/pyro/archive/refs/tags/1.8.3.tar.gz -> ${P}"
+SRC_URI="https://github.com/pyro-ppl/pyro/archive/refs/tags/1.8.3.tar.gz -> ${P}.tar.gz"
 LICENSE="AGPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
@@ -18,7 +18,7 @@ IUSE="test"
 DEPEND=">=dev-python/numpy-1.7
 		>=dev-python/opt-einsum-2.3.2
 		>=dev-python/pyro-api-0.1.1
-		>=dev-python/pytorch-1.11.0
+		>=sci-libs/pytorch-1.11.0
 		>=dev-python/tqdm-4.36"
 RDEPEND="${DEPEND}"
 BDEPEND=""

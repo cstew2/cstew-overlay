@@ -9,7 +9,7 @@ inherit distutils-r1
 
 DESCRIPTION=""
 HOMEPAGE="https://www.mackelab.org/sbi/"
-SRC_URI="https://github.com/mackelab/sbi/archive/refs/tags/v0.20.0.tar.gz -> ${P}"
+SRC_URI="https://github.com/mackelab/sbi/archive/refs/tags/v0.20.0.tar.gz -> ${P}.tar.gz"
 LICENSE="AGPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
@@ -21,11 +21,10 @@ DEPEND="dev-python/arviz
 		dev-python/numpy
 		dev-python/pillow
 		>=dev-python/pyknos-0.15.1
-		>=dev-python/pyro-ppl-1.3.1
-		dev-python/scikit-learn
+		>=dev-python/pyro-1.3.1
+		sci-libs/scikit-learn
 		dev-python/scipy
-		dev-python/tensorboard
-		>=dev-python/pytorch-1.8.0
+		>=sci-libs/pytorch-1.8.0
 		"
 RDEPEND="${DEPEND}"
 BDEPEND=""

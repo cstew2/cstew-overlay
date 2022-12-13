@@ -9,8 +9,8 @@ inherit distutils-r1
 
 DESCRIPTION="Generic API for dispatch to Pyro backends."
 HOMEPAGE="https://pyro.ai/api"
-SRC_URI="https://github.com/pyro-ppl/pyro-api/archive/refs//tags/0.1.1.tar.gz -> ${P}"
-LICENSE="AGPL-3"
+SRC_URI="https://github.com/pyro-ppl/pyro-api/archive/refs/tags/0.1.1.tar.gz -> ${P}.tar.gz"
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
