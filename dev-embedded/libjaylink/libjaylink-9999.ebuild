@@ -20,6 +20,7 @@ RDEPEND="${DEPEND}"
 
 src_prepare() {
 	eautoreconf || die
+	default
 }
 
 src_configure() {
