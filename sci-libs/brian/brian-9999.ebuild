@@ -22,6 +22,7 @@ DEPEND="dev-python/numpy
 		dev-python/jinja
 		docs? ( dev-python/sphinx
 				dev-python/ipython )
+		dev-python/versioneer
 	   "
 RDEPEND="${DEPEND}"
 BDEPEND="test? ( dev-python/pytest

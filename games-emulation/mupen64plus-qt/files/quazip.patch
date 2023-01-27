@@ -1,18 +1,14 @@
 diff --git a/mupen64plus-qt.pro b/mupen64plus-qt.pro
-index 7be60cc..5ffd41c 100644
+index 7be60cc..3cef254 100644
 --- a/mupen64plus-qt.pro
 +++ b/mupen64plus-qt.pro
-@@ -83,10 +83,11 @@ win32|macx|linux_quazip_static {
-             system("dpkg -l | grep libquazip-qt5-dev | grep ^ii > /dev/null") {
-                 LIBS += -lquazip-qt5
-             } else {
--                LIBS += -lquazip5
-+            LIBS += -lquazip5
+@@ -86,7 +86,8 @@ win32|macx|linux_quazip_static {
+                 LIBS += -lquazip5
              }
          } else {
 -            LIBS += -lquazip5
-+            INCLUDEPATH += /usr/include/QuaZip-Qt5-1.1/   
 +            LIBS += -lquazip1-qt5
++            INCLUDEPATH += /usr/include/QuaZip
          }
      }
  }

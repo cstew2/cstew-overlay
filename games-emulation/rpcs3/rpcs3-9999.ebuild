@@ -1,4 +1,4 @@
-# Copyright 2021-2022 Gentoo Authors
+# Copyright 2021-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -21,17 +21,20 @@ DEPEND="alsa? ( media-libs/alsa-lib )
 	faudio? ( app-emulation/faudio )
 	pulseaudio? ( media-sound/pulseaudio )
 	app-arch/p7zip
+	dev-libs/hidapi
 	dev-libs/libevdev
 	dev-libs/pugixml
+	dev-libs/xxhash
 	dev-qt/qtconcurrent
 	dev-qt/qtmultimedia[widgets]
 	dev-qt/qtsvg
 	dev-qt/qtwidgets
 	media-libs/cubeb
+	media-libs/glew
 	media-libs/libpng
 	media-libs/openal
 	sys-libs/zlib"
-#	dev-cpp/yaml-cpp
+#	dev-cpp/yaml-cpp"
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
@@ -45,6 +48,10 @@ src_unpack() {
 src_prepare() {
 	append-cflags -DNDEBUG -Wno-error=stringop-truncation
 	append-cppflags -DNDEBUG -Wno-error=stringop-truncation
+
+	#fix linker error
+	sed -i 's/target_link_libraries(rpcs3 Threads::Threads)/target_link_libraries(rpcs3 Threads::Threads udev)/' \
+		rpcs3/CMakeLists.txt || die
 
 	# Disable cache
 	sed -i -e '/find_program(CCACHE_FOUND/d' -e '/set(.*_FLAGS/d' \
@@ -92,14 +99,16 @@ src_configure() {
 		-DBUILD_SHARED_LIBS=OFF # to remove after unbundling
 		-DUSE_DISCORD_RPC=OFF
 		-DUSE_FAUDIO=$(usex faudio)
-		-DUSE_PRECOMPILED_HEADERS=ON
+		-DUSE_LIBEVDEV=ON
+		-DUSE_PRECOMPILED_HEADERS=OFF
 		-DUSE_SYSTEM_CURL=ON
+		-DUSE_SYSTEM_FFMPEG=ON
 		-DUSE_SYSTEM_LIBPNG=ON
 		-DUSE_SYSTEM_LIBUSB=ON
 		-DUSE_SYSTEM_PUGIXML=ON
 		-DUSE_SYSTEM_XXHASH=ON
 		-DUSE_SYSTEM_ZLIB=ON
-		-DUSE_VULKAN=OFF
+		-DUSE_VULKAN=$(usex vulkan)
 		-DWITH_LLVM=$(usex llvm)
 	)
 	use faudio && mycmakeargs+=( -DUSE_SYSTEM_FAUDIO=$(usex faudio) )
