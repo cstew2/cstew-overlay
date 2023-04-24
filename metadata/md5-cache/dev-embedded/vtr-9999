@@ -10,5 +10,5 @@ LICENSE=MIT
 PROPERTIES=live
 RDEPEND=media-libs/freetype x11-libs/libXft media-libs/fontconfig x11-libs/gtk+:3 dev-lang/perl
 SLOT=0
-_eclasses_=git-r3	2347f8fe2d392b2a091191f94be37e6f
+_eclasses_=git-r3	27e13c09a4c7e4c78ac812f74727e676
 _md5_=9b92889effc74d4f2938a5aae5d0be6f

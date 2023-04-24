@@ -1,0 +1,12 @@
+DEFINED_PHASES=-
+DEPEND=virtual/lapack sci-libs/suitesparse_gpuruntime sci-libs/gpuqrengine sci-libs/cholmod[lapack,partition?] partition? ( sci-libs/metis ) tbb? ( dev-cpp/tbb )
+DESCRIPTION=Multithreaded multifrontal sparse QR factorization library
+EAPI=7
+HOMEPAGE=https://faculty.cse.tamu.edu/davis/suitesparse.html
+IUSE=doc partition static-libs tbb
+KEYWORDS=~amd64 ~arm ~arm64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x86-linux
+LICENSE=GPL-2+
+RDEPEND=virtual/lapack sci-libs/suitesparse_gpuruntime sci-libs/gpuqrengine sci-libs/cholmod[lapack,partition?] partition? ( sci-libs/metis ) tbb? ( dev-cpp/tbb )
+SLOT=0
+SRC_URI=https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/refs/tags/v7.0.1.tar.gz -> SuiteSparse-7.0.1.tar.gz
+_md5_=ba983daf7d240214839c1c8a519d4ec9

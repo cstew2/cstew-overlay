@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -11,7 +11,7 @@ DESCRIPTION="FPGA Assembly (FASM) Parser and Generator"
 HOMEPAGE="https://github.com/SymbiFlow/fasm"
 EGIT_REPO_URI="https://github.com/SymbiFlow/fasm.git"
 
-LICENSE="ISC"
+LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS=""
 IUSE=""
@@ -22,6 +22,8 @@ DEPEND="dev-python/textX
 		dev-cpp/gtest"
 RDEPEND="${DEPEND}"
 BDEPEND=""
+
+PATCHES=( "${FILESDIR}/build_system.patch" ) #"${FILESDIR}/antlr.patch" )
 
 python_compile() {
 	distutils-r1_python_compile --antlr-runtime=shared

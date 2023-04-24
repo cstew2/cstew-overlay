@@ -1,0 +1,12 @@
+DEFINED_PHASES=-
+DEPEND=cuda? ( x11-drivers/nvidia-drivers dev-util/nvidia-cuda-toolkit ) sci-libs/suitesparseconfig
+DESCRIPTION=SuiteSparse_GPURuntime provides helper functions for the GPU.
+EAPI=7
+HOMEPAGE=https://faculty.cse.tamu.edu/davis/suitesparse.html
+IUSE=cuda doc static-libs
+KEYWORDS=~amd64 ~arm ~arm64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x86-linux
+LICENSE=GPL-2+
+RDEPEND=cuda? ( x11-drivers/nvidia-drivers dev-util/nvidia-cuda-toolkit ) sci-libs/suitesparseconfig
+SLOT=0
+SRC_URI=https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/refs/tags/v7.0.1.tar.gz -> SuiteSparse-7.0.1.tar.gz
+_md5_=a7cfef42a9973d529f31f73aa0a8b8ae

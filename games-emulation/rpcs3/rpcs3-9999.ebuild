@@ -8,10 +8,7 @@ inherit cmake flag-o-matic git-r3 xdg
 DESCRIPTION="PS3 emulator/debugger"
 HOMEPAGE="https://rpcs3.net/"
 EGIT_REPO_URI="https://github.com/RPCS3/rpcs3"
-EGIT_SUBMODULES=( 'asmjit' 'llvm' '3rdparty/flatbuffers' '3rdparty/wolfssl'
-	'3rdparty/SoundTouch/soundtouch' )
-# Delete sources when ensuring yaml-cpp compiled with fexceptions
-EGIT_SUBMODULES+=( '3rdparty/yaml-cpp' )
+EGIT_SUBMODULES=( '3rdparty/wolfssl' )
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -21,6 +18,8 @@ DEPEND="alsa? ( media-libs/alsa-lib )
 	faudio? ( app-emulation/faudio )
 	pulseaudio? ( media-sound/pulseaudio )
 	app-arch/p7zip
+	dev-libs/asmjit
+	dev-libs/flatbuffers
 	dev-libs/hidapi
 	dev-libs/libevdev
 	dev-libs/pugixml
@@ -32,9 +31,11 @@ DEPEND="alsa? ( media-libs/alsa-lib )
 	media-libs/cubeb
 	media-libs/glew
 	media-libs/libpng
+	media-libs/libsoundtouch
 	media-libs/openal
-	sys-libs/zlib"
-#	dev-cpp/yaml-cpp"
+	net-libs/miniupnpc
+	sys-libs/zlib
+	dev-cpp/yaml-cpp"
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
@@ -64,23 +65,27 @@ src_prepare() {
 	sed -i -e 's/3rdparty::hidapi/hidapi-hidraw/' rpcs3/CMakeLists.txt rpcs3/rpcs3qt/CMakeLists.txt || die
 	sed -i -e 's/hid_write_control/hid_write/' rpcs3/Input/dualsense_pad_handler.cpp rpcs3/Input/ds4_pad_handler.cpp || die
 
-	# Move ittapi to the right place via cmake
-	local regex='/GIT_EXECUTABLE} clone/s!(.*!(COMMAND mv '
-	regex+="${WORKDIR}"
-	regex+='/ittapi \${ITTAPI_SOURCE_DIR}!'
-	sed -i -e "${regex}" \
-		llvm/lib/ExecutionEngine/IntelJITEvents/CMakeLists.txt || die ${regex}
-
 	# Unbundle cubeb
 	sed -i -e '/cubeb/d' 3rdparty/CMakeLists.txt || die
 	sed -i -e '$afind_package(cubeb)\n' CMakeLists.txt || die
 	sed -i -e 's/3rdparty::cubeb/cubeb/' rpcs3/Emu/CMakeLists.txt || die
 
 	# Unbundle yaml-cpp: system yaml-cpp should be compiled with -fexceptions
-	# sed -i -e '/yaml-cpp/d' 3rdparty/CMakeLists.txt || die
-	# sed -i -e '$afind_package(yaml-cpp)\n' CMakeLists.txt || die
-	# sed -i -e 's/3rdparty::yaml-cpp/yaml-cpp/' rpcs3/Emu/CMakeLists.txt \
-	#	rpcs3/rpcs3qt/CMakeLists.txt || die
+	sed -i -e '/yaml-cpp/d' 3rdparty/CMakeLists.txt || die
+	sed -i -e '$afind_package(yaml-cpp)\n' CMakeLists.txt || die
+	sed -i -e 's/3rdparty::yaml-cpp/yaml-cpp/' rpcs3/Emu/CMakeLists.txt \
+		rpcs3/rpcs3qt/CMakeLists.txt || die
+
+	# Unbundle miniupnpc
+	sed -i -e '/miniupnp/d' 3rdparty/CMakeLists.txt || die
+	sed -i -e '/add_subdirectory/d' 3rdparty/miniupnp/CMakeLists.txt || die
+
+	# Unbundle asmjit
+	sed -i -e '/asmjit/d' 3rdparty/CMakeLists.txt || die
+	sed -i -e '/3rdparty::asmjit/d' 3rdparty//CMakeLists.txt || die
+
+		# Unbundle soundtouch
+	sed -i -e '/soundtouch/d' 3rdparty/CMakeLists.txt || die
 
 	# Unbundle glslang SPIRV
 	sed -i -e '/add_subdirectory(glslang/d' \
@@ -95,8 +100,8 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DBUILD_LLVM_SUBMODULE=ON # ennoying really
-		-DBUILD_SHARED_LIBS=OFF # to remove after unbundling
+		-DBUILD_LLVM_SUBMODULE=OFF
+		-DBUILD_SHARED_LIBS=YES
 		-DUSE_DISCORD_RPC=OFF
 		-DUSE_FAUDIO=$(usex faudio)
 		-DUSE_LIBEVDEV=ON
