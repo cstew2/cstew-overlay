@@ -1,5 +1,24 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index e44a3ee8..d564a4e8 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -245,13 +245,7 @@ if( NOT CMAKE_BUILD_TYPE )
+     set(CMAKE_BUILD_TYPE Release)
+ endif()
+ 
+-if(CMAKE_CROSSCOMPILING)
+-    set(BBA_IMPORT "IMPORTFILE-NOTFOUND" CACHE FILEPATH
+-        "Path to the `bba-export.cmake` export file from a native build")
+-    include(${BBA_IMPORT})
+-else()
+-    add_subdirectory(bba)
+-endif()
++add_subdirectory(bba)
+ 
+ include(TestBigEndian)
+ test_big_endian(IS_BIG_ENDIAN)
 diff --git a/xilinx/arch_place.cc b/xilinx/arch_place.cc
-index b7386d78..18e1db7b 100644
+index b29e1243..0cd9819f 100644
 --- a/xilinx/arch_place.cc
 +++ b/xilinx/arch_place.cc
 @@ -19,6 +19,7 @@
@@ -11,10 +30,10 @@ index b7386d78..18e1db7b 100644
  #include "log.h"
  #include "nextpnr.h"
 diff --git a/xilinx/fasm.cc b/xilinx/fasm.cc
-index 0660e8fe..faaa8422 100644
+index b42f8716..cd471d33 100644
 --- a/xilinx/fasm.cc
 +++ b/xilinx/fasm.cc
-@@ -20,6 +20,7 @@
+@@ -21,6 +21,7 @@
  #include <boost/algorithm/string.hpp>
  #include <boost/range/adaptor/reversed.hpp>
  #include <fstream>
@@ -23,7 +42,7 @@ index 0660e8fe..faaa8422 100644
  #include "nextpnr.h"
  #include "pins.h"
 diff --git a/xilinx/pack_io_xc7.cc b/xilinx/pack_io_xc7.cc
-index cd6d397d..126fad4d 100644
+index 3058cde0..29c75574 100644
 --- a/xilinx/pack_io_xc7.cc
 +++ b/xilinx/pack_io_xc7.cc
 @@ -23,6 +23,7 @@
@@ -35,7 +54,7 @@ index cd6d397d..126fad4d 100644
  #include "chain_utils.h"
  #include "design_utils.h"
 diff --git a/xilinx/pack_io_xcup.cc b/xilinx/pack_io_xcup.cc
-index 9be17afa..386a7aa8 100644
+index d59c55e0..421ba8ba 100644
 --- a/xilinx/pack_io_xcup.cc
 +++ b/xilinx/pack_io_xcup.cc
 @@ -22,6 +22,7 @@
@@ -46,28 +65,8 @@ index 9be17afa..386a7aa8 100644
  #include "cells.h"
  #include "chain_utils.h"
  #include "design_utils.h"
-@@ -815,4 +816,4 @@ void USPacker::pack_idelayctrl()
+@@ -797,4 +798,4 @@ void USPacker::pack_idelayctrl()
      generic_xform(ioctrl_rules);
- }
- 
--NEXTPNR_NAMESPACE_END
-\ No newline at end of file
-+NEXTPNR_NAMESPACE_END
-diff --git a/xilinx/pins.cc b/xilinx/pins.cc
-index 0c4d0376..4d1763ca 100644
---- a/xilinx/pins.cc
-+++ b/xilinx/pins.cc
-@@ -17,6 +17,8 @@
-  *
-  */
- 
-+#include <set>
-+
- #include "nextpnr.h"
- 
- NEXTPNR_NAMESPACE_BEGIN
-@@ -703,4 +705,4 @@ void get_top_level_pins(Context *ctx, std::unordered_map<IdString, std::unordere
-     toplevel_pins[ctx->id("OBUFTDS")] = {ctx->id("O"), ctx->id("OB")};
  }
  
 -NEXTPNR_NAMESPACE_END

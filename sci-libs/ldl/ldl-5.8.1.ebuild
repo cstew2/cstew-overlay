@@ -1,7 +1,7 @@
 # Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="Simple but educational LDL^T matrix factorization algorithm"
 HOMEPAGE="https://faculty.cse.tamu.edu/davis/suitesparse.html"
