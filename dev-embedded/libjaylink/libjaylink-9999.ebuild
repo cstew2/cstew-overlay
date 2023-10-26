@@ -5,7 +5,7 @@ EAPI=8
 
 EGIT_REPO_URI="https://gitlab.zapb.de/libjaylink/libjaylink.git"
 
-inherit git-r3 autotools eutils
+inherit git-r3 autotools
 
 DESCRIPTION="Library to access J-Link devices"
 HOMEPAGE="https://gitlab.zapb.de/libjaylink/libjaylink"
@@ -19,7 +19,7 @@ DEPEND="virtual/libusb:1"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	eautoreconf || die
+	eautoreconf
 	default
 }
 

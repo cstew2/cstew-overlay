@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -29,7 +29,14 @@ BDEPEND="
 	virtual/pkgconfig"
 
 # Add '-gtk3-' to the pacakge name
-S="${WORKDIR}/${P}/${PN}3"
+S="${WORKDIR}/${PN}-${PV}"
+
+src_prepare() {
+	default
+
+	# do not install doc and examples by default
+	sed -i -e 's/doc examples//' Makefile.in || die
+}
 
 src_configure() {
 	econf \
@@ -44,7 +51,7 @@ src_configure() {
 }
 
 src_compile() {
-	default
+	emake AR="$(tc-getAR)"
 }
 
 src_install() {

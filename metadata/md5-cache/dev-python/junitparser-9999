@@ -1,13 +1,13 @@
 BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=unpack
 DESCRIPTION=Parses JUnit/xUnit Result XML files with ease
-EAPI=7
+EAPI=8
 HOMEPAGE=https://github.com/gastlygem/junitparser
 INHERIT=git-r3 python-r1
-IUSE=python_targets_python3_9 python_targets_python3_10
+IUSE=python_targets_python3_10 python_targets_python3_11
 KEYWORDS=~amd64
 LICENSE=Apache-2.0
 PROPERTIES=live
 SLOT=0
-_eclasses_=git-r3	27e13c09a4c7e4c78ac812f74727e676	out-of-source-utils	1a9007554652a6e627edbccb3c25a439	multibuild	bddcb51b74f4a76724ff7cf8e7388869	eapi8-dosym	741bfa77afb2a9321261501aca58c208	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	toolchain-funcs	14a8ae365191b518fad51caad7a08f3e	multilib	d1408425c7c4a7669b9b17735404b693	python-utils-r1	429bfd4e8d8e39db5385ba5744f30788	python-r1	3c6cd0f418ba702c186a9865b85e704d
-_md5_=84125097aa7d22ab46bffc209196af5e
+_eclasses_=git-r3	2358a7b20091609e24bd3a83b3ac5991	out-of-source-utils	1a9007554652a6e627edbccb3c25a439	multibuild	30dbf3c5a31db09a19f31ad0a68f2405	multiprocessing	30ead54fa2e2b5f9cd4e612ffc34d0fe	toolchain-funcs	fbbbc99d10168de2926e06da7169b8dc	multilib	c19072c3cd7ac5cb21de013f7e9832e0	python-utils-r1	f6221c2f55e5e832be9919fe1711f33b	python-r1	8a28fa6d3e3bc96ff8a7eff2badbe71f
+_md5_=8c482f76e3d1ee6d29e40265213a030f

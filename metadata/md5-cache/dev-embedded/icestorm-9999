@@ -2,12 +2,12 @@ BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=install unpack
 DEPEND=
 DESCRIPTION=Lattice iCE40 FPGAs Bitstream Documentaion (Reverse Engineered)
-EAPI=7
+EAPI=8
 HOMEPAGE=https://github.com/YosysHQ/icestorm
 INHERIT=git-r3
 LICENSE=ISC
 PROPERTIES=live
 RDEPEND=
 SLOT=0
-_eclasses_=git-r3	27e13c09a4c7e4c78ac812f74727e676
-_md5_=20c753523bd5e631d6585f1d4aa2590e
+_eclasses_=git-r3	2358a7b20091609e24bd3a83b3ac5991
+_md5_=18cf0abe912421aa92d4d43f558fd8d8

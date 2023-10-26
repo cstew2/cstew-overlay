@@ -1,0 +1,12 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 5d3d22613..b225b0c10 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -190,7 +190,6 @@ else()
+   if(WITH_VULKAN)
+     add_subdirectory(src/OrbitTriggerCaptureVulkanLayer)
+     add_subdirectory(src/OrbitVulkanLayer)
+-    add_subdirectory(src/VulkanTutorial)
+   endif()
+ endif()
+ 

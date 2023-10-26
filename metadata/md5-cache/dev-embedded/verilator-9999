@@ -2,12 +2,12 @@ BDEPEND=sys-devel/flex sys-devel/bison >=dev-vcs/git-1.8.2.1[curl] sys-devel/gnu
 DEFINED_PHASES=compile configure install prepare unpack
 DEPEND=dev-lang/perl dev-util/google-perftools sys-process/numactl
 DESCRIPTION=Open Source Verilog and SystemC Software - Serious Tools for Real Projects
-EAPI=7
+EAPI=8
 HOMEPAGE=https://www.veripool.org/
 INHERIT=git-r3 autotools
 LICENSE=LGPL-3
 PROPERTIES=live
 RDEPEND=dev-lang/perl dev-util/google-perftools sys-process/numactl
 SLOT=0
-_eclasses_=git-r3	27e13c09a4c7e4c78ac812f74727e676	gnuconfig	b6b3e92f8b8c996400074b5f61a59256	toolchain-funcs	14a8ae365191b518fad51caad7a08f3e	multilib	d1408425c7c4a7669b9b17735404b693	libtool	9d3a9a889a6fa62ae794f817c156491b	autotools	f0d3196128225dee3220e65f3371bc7a
-_md5_=fda47a224114d233f7fd3b3d7c5cb333
+_eclasses_=git-r3	2358a7b20091609e24bd3a83b3ac5991	gnuconfig	b6b3e92f8b8c996400074b5f61a59256	toolchain-funcs	fbbbc99d10168de2926e06da7169b8dc	multilib	c19072c3cd7ac5cb21de013f7e9832e0	libtool	9d3a9a889a6fa62ae794f817c156491b	autotools	6ae9a4347149b19a112caa1182d03bde
+_md5_=dcadd5bce10af60f6aed48c217126bbe

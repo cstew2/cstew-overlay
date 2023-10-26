@@ -1,17 +1,17 @@
 BDEPEND=sys-devel/gnuconfig >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.5:1.16 ) >=sys-devel/autoconf-2.71-r5 >=sys-devel/libtool-2.4.7
 DEFINED_PHASES=compile prepare setup
-DEPEND=python_single_target_python3_9? ( >=dev-lang/python-3.9.16-r1:3.9 ) python_single_target_python3_9? ( dev-python/httplib2[${PYTHON_MULTI_USEDEP}] ) sys-libs/ncurses:0=
+DEPEND=python_single_target_python3_10? ( dev-lang/python:3.10 ) python_single_target_python3_11? ( dev-lang/python:3.11 ) python_single_target_python3_10? ( dev-python/httplib2[${PYTHON_MULTI_USEDEP}] ) python_single_target_python3_11? ( dev-python/httplib2[${PYTHON_MULTI_USEDEP}] ) sys-libs/ncurses:0=
 DESCRIPTION=a text-based calendar and scheduling application
-EAPI=7
+EAPI=8
 HOMEPAGE=https://calcurse.org/
 INHERIT=autotools python-single-r1
-IUSE=+python_single_target_python3_9
+IUSE=python_single_target_python3_10 python_single_target_python3_11
 KEYWORDS=~amd64
 LICENSE=BSD-2
-RDEPEND=python_single_target_python3_9? ( >=dev-lang/python-3.9.16-r1:3.9 ) python_single_target_python3_9? ( dev-python/httplib2[${PYTHON_MULTI_USEDEP}] ) sys-libs/ncurses:0=
-REQUIRED_USE=^^ ( python_single_target_python3_9 )
+RDEPEND=python_single_target_python3_10? ( dev-lang/python:3.10 ) python_single_target_python3_11? ( dev-lang/python:3.11 ) python_single_target_python3_10? ( dev-python/httplib2[${PYTHON_MULTI_USEDEP}] ) python_single_target_python3_11? ( dev-python/httplib2[${PYTHON_MULTI_USEDEP}] ) sys-libs/ncurses:0=
+REQUIRED_USE=^^ ( python_single_target_python3_10 python_single_target_python3_11 )
 RESTRICT=test
 SLOT=0
 SRC_URI=https://calcurse.org/files/calcurse-4.7.0.tar.gz
-_eclasses_=gnuconfig	b6b3e92f8b8c996400074b5f61a59256	toolchain-funcs	14a8ae365191b518fad51caad7a08f3e	multilib	d1408425c7c4a7669b9b17735404b693	libtool	9d3a9a889a6fa62ae794f817c156491b	autotools	f0d3196128225dee3220e65f3371bc7a	eapi8-dosym	741bfa77afb2a9321261501aca58c208	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	python-utils-r1	429bfd4e8d8e39db5385ba5744f30788	python-single-r1	75118e916668a74c660a13b0ecb22562
-_md5_=4cc1d0a6e3f0c9f51f44d5558c3d7e03
+_eclasses_=gnuconfig	b6b3e92f8b8c996400074b5f61a59256	toolchain-funcs	fbbbc99d10168de2926e06da7169b8dc	multilib	c19072c3cd7ac5cb21de013f7e9832e0	libtool	9d3a9a889a6fa62ae794f817c156491b	autotools	6ae9a4347149b19a112caa1182d03bde	multiprocessing	30ead54fa2e2b5f9cd4e612ffc34d0fe	python-utils-r1	f6221c2f55e5e832be9919fe1711f33b	python-single-r1	75118e916668a74c660a13b0ecb22562
+_md5_=810359cdfc1c53d98cc6428cb97b12be

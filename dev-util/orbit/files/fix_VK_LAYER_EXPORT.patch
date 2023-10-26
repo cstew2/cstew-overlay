@@ -1,0 +1,22 @@
+diff --git a/src/OrbitVulkanLayer/EntryPoints.cpp b/src/OrbitVulkanLayer/EntryPoints.cpp
+index 68d2c37db..f5425c6a4 100644
+--- a/src/OrbitVulkanLayer/EntryPoints.cpp
++++ b/src/OrbitVulkanLayer/EntryPoints.cpp
+@@ -288,7 +288,7 @@ VKAPI_ATTR VkResult VKAPI_CALL OrbitEnumerateDeviceExtensionProperties(
+     }                                                          \
+   } while (false)
+ 
+-extern "C" VK_LAYER_EXPORT VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL
++extern "C" VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL
+ OrbitGetDeviceProcAddr(VkDevice device, const char* name) {
+   // Functions available through GetInstanceProcAddr and GetDeviceProcAddr
+   RETURN_ORBIT_FUNCTION_IF_MATCHES_VK_FUNCTION(GetDeviceProcAddr);
+@@ -330,7 +330,7 @@ OrbitGetDeviceProcAddr(VkDevice device, const char* name) {
+   return controller.ForwardGetDeviceProcAddr(device, name);
+ }
+ 
+-extern "C" VK_LAYER_EXPORT VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL
++extern "C" VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL
+ OrbitGetInstanceProcAddr(VkInstance instance, const char* name) {
+   // Functions available only through GetInstanceProcAddr
+   RETURN_ORBIT_FUNCTION_IF_MATCHES_VK_FUNCTION(GetInstanceProcAddr);

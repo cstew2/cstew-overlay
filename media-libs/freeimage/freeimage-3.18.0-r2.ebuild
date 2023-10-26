@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-inherit eutils toolchain-funcs
+inherit toolchain-funcs
 
 MY_PN=FreeImage
 MY_PV=${PV//.}
@@ -54,11 +54,11 @@ PATCHES=(
 )
 
 src_prepare() {
-	pushd Source >/dev/null || die
-	cp LibJPEG/{transupp.c,transupp.h,jinclude.h} . || die
-	cp LibTIFF4/{tiffiop,tif_dir}.h . || die
-	rm -rf LibPNG LibMNG LibOpenJPEG ZLib OpenEXR LibRawLite LibTIFF4 LibJPEG LibWebP LibJXR || die
-	popd >/dev/null || die
+	pushd Source >/dev/null
+	cp LibJPEG/{transupp.c,transupp.h,jinclude.h} .
+	cp LibTIFF4/{tiffiop,tif_dir}.h .
+	rm -rf LibPNG LibMNG LibOpenJPEG ZLib OpenEXR LibRawLite LibTIFF4 LibJPEG LibWebP LibJXR
+	popd >/dev/null
 
 	edos2unix Makefile.{gnu,fip,srcs} fipMakefile.srcs */*.h */*/*.cpp
 	sed -i \
@@ -71,7 +71,7 @@ src_prepare() {
 		-e 's: -ISource: \\\n\t-ISource:g' \
 		-e 's: -IWrapper: \\\n\t-IWrapper:g' \
 		-e 's:INCLS:\nINCLS:g' \
-		Makefile.srcs fipMakefile.srcs || die
+		Makefile.srcs fipMakefile.srcs
 	sed -i \
 		-e "/LibJPEG/d" \
 		-e "/LibJXR/d" \
@@ -84,7 +84,7 @@ src_prepare() {
 		-e "/LibMNG/d" \
 		-e "/LibWebP/d" \
 		-e "/LibJXR/d" \
-		Makefile.srcs fipMakefile.srcs || die
+		Makefile.srcs fipMakefile.srcs
 
 	default
 }

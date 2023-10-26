@@ -2,7 +2,7 @@ BDEPEND=dev-libs/wayland-protocols dev-util/wayland-scanner virtual/pkgconfig >=
 DEFINED_PHASES=configure install postinst prepare unpack
 DEPEND=dev-libs/libinput dev-libs/wayland x11-libs/libxcb x11-libs/libxkbcommon gui-libs/wlroots:0/15[X(-)?]
 DESCRIPTION=dwm for Wayland
-EAPI=7
+EAPI=8
 HOMEPAGE=https://git.sr.ht/~raphi/dwl
 INHERIT=savedconfig git-r3
 IUSE=X savedconfig
@@ -10,5 +10,5 @@ LICENSE=CC0-1.0 GPL-3 MIT
 PROPERTIES=live
 RDEPEND=dev-libs/libinput dev-libs/wayland x11-libs/libxcb x11-libs/libxkbcommon gui-libs/wlroots:0/15[X(-)?]
 SLOT=0
-_eclasses_=portability	964493f201f557a5c6baccacccf45ee2	savedconfig	8b5f9d995a970e49cd427c55d5840285	git-r3	27e13c09a4c7e4c78ac812f74727e676
-_md5_=0d2f9e2fcca86b00ca4d8c5e00193a87
+_eclasses_=portability	a74d533f258f1f435be71312558c12f9	savedconfig	8b5f9d995a970e49cd427c55d5840285	git-r3	2358a7b20091609e24bd3a83b3ac5991
+_md5_=07e97090e3cacf4426f981f943584227

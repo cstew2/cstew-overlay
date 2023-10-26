@@ -1,7 +1,7 @@
 BDEPEND=X? ( >=x11-apps/mkfontscale-1.2.0 media-fonts/encodings ) >=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=compile install postinst postrm setup unpack
 DESCRIPTION=The Crimson Text typeface
-EAPI=7
+EAPI=8
 HOMEPAGE=https://github.com/skosch/Crimson
 INHERIT=font git-r3
 IUSE=X
@@ -9,5 +9,5 @@ KEYWORDS=~amd64 ~arm ~arm64 ~ppc ~ppc64 ~x86
 LICENSE=OFL
 PROPERTIES=live
 SLOT=0
-_eclasses_=font	aa113a3df9cd0a9693a1c1ee7c34a6eb	git-r3	27e13c09a4c7e4c78ac812f74727e676
-_md5_=e4cbf71c5847cd67a11635c6f57809ad
+_eclasses_=font	aa113a3df9cd0a9693a1c1ee7c34a6eb	git-r3	2358a7b20091609e24bd3a83b3ac5991
+_md5_=beb010e29feeed3c8e5e086b90c97ed7

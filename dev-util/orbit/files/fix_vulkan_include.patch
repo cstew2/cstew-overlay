@@ -1,0 +1,72 @@
+diff --git a/src/OrbitTriggerCaptureVulkanLayer/DispatchTable.cpp b/src/OrbitTriggerCaptureVulkanLayer/DispatchTable.cpp
+index ae6befeda..34626c6da 100644
+--- a/src/OrbitTriggerCaptureVulkanLayer/DispatchTable.cpp
++++ b/src/OrbitTriggerCaptureVulkanLayer/DispatchTable.cpp
+@@ -8,7 +8,7 @@
+ 
+ // clang-format off
+ #include "vulkan/vulkan.h" // IWYU pragma: keep
+-#include "vulkan/vk_layer_dispatch_table.h" // IWYU pragma: keep
++#include "vulkan/generated/vk_layer_dispatch_table.h" // IWYU pragma: keep
+ // clang-format on
+ 
+ namespace {
+diff --git a/src/OrbitTriggerCaptureVulkanLayer/DispatchTable.h b/src/OrbitTriggerCaptureVulkanLayer/DispatchTable.h
+index 5cd7ca14b..42b6dffb8 100644
+--- a/src/OrbitTriggerCaptureVulkanLayer/DispatchTable.h
++++ b/src/OrbitTriggerCaptureVulkanLayer/DispatchTable.h
+@@ -14,7 +14,7 @@
+ #include "absl/synchronization/mutex.h"
+ // clang-format off
+ #include "vulkan/vulkan.h" // IWYU pragma: keep
+-#include "vulkan/vk_layer_dispatch_table.h" // IWYU pragma: keep
++#include "vulkan/generated/vk_layer_dispatch_table.h" // IWYU pragma: keep
+ // clang-format on
+ 
+ // Contains the logic related to the dispatch table so the creation of the table as well as the
+diff --git a/src/OrbitTriggerCaptureVulkanLayer/OrbitCaptureClientLayer.cpp b/src/OrbitTriggerCaptureVulkanLayer/OrbitCaptureClientLayer.cpp
+index 5c4436be6..383ed4866 100644
+--- a/src/OrbitTriggerCaptureVulkanLayer/OrbitCaptureClientLayer.cpp
++++ b/src/OrbitTriggerCaptureVulkanLayer/OrbitCaptureClientLayer.cpp
+@@ -15,7 +15,7 @@
+ #include "absl/synchronization/mutex.h"
+ // clang-format off
+ #include "vulkan/vk_layer.h" // IWYU pragma: keep
+-#include "vulkan/vk_layer_dispatch_table.h" // IWYU pragma: keep
++#include "vulkan/generated/vk_layer_dispatch_table.h" // IWYU pragma: keep
+ // clang-format on
+ 
+ #undef VK_LAYER_EXPORT
+diff --git a/src/OrbitVulkanLayer/DispatchTable.h b/src/OrbitVulkanLayer/DispatchTable.h
+index 265192daa..053cd2b48 100644
+--- a/src/OrbitVulkanLayer/DispatchTable.h
++++ b/src/OrbitVulkanLayer/DispatchTable.h
+@@ -11,7 +11,7 @@
+ #include <absl/synchronization/mutex.h>
+ // clang-format off
+ #include <vulkan/vulkan.h> // IWYU pragma: keep
+-#include <vulkan/vk_layer_dispatch_table.h> // IWYU pragma: keep
++#include <vulkan/generated/vk_layer_dispatch_table.h> // IWYU pragma: keep
+ #include <string.h>
+ #include <vulkan/vulkan_core.h>
+ 
+diff --git a/src/OrbitVulkanLayer/DispatchTableTest.cpp b/src/OrbitVulkanLayer/DispatchTableTest.cpp
+index 49d7e1b0d..f879f31e7 100644
+--- a/src/OrbitVulkanLayer/DispatchTableTest.cpp
++++ b/src/OrbitVulkanLayer/DispatchTableTest.cpp
+@@ -10,7 +10,7 @@
+ // clang-format off
+ // vulkan_core needs to be included before the dispatch table
+ #include <vulkan/vulkan_core.h> // IWYU pragma: keep
+-#include <vulkan/vk_layer_dispatch_table.h> // IWYU pragma: keep
++#include <vulkan/generated/vk_layer_dispatch_table.h> // IWYU pragma: keep
+ // clang-format on
+ 
+ #include <memory>
+@@ -1230,4 +1230,4 @@ TEST(DispatchTable, CanCallDebugMarkerSetObjectNameEXT) {
+   EXPECT_EQ(result, VK_SUCCESS);
+ }
+ 
+-}  // namespace orbit_vulkan_layer
+\ No newline at end of file
++}  // namespace orbit_vulkan_layer

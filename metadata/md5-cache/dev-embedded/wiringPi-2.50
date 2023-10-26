@@ -1,9 +1,9 @@
 DEFINED_PHASES=compile install
 DESCRIPTION=PIN based GPIO library written in C for the SoC devices used in all Raspberry Pi
-EAPI=7
+EAPI=8
 HOMEPAGE=http://www.wiringPi.com
 KEYWORDS=amd64
 LICENSE=GPL-2
 SLOT=0
 SRC_URI=https://github.com/wiringPi/wiringPi/archive/final_official_2.50.tar.gz
-_md5_=33bdf5cd2b7229da6c81e9c9d4de3aa8
+_md5_=143eeb52eae88f987c28027104db6aaa

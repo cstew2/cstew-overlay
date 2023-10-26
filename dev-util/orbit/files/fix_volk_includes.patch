@@ -1,0 +1,26 @@
+diff --git a/third_party/VulkanTutorial/OffscreenRenderingVulkanTutorial.cpp b/third_party/VulkanTutorial/OffscreenRenderingVulkanTutorial.cpp
+index 05c41c5cc..132983970 100644
+--- a/third_party/VulkanTutorial/OffscreenRenderingVulkanTutorial.cpp
++++ b/third_party/VulkanTutorial/OffscreenRenderingVulkanTutorial.cpp
+@@ -2,7 +2,7 @@
+ 
+ #include <absl/base/casts.h>
+ #include <absl/synchronization/mutex.h>
+-#include <volk.h>
++#include <volk/volk.h>
+ 
+ #include <cstdint>
+ #include <vector>
+diff --git a/third_party/VulkanTutorial/include/VulkanTutorial/OffscreenRenderingVulkanTutorial.h b/third_party/VulkanTutorial/include/VulkanTutorial/OffscreenRenderingVulkanTutorial.h
+index 8f927e702..b97541da5 100644
+--- a/third_party/VulkanTutorial/include/VulkanTutorial/OffscreenRenderingVulkanTutorial.h
++++ b/third_party/VulkanTutorial/include/VulkanTutorial/OffscreenRenderingVulkanTutorial.h
+@@ -3,7 +3,7 @@
+ 
+ #include <absl/base/thread_annotations.h>
+ #include <absl/synchronization/mutex.h>
+-#include <volk.h>
++#include <volk/volk.h>
+ 
+ #include <cstdint>
+ #include <optional>
