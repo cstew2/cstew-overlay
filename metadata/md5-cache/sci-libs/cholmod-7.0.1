@@ -1,15 +1,15 @@
-BDEPEND=>=dev-util/ninja-1.8.2 >=dev-util/cmake-3.20.5
+BDEPEND=app-alternatives/ninja >=dev-util/cmake-3.20.5
 DEFINED_PHASES=compile configure install prepare test
 DEPEND=sci-libs/amd sci-libs/colamd cuda? ( x11-drivers/nvidia-drivers dev-util/nvidia-cuda-toolkit ) lapack? ( virtual/lapack ) partition? ( sci-libs/camd sci-libs/ccolamd || ( sci-libs/metis sci-libs/parmetis ) )
 DESCRIPTION=Sparse Cholesky factorization and update/downdate library
 EAPI=8
 HOMEPAGE=https://faculty.cse.tamu.edu/davis/suitesparse.html
 INHERIT=cmake
-IUSE=+cuda doc +lapack +matrixops +modify +openmp +partition static-libs
+IUSE=cuda doc +lapack +matrixops +modify +openmp +partition static-libs
 KEYWORDS=~amd64 ~arm ~arm64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x86-linux
 LICENSE=LGPL-2.1+
 RDEPEND=sci-libs/amd sci-libs/colamd cuda? ( x11-drivers/nvidia-drivers dev-util/nvidia-cuda-toolkit ) lapack? ( virtual/lapack ) partition? ( sci-libs/camd sci-libs/ccolamd || ( sci-libs/metis sci-libs/parmetis ) )
 SLOT=0
 SRC_URI=https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/refs/tags/v7.0.1.tar.gz -> SuiteSparse-7.0.1.tar.gz
-_eclasses_=toolchain-funcs	fbbbc99d10168de2926e06da7169b8dc	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	5ae516d405b6ae5636e487ea4350a8a2	multiprocessing	30ead54fa2e2b5f9cd4e612ffc34d0fe	ninja-utils	39e7a84b06eff4efd9f2e0c3d1668b98	xdg-utils	baea6080dd821f5562d715887954c9d3	cmake	fc2f89084f590ac95c004ea95b0d2f80
-_md5_=a9fe8b20ad2c76fc63d74de9386a4dcc
+_eclasses_=toolchain-funcs	e56c7649b804f051623c8bc1a1c44084	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	78cf3cc2d5572fddf5e5e10c70f7c81a	multiprocessing	30ead54fa2e2b5f9cd4e612ffc34d0fe	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	xdg-utils	baea6080dd821f5562d715887954c9d3	cmake	6ce0fba8085ef5b349c3a2e185305098
+_md5_=eb611ed0a04d24ccc426bc8633017bd4

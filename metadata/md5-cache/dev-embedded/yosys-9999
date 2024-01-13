@@ -9,5 +9,5 @@ LICENSE=ISC
 PROPERTIES=live
 RDEPEND=sys-libs/readline sys-apps/gawk dev-libs/libffi media-gfx/graphviz dev-libs/boost[python,zlib] sys-libs/zlib dev-lang/tcl dev-embedded/abc media-gfx/xdot
 SLOT=0
-_eclasses_=git-r3	2358a7b20091609e24bd3a83b3ac5991
+_eclasses_=git-r3	86fa1f157b70b9d2ff340c4633b1cf4b
 _md5_=64ecbc700070698c8bb16e7fc0623901

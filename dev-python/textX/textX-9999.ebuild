@@ -3,7 +3,7 @@
 
 EAPI=8
 
-DISTUTILS_USE_PEP517=setuptools
+DISTUTILS_USE_PEP517=flit
 PYTHON_COMPAT=(python3_{10,11})
 
 inherit git-r3 distutils-r1
@@ -14,7 +14,6 @@ HOMEPAGE="
 	https://github.com/textX/textX/
 "
 EGIT_REPO_URI="https://github.com/textX/textX.git"
-
 
 LICENSE="MIT"
 SLOT="0"
