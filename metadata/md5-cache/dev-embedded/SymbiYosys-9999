@@ -9,5 +9,5 @@ LICENSE=ISC
 PROPERTIES=live
 RDEPEND=dev-embedded/yosys
 SLOT=0
-_eclasses_=git-r3	86fa1f157b70b9d2ff340c4633b1cf4b
-_md5_=b1bb94ac46a494fa29483db5c87765be
+_eclasses_=git-r3	875eb471682d3e1f18da124be97dcc81
+_md5_=8c9f98c419ae13e0b9c5e733413ad189

@@ -1,6 +1,6 @@
-BDEPEND=>=dev-vcs/git-1.8.2.1[curl] >=dev-util/meson-1.2.1 app-alternatives/ninja dev-util/meson-format-array
+BDEPEND=>=dev-vcs/git-1.8.2.1[curl] >=dev-build/meson-1.2.3 app-alternatives/ninja dev-build/meson-format-array
 DEFINED_PHASES=compile configure install prepare test unpack
-DEPEND=>=media-libs/libmpdclient-2.5 >=dev-libs/boost-1.62 dev-libs/libgcrypt >=net-misc/curl-7.18 acct? ( acct-user/mpdscribble ) dev-util/ninja
+DEPEND=>=media-libs/libmpdclient-2.5 >=dev-libs/boost-1.62 dev-libs/libgcrypt >=net-misc/curl-7.18 acct? ( acct-user/mpdscribble ) dev-build/ninja
 DESCRIPTION=An MPD client that submits information to Audioscrobbler
 EAPI=8
 HOMEPAGE=https://www.musicpd.org/clients/mpdscribble/
@@ -10,5 +10,5 @@ LICENSE=GPL-2
 PROPERTIES=live
 RDEPEND=>=media-libs/libmpdclient-2.5 >=dev-libs/boost-1.62 dev-libs/libgcrypt >=net-misc/curl-7.18 acct? ( acct-user/mpdscribble )
 SLOT=0
-_eclasses_=git-r3	86fa1f157b70b9d2ff340c4633b1cf4b	multiprocessing	30ead54fa2e2b5f9cd4e612ffc34d0fe	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	toolchain-funcs	e56c7649b804f051623c8bc1a1c44084	multilib	c19072c3cd7ac5cb21de013f7e9832e0	python-utils-r1	042f4cc53680245bf99a84669b94155a	meson	0e160eeba59c15ec333bd675cecdfdc9
-_md5_=1dba342c3d1cc5d9fbe9431701f172be
+_eclasses_=git-r3	875eb471682d3e1f18da124be97dcc81	toolchain-funcs	e56c7649b804f051623c8bc1a1c44084	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	e503ea5acc20410237ba33ec3f7c857d	multiprocessing	30ead54fa2e2b5f9cd4e612ffc34d0fe	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	python-utils-r1	8b220bbce5c119fb1d4d5c2f5588f3ea	meson	99466844dd8d4fcfb07578a76f5a9922
+_md5_=5e12b6a923b4f4ab57cab4d3091305d4

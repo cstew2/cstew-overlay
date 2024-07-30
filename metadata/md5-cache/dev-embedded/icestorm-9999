@@ -9,5 +9,5 @@ LICENSE=ISC
 PROPERTIES=live
 RDEPEND=
 SLOT=0
-_eclasses_=git-r3	86fa1f157b70b9d2ff340c4633b1cf4b
-_md5_=18cf0abe912421aa92d4d43f558fd8d8
+_eclasses_=git-r3	875eb471682d3e1f18da124be97dcc81
+_md5_=f90b3b9cd415b153b59d6d1c3f00384a

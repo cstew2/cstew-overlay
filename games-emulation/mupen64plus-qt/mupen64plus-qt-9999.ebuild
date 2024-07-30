@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -20,7 +20,8 @@ DEPEND="dev-qt/qtcore:5
 		dev-qt/qtwidgets:5
 		dev-qt/qtsql:5
 		dev-libs/quazip"
-RDEPEND="${DEPEND}"
+RDEPEND="games-emulation/mupen64plus-core
+		 ${DEPEND}"
 
 PATCHES=( "${FILESDIR}/quazip.patch" )
 

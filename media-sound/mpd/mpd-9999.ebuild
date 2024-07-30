@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -106,7 +106,7 @@ DEPEND="${RDEPEND}
 	>=dev-libs/boost-1.58:=
 	test? ( dev-cpp/gtest )"
 
-BDEPEND=">=dev-util/meson-0.49.2
+BDEPEND=">=dev-build/meson-0.49.2
 	virtual/pkgconfig"
 
 PATCHES=()

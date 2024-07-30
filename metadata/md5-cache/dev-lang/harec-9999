@@ -9,5 +9,5 @@ LICENSE=GPL-3
 PROPERTIES=live
 RDEPEND=sys-devel/qbe
 SLOT=0
-_eclasses_=git-r3	86fa1f157b70b9d2ff340c4633b1cf4b
+_eclasses_=git-r3	875eb471682d3e1f18da124be97dcc81
 _md5_=b13276dc3c0daa7c86e2c17f898e2088

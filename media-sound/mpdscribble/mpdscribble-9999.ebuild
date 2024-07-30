@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -20,7 +20,7 @@ RDEPEND=">=media-libs/libmpdclient-2.5
 	>=net-misc/curl-7.18
 	acct? ( acct-user/mpdscribble )"
 DEPEND="${RDEPEND}
-	dev-util/ninja"
+	dev-build/ninja"
 
 src_prepare() {
 	default

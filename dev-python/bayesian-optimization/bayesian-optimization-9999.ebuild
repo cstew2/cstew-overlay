@@ -1,9 +1,10 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-PYTHON_COMPAT=(python3_{10,11,12})
+PYTHON_COMPAT=(python3_{11,12})
+DISTUTILS_USE_PEP517=poetry
 
 inherit git-r3 distutils-r1
 
@@ -18,7 +19,7 @@ IUSE="test"
 
 DEPEND=">=dev-python/numpy-1.9.0
 		>=dev-python/scipy-1.0.0
-		>=sci-libs/scikit-learn-0.18.0
+		>=dev-python/scikit-learn-0.18.0
 		>=dev-python/colorama-0.4.6"
 RDEPEND="${DEPEND}"
 BDEPEND=""

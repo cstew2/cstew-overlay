@@ -1,0 +1,72 @@
+diff --git a/faiss/python/CMakeLists.txt b/faiss/python/CMakeLists.txt
+index d8d93349..6652318b 100644
+--- a/faiss/python/CMakeLists.txt
++++ b/faiss/python/CMakeLists.txt
+@@ -142,6 +142,35 @@ else()
+   target_compile_options(swigfaiss_sve PRIVATE /bigobj)
+ endif()
+ 
++# If Linux, then set all public PROPERTIES
++# Enable swifaiss to load the python loader from the directory where _swigfaiss.so lies.
++set_target_properties(swigfaiss PROPERTIES
++  SUFFIX .so
++  INSTALL_RPATH "$ORIGIN/."
++  BUILD_WITH_INSTALL_RPATH TRUE
++)
++
++# Enable swifaiss_avx2 to load the python loader from the directory where _swigfaiss.so lies.
++set_target_properties(swigfaiss_avx2 PROPERTIES
++  SUFFIX .so
++  INSTALL_RPATH "$ORIGIN/."
++  BUILD_WITH_INSTALL_RPATH TRUE
++)
++
++# Enable swifaiss_avx512 to load the python loader from the directory where _swigfaiss.so lies.
++set_target_properties(swigfaiss_avx512 PROPERTIES
++  SUFFIX .so
++  INSTALL_RPATH "$ORIGIN/."
++  BUILD_WITH_INSTALL_RPATH TRUE
++)
++
++# Enable swifaiss_sve to load the python loader from the directory where _swigfaiss.so lies.
++set_target_properties(swigfaiss_sve PROPERTIES
++  SUFFIX .so
++  INSTALL_RPATH "$ORIGIN/."
++  BUILD_WITH_INSTALL_RPATH TRUE
++)
++
+ if(FAISS_ENABLE_GPU)
+   find_package(CUDAToolkit REQUIRED)
+   if(FAISS_ENABLE_RAFT)
+@@ -157,6 +186,7 @@ find_package(OpenMP REQUIRED)
+ 
+ target_link_libraries(swigfaiss PRIVATE
+   faiss
++  faiss_python_callbacks
+   Python::Module
+   Python::NumPy
+   OpenMP::OpenMP_CXX
+@@ -164,6 +194,7 @@ target_link_libraries(swigfaiss PRIVATE
+ 
+ target_link_libraries(swigfaiss_avx2 PRIVATE
+   faiss_avx2
++  faiss_python_callbacks
+   Python::Module
+   Python::NumPy
+   OpenMP::OpenMP_CXX
+@@ -171,6 +202,7 @@ target_link_libraries(swigfaiss_avx2 PRIVATE
+ 
+ target_link_libraries(swigfaiss_avx512 PRIVATE
+   faiss_avx512
++  faiss_python_callbacks
+   Python::Module
+   Python::NumPy
+   OpenMP::OpenMP_CXX
+@@ -178,6 +210,7 @@ target_link_libraries(swigfaiss_avx512 PRIVATE
+ 
+ target_link_libraries(swigfaiss_sve PRIVATE
+   faiss_sve
++  faiss_python_callbacks
+   Python::Module
+   Python::NumPy
+   OpenMP::OpenMP_CXX
