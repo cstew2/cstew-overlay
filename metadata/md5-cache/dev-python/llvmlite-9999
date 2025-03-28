@@ -1,15 +1,15 @@
-BDEPEND=test? ( dev-python/pytest ) python_targets_python3_11? ( dev-lang/python:3.11 ) python_targets_python3_12? ( dev-lang/python:3.12 ) >=dev-python/setuptools-69.0.3[python_targets_python3_11(-)?,python_targets_python3_12(-)?] >=dev-vcs/git-1.8.2.1[curl]
+BDEPEND=test? ( dev-python/pytest ) python_targets_python3_12? ( dev-lang/python:3.12 ) python_targets_python3_13? ( dev-lang/python:3.13 ) >=dev-python/setuptools-69.0.3[python_targets_python3_12(-)?,python_targets_python3_13(-)?] >=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=compile configure install prepare setup test unpack
 DEPEND=sys-devel/llvm:16
 DESCRIPTION=A library for efficient similarity search and clustering of dense vectors
 EAPI=8
 HOMEPAGE=llvmlite.pydata.org/
 INHERIT=distutils-r1 git-r3 llvm-r1
-IUSE=docs test python_targets_python3_11 python_targets_python3_12 +llvm_slot_16 llvm_slot_15
+IUSE=docs test python_targets_python3_12 python_targets_python3_13 +llvm_slot_16 llvm_slot_15
 LICENSE=BSD-2
 PROPERTIES=live
-RDEPEND=sys-devel/llvm:16 python_targets_python3_11? ( dev-lang/python:3.11 ) python_targets_python3_12? ( dev-lang/python:3.12 )
-REQUIRED_USE=|| ( python_targets_python3_11 python_targets_python3_12 ) ^^ ( llvm_slot_15 llvm_slot_16 )
+RDEPEND=sys-devel/llvm:16 python_targets_python3_12? ( dev-lang/python:3.12 ) python_targets_python3_13? ( dev-lang/python:3.13 )
+REQUIRED_USE=|| ( python_targets_python3_12 python_targets_python3_13 ) ^^ ( llvm_slot_15 llvm_slot_16 )
 SLOT=0
 _eclasses_=toolchain-funcs	6afdb6107430c1832ca7e16aacbf8fa1	multilib	b2a329026f2e404e9e371097dda47f96	flag-o-matic	357f1a896fbedcd06e5ce55419c49eb9	out-of-source-utils	dbf9e34ee8964084651e25907fa8f52c	multibuild	4650a65187015567b4e041bb9bfdb364	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	python-utils-r1	b7726144f5af59e186d66746d0f513e5	python-r1	fa2daad0051275fa416115c76e53b1de	distutils-r1	85ccd3b54a6533fb120ee52b7c76a3df	git-r3	875eb471682d3e1f18da124be97dcc81	llvm-utils	7f49c40879f833f9d07e2d5a9643077b	llvm-r1	0bd586d3786517cd63802a520b404dda
-_md5_=e80686a8fe9b3d6d3e9a9950b538745e
+_md5_=fff1040e6ca02db0ff4fbbe75d3c6d27

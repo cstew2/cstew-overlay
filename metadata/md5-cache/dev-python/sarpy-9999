@@ -1,15 +1,15 @@
-BDEPEND=test? ( dev-python/pytest ) python_targets_python3_11? ( dev-lang/python:3.11 ) python_targets_python3_12? ( dev-lang/python:3.12 ) >=dev-python/setuptools-69.0.3[python_targets_python3_11(-)?,python_targets_python3_12(-)?] >=dev-vcs/git-1.8.2.1[curl]
+BDEPEND=test? ( dev-python/pytest ) python_targets_python3_12? ( dev-lang/python:3.12 ) python_targets_python3_13? ( dev-lang/python:3.13 ) >=dev-python/setuptools-69.0.3[python_targets_python3_12(-)?,python_targets_python3_13(-)?] >=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=compile configure install prepare test unpack
 DEPEND=dev-python/scipy dev-python/numpy extra? ( dev-python/lxml dev-python/shapely dev-python/networkx dev-python/pyproj ) docs? ( dev-python/sphinx )
 DESCRIPTION=A basic Python library for reading, writing, display, and simple processing of SAR data
 EAPI=8
 HOMEPAGE=https://github.com/numba/numba.git
 INHERIT=distutils-r1 git-r3
-IUSE=docs extra test python_targets_python3_11 python_targets_python3_12
+IUSE=docs extra test python_targets_python3_12 python_targets_python3_13
 LICENSE=MIT
 PROPERTIES=live
-RDEPEND=dev-python/scipy dev-python/numpy extra? ( dev-python/lxml dev-python/shapely dev-python/networkx dev-python/pyproj ) docs? ( dev-python/sphinx ) python_targets_python3_11? ( dev-lang/python:3.11 ) python_targets_python3_12? ( dev-lang/python:3.12 )
-REQUIRED_USE=|| ( python_targets_python3_11 python_targets_python3_12 )
+RDEPEND=dev-python/scipy dev-python/numpy extra? ( dev-python/lxml dev-python/shapely dev-python/networkx dev-python/pyproj ) docs? ( dev-python/sphinx ) python_targets_python3_12? ( dev-lang/python:3.12 ) python_targets_python3_13? ( dev-lang/python:3.13 )
+REQUIRED_USE=|| ( python_targets_python3_12 python_targets_python3_13 )
 SLOT=0
 _eclasses_=toolchain-funcs	6afdb6107430c1832ca7e16aacbf8fa1	multilib	b2a329026f2e404e9e371097dda47f96	flag-o-matic	357f1a896fbedcd06e5ce55419c49eb9	out-of-source-utils	dbf9e34ee8964084651e25907fa8f52c	multibuild	4650a65187015567b4e041bb9bfdb364	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	python-utils-r1	b7726144f5af59e186d66746d0f513e5	python-r1	fa2daad0051275fa416115c76e53b1de	distutils-r1	85ccd3b54a6533fb120ee52b7c76a3df	git-r3	875eb471682d3e1f18da124be97dcc81
-_md5_=4fa7796ce2d7f1d8b77480f13bc1d699
+_md5_=1c0310c84eb721e883e676a780cdfe93

@@ -11,4 +11,4 @@ PROPERTIES=live
 RDEPEND=media-libs/freetype x11-libs/libXft media-libs/fontconfig x11-libs/gtk+:3 dev-lang/perl
 SLOT=0
 _eclasses_=git-r3	875eb471682d3e1f18da124be97dcc81
-_md5_=601c92edf708b45386789583d779f66c
+_md5_=8c3e81daa1c0079b534e6cd0b4cb7068
