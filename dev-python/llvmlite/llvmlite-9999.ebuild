@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=(python3_{11,12})
+PYTHON_COMPAT=(python3_{12,13})
 LLVM_COMPAT=({15,16})
 
 inherit distutils-r1 git-r3 llvm-r1

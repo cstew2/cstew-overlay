@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit flag-o-matic linux-info meson systemd xdg-utils git-r3
+inherit flag-o-matic linux-info meson git-r3
 
 DESCRIPTION="The Music Player Daemon (mpd)"
 HOMEPAGE="https://www.musicpd.org https://github.com/MusicPlayerDaemon/MPD"
@@ -12,11 +12,11 @@ EGIT_REPO_URI="https://github.com/MusicPlayerDaemon/MPD.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="+alsa ao +audiofile bzip2 cdio chromaprint +cue +curl doc +dbus
+IUSE="+alsa ao +audiofile bzip2 cdio chromaprint +cue +curl doc
 	+eventfd expat faad +ffmpeg +fifo flac fluidsynth gme +icu +id3tag +inotify
 	+ipv6 jack lame libmpdclient libsamplerate libsoxr +mad mikmod mms
 	modplug mpg123 musepack +network nfs openal opus oss pipe pulseaudio qobuz
-	recorder samba selinux sid signalfd sndfile soundcloud sqlite systemd
+	recorder samba selinux sid signalfd sndfile soundcloud sqlite
 	test twolame udisks unicode vorbis wavpack webdav wildmidi upnp
 	zeroconf zip zlib"
 
@@ -55,7 +55,6 @@ RDEPEND="
 
 	chromaprint? ( media-libs/chromaprint )
 	curl? ( net-misc/curl )
-	dbus? ( sys-apps/dbus )
 	doc? ( dev-python/sphinx )
 	expat? ( dev-libs/expat )
 	faad? ( media-libs/faad2 )
@@ -91,14 +90,12 @@ RDEPEND="
 	sndfile? ( media-libs/libsndfile )
 	soundcloud? ( >=dev-libs/yajl-2:= )
 	sqlite? ( dev-db/sqlite:3 )
-	systemd? ( sys-apps/systemd )
 	twolame? ( media-sound/twolame )
 	udisks? ( sys-fs/udisks:2 )
 	upnp? ( net-libs/libupnp:0 )
 	vorbis? ( media-libs/libvorbis )
 	wavpack? ( media-sound/wavpack )
 	wildmidi? ( media-sound/wildmidi )
-	zeroconf? ( net-dns/avahi[dbus] )
 	zip? ( dev-libs/zziplib )
 	zlib? ( sys-libs/zlib:= )"
 
@@ -147,7 +144,6 @@ src_configure() {
 		-Dchromaprint=$(usex chromaprint enabled disabled)
 		-Dcue=$(usex cue true false)
 		-Dcurl=$(usex curl enabled disabled)
-		-Ddbus=$(usex dbus enabled disabled)
 		-Deventfd=$(usex eventfd true false)
 		-Dexpat=$(usex expat enabled disabled)
 		-Dicu=$(usex icu enabled disabled)
@@ -163,7 +159,6 @@ src_configure() {
 		-Dsmbclient=$(usex samba enabled disabled)
 		-Dsoxr=$(usex libsoxr enabled disabled)
 		-Dsqlite=$(usex sqlite enabled disabled)
-		-Dsystemd=$(usex systemd enabled disabled)
 		-Dtest=$(usex test true false)
 		-Dudisks=$(usex udisks enabled disabled)
 		-Dupnp=$(usex upnp enabled disabled)
@@ -188,6 +183,9 @@ src_configure() {
 	if use samba || use upnp; then
 		emesonargs+=( -Dneighbor=true )
 	fi
+
+	append-cxxflags -DFMT_HEADER_ONLY=1
+	append-cflags -DFMT_HEADER_ONLY=1
 
 	append-lfs-flags
 	append-ldflags "-L/usr/$(get_libdir)/sidplay/builders"
@@ -244,8 +242,6 @@ src_configure() {
 		-Dio_uring=enabled
 		-Dtcp=true
 
-		-Dsystemd_system_unit_dir="$(systemd_get_systemunitdir)"
-		-Dsystemd_user_unit_dir="$(systemd_get_userunitdir)"
 		)
 
 	if use icu; then
@@ -282,12 +278,4 @@ src_install() {
 	keepdir /var/lib/mpd/music
 	keepdir /var/lib/mpd/playlists
 
-}
-
-pkg_postinst() {
-	xdg_icon_cache_update
-}
-
-pkg_postrm() {
-	xdg_icon_cache_update
 }

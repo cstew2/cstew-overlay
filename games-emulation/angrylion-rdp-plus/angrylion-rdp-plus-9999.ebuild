@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -17,36 +17,3 @@ IUSE=""
 DEPEND="games-emulation/mupen64plus-core
 		media-libs/freeglut"
 RDEPEND="${DEPEND}"
-
-src_configure() {
-	cmake-utils_src_configure
-}
-
-src_compile() {
-	MAKEARGS=(
-		# this basically means: GNU userspace
-		UNAME=Linux
-
-		# verbose output
-		V=1
-
-		# paths, some of them are used at compile time
-		PREFIX=/usr
-		LIBDIR=/usr/$(get_libdir)
-
-		# disable unwanted magic
-		LDCONFIG=:
-		INSTALL_STRIP_FLAG=
-	)
-
-	use amd64 && MAKEARGS+=( HOST_CPU=x86_64 )
-	use x86 && MAKEARGS+=( HOST_CPU=i386 )
-
-	cmake-utils_src_compile
-}
-
-src_install() {
-	insinto /usr/lib64/mupen64plus
-	doins "${WORKDIR}/${P}_build/mupen64plus-video-angrylion-plus.so"
-	dodoc "README.md"
-}

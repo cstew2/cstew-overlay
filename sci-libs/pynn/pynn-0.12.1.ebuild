@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=(python3_{11,12})
+PYTHON_COMPAT=(python3_{12,13})
 
 inherit cmake distutils-r1
 
@@ -13,16 +13,16 @@ SRC_URI="https://github.com/NeuralEnsemble/PyNN/archive/refs/tags/${PV}.tar.gz -
 LICENSE="CeCILL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="test"
+IUSE="test brian neuron doc mpi"
 
 DEPEND="dev-python/numpy
 		dev-python/lazyarray
 		dev-python/neo
 		dev-python/quantities
 		dev-python/morphio
-		brian2?( sci-libs/brian2 )
+		brian?( sci-libs/brian )
 		neuron?( sci-libs/neuron )
-		doc?( sphinx )
+		doc?( dev-python/sphinx )
 		mpi?( dev-python/mpi4py )
 		test?( dev-python/jinja
 			   dev-python/pytest-conv

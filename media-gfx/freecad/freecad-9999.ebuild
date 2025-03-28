@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=(python3_{11,12})
+PYTHON_COMPAT=(python3_{12,13})
 
 inherit check-reqs cmake optfeature python-single-r1 xdg
 

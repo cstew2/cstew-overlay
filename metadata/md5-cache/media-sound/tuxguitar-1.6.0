@@ -12,5 +12,5 @@ LICENSE=LGPL-2.1
 RDEPEND=>=virtual/jre-1.5 media-libs/suil media-sound/fluid-soundfont timidity? ( alsa? ( media-sound/timidity++[alsa] ) oss? ( media-sound/timidity++[oss] ) media-sound/timidity++ ) dev-java/swt:4.10[cairo] alsa? ( media-libs/alsa-lib ) fluidsynth? ( media-sound/fluidsynth ) fluidalsa? ( media-sound/fluidsynth[alsa] ) fluidjack? ( media-sound/fluidsynth[jack] ) fluidsdl? ( media-sound/fluidsynth[sdl] ) fluidoss? ( media-sound/fluidsynth[oss] ) fluidpipewire? ( media-sound/fluidsynth[pipewire] ) fluidportaudio? ( media-sound/fluidsynth[portaudio] ) fluidpulseaudio? ( media-sound/fluidsynth[pulseaudio] )
 SLOT=0
 SRC_URI=https://github.com/helge17/tuxguitar/archive/refs/tags/1.6.0.tar.gz -> tuxguitar-1.6.0.tar.gz https://github.com/domichel/GenCool/raw/master/distfiles/tuxguitar-1.6.0_bdepends.tar.bz2 https://archive.eclipse.org/eclipse/downloads/drops4/R-4.13-201909161045/swt-4.13-gtk-linux-x86_64.zip
-_eclasses_=xdg-utils	baea6080dd821f5562d715887954c9d3	xdg	4a14c5c24f121e7da66e5aab4a168c6e
+_eclasses_=xdg-utils	42869b3c8d86a70ef3cf75165a395e09	xdg	3ef49a87c52c8b77c476351195dfe575
 _md5_=ba631d8f2664993ecc77bf70a5859472

@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=(python3_{11,12})
+PYTHON_COMPAT=(python3_{12,13})
 
 inherit distutils-r1 git-r3
 
@@ -17,7 +17,7 @@ SLOT="0"
 KEYWORDS=""
 IUSE="docs gui test"
 
-DEPEND="dev-python/faiss
+DEPEND="dev-libs/faiss
 		dev-python/numba
 		dev-python/numpy
 		dev-python/scipy

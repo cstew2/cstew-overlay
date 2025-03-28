@@ -1,9 +1,9 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-PYTHON_COMPAT=(python3_{11,12})
+PYTHON_COMPAT=(python3_{12,13})
 
 inherit cmake
 
@@ -18,8 +18,6 @@ IUSE="test"
 DEPEND="dev-python/mpi4py
 		dev-python/scipy
 		dev-python/numpy
-		dev-python/bokeh
-		dev-python/matplotlib
 		dev-python/scikit-build
 		dev-python/cython
 		sys-devel/bison

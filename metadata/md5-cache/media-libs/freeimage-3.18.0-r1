@@ -11,5 +11,5 @@ LICENSE=|| ( GPL-2 FIPL-1.0 )
 RDEPEND=sys-libs/zlib jpeg? ( virtual/jpeg:0 ) jpeg2k? ( media-libs/openjpeg:2= ) mng? ( media-libs/libmng:= ) openexr? ( media-libs/openexr:= ) png? ( media-libs/libpng:0= ) raw? ( media-libs/libraw:= ) tiff? ( media-libs/ilmbase:= media-libs/tiff:0 ) webp? ( media-libs/libwebp:= )
 SLOT=0
 SRC_URI=mirror://sourceforge/freeimage/FreeImage3180.zip mirror://sourceforge/freeimage/FreeImage3180.pdf
-_eclasses_=toolchain-funcs	e56c7649b804f051623c8bc1a1c44084	multilib	c19072c3cd7ac5cb21de013f7e9832e0
+_eclasses_=toolchain-funcs	6afdb6107430c1832ca7e16aacbf8fa1	multilib	b2a329026f2e404e9e371097dda47f96
 _md5_=99301f36e48280d834608b1f6e108252

@@ -1,9 +1,9 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-PYTHON_COMPAT=(python3_{11,12})
+PYTHON_COMPAT=(python3_{12,13})
 
 inherit git-r3 cmake
 
@@ -20,6 +20,6 @@ DEPEND="dev-embedded/openocd
 		dev-libs/boost[python]
 		"
 RDEPEND="${DEPEND}"
-BDEPEND=">=dev-util/cmake-3.5"
+BDEPEND=""
 
 S="${WORKDIR}/${P}/libtrellis"
