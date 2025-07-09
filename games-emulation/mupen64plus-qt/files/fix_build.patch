@@ -1,0 +1,28 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 04adc88..d1c3726 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -20,7 +20,7 @@ if(UNIX AND NOT MACOS AND NOT LINUX_QUAZIP_STATIC)
+     find_package(QuaZip-Qt6 REQUIRED)
+ endif()
+ 
+-qt_add_executable(mupen64plus-qt WIN32 MACOSX_BUNDLE
++qt_add_executable(mupen64plus-qt
+     src/common.cpp src/common.h
+     src/dialogs/aboutdialog.cpp src/dialogs/aboutdialog.h
+     src/dialogs/configeditor.cpp src/dialogs/configeditor.h
+@@ -91,13 +91,6 @@ if(UNIX AND NOT MACOS AND NOT LINUX_QUAZIP_STATIC)
+ endif()
+ 
+ install(TARGETS mupen64plus-qt
+-    BUNDLE DESTINATION .
++    DESTINATION .
+     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+ )
+-
+-qt_generate_deploy_app_script(
+-    TARGET mupen64plus-qt
+-    FILENAME_VARIABLE deploy_script
+-    NO_UNSUPPORTED_PLATFORM_ERROR
+-)
+-install(SCRIPT ${deploy_script})

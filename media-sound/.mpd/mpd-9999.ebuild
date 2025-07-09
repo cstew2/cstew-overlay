@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -16,7 +16,7 @@ IUSE="+alsa ao +audiofile bzip2 cdio chromaprint +cue +curl doc
 	+eventfd expat faad +ffmpeg +fifo flac fluidsynth gme +icu +id3tag +inotify
 	+ipv6 jack lame libmpdclient libsamplerate libsoxr +mad mikmod mms
 	modplug mpg123 musepack +network nfs openal opus oss pipe pulseaudio qobuz
-	recorder samba selinux sid signalfd sndfile soundcloud sqlite
+	recorder samba selinux sid signalfd sndfile sqlite
 	test twolame udisks unicode vorbis wavpack webdav wildmidi upnp
 	zeroconf zip zlib"
 
@@ -88,7 +88,6 @@ RDEPEND="
 		media-libs/libsidplayfp
 	) )
 	sndfile? ( media-libs/libsndfile )
-	soundcloud? ( >=dev-libs/yajl-2:= )
 	sqlite? ( dev-db/sqlite:3 )
 	twolame? ( media-sound/twolame )
 	udisks? ( sys-fs/udisks:2 )
@@ -228,7 +227,6 @@ src_configure() {
 
 	emesonargs+=(
 		-Dqobuz=$(usex qobuz enabled disabled)
-		-Dsoundcloud=$(usex soundcloud enabled disabled)
 	)
 
 	emesonargs+=(

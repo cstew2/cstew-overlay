@@ -5,7 +5,7 @@ EAPI=8
 
 ROCM_VERSION=6.1
 LLVM_COMPAT=( {14..20} )
-inherit git-r3 cuda rocm llvm-r1 cmake
+inherit git-r3 cuda rocm llvm-r1 cmake toolchain-funcs
 
 DESCRIPTION="Implementation of SYCL and C++ standard parallelism"
 HOMEPAGE="adaptivecpp.github.io/ "
@@ -29,24 +29,12 @@ BDEPEND=""
 PATCHES=( "${FILESDIR}/fix_dirs.patch" )
 
 src_configure() {
-	if use clang; then
-		# Force clang
-		einfo "Enforcing the use of clang due to USE=clang ..."
-
-		local version_clang=$(clang --version 2>/dev/null | grep -F -- 'clang version' | awk '{ print $3 }')
-		[[ -n ${version_clang} ]] && version_clang=$(ver_cut 1 "${version_clang}")
-		[[ -z ${version_clang} ]] && die "Failed to read clang version!"
-
-		if tc-is-gcc; then
-			have_switched_compiler=yes
-		fi
-
-		AR=llvm-ar
-		CC=${CHOST}-clang-${version_clang}
-		CXX=${CHOST}-clang++-${version_clang}
-		NM=llvm-nm
-		RANLIB=llvm-ranlib
-
+	if use clang && !tc-is-clang; then
+		local -x AR=llvm-ar
+		local -x CC=${CHOST}-clang
+		local -x CXX=${CHOST}-clang++
+		local -x NM=llvm-nm
+		local -x RANLIB=llvm-ranlib
 		strip-unsupported-flags
 	fi
 

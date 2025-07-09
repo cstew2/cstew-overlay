@@ -1,4 +1,4 @@
-BDEPEND=test? ( dev-python/pytest dev-python/pytest-xdist ) python_targets_python3_12? ( dev-lang/python:3.12 ) python_targets_python3_13? ( dev-lang/python:3.13 ) >=dev-python/setuptools-69.0.3[python_targets_python3_12(-)?,python_targets_python3_13(-)?] app-alternatives/ninja >=dev-build/cmake-3.20.5
+BDEPEND=test? ( dev-python/pytest dev-python/pytest-xdist ) python_targets_python3_12? ( dev-lang/python:3.12 ) python_targets_python3_13? ( dev-lang/python:3.13 ) >=dev-python/gpep517-16[python_targets_python3_12(-)?,python_targets_python3_13(-)?] >=dev-python/setuptools-78.1.0[python_targets_python3_12(-)?,python_targets_python3_13(-)?] app-alternatives/ninja >=dev-build/cmake-3.20.5
 DEFINED_PHASES=compile configure install prepare test
 DEPEND=sys-cluster/openmpi >=sci-libs/gsl-1.11 >=dev-libs/boost-1.69 mpi? ( virtual/mpi ) test? ( dev-python/pytest dev-python/pytest-timeout dev-python/pytest-xdist dev-python/numpy dev-python/pandas dev-python/scipy dev-python/mpi4py dev-python/terminaltables dev-python/pycodestyle dev-util/cppcheck ) docs? ( dev-python/PyYAML dev-python/sphinx dev-python/ipython ) python? ( dev-python/numpy dev-python/scipy )
 DESCRIPTION=NEST is a simulator for spiking neural network models
@@ -12,5 +12,5 @@ RDEPEND=sys-cluster/openmpi >=sci-libs/gsl-1.11 >=dev-libs/boost-1.69 mpi? ( vir
 REQUIRED_USE=|| ( python_targets_python3_12 python_targets_python3_13 )
 SLOT=0
 SRC_URI=https://github.com/nest/nest-simulator/archive/refs/tags/v3.2.tar.gz
-_eclasses_=toolchain-funcs	6afdb6107430c1832ca7e16aacbf8fa1	multilib	b2a329026f2e404e9e371097dda47f96	flag-o-matic	357f1a896fbedcd06e5ce55419c49eb9	out-of-source-utils	dbf9e34ee8964084651e25907fa8f52c	multibuild	4650a65187015567b4e041bb9bfdb364	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	python-utils-r1	b7726144f5af59e186d66746d0f513e5	python-r1	fa2daad0051275fa416115c76e53b1de	distutils-r1	85ccd3b54a6533fb120ee52b7c76a3df	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	10a50dfaf728b802fcfd37f8d0da9056
-_md5_=a23e7e9db7ed3eb703544625375ab3de
+_eclasses_=toolchain-funcs	f9d71a6efe9d083aec750dd13968e169	flag-o-matic	b892042b2667b8ac69ec8a2571dc290a	out-of-source-utils	dbf9e34ee8964084651e25907fa8f52c	multibuild	4650a65187015567b4e041bb9bfdb364	multilib	b2a329026f2e404e9e371097dda47f96	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	python-utils-r1	5ffe8ec396a751540949b565de0f048c	python-r1	0e15b2ab9cfc87d7474678201d6bca38	distutils-r1	be1082db72eb0381081ef946a26e3a71	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	460729dc36f68cf03b044bc1d367e34a
+_md5_=363cc88ea685c9997538c7bd953b7a47

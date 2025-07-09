@@ -1,10 +1,10 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 PYTHON_COMPAT=(python3_{12,13})
-
+DISTUTILS_USE_PEP517=setuptools
 inherit distutils-r1
 
 DESCRIPTION="Brian is a free, open source simulator for spiking neural networks."
@@ -19,7 +19,7 @@ IUSE="docs test"
 DEPEND="dev-python/numpy
 		dev-python/sympy
 		dev-python/pyparsing
-		dev-python/jinja
+		dev-python/jinja2
 		docs? ( dev-python/sphinx
 				dev-python/ipython )
 	   "

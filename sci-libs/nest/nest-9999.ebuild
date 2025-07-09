@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -17,8 +17,7 @@ SLOT="0"
 KEYWORDS=""
 IUSE="docs test +python mpi"
 
-DEPEND="sys-cluster/openmpi
-		>=sci-libs/gsl-1.11
+DEPEND=">=sci-libs/gsl-1.11
 		>=dev-libs/boost-1.69
 		mpi? ( virtual/mpi )
 		test? ( dev-python/pytest

@@ -1,72 +1,32 @@
 diff --git a/faiss/python/CMakeLists.txt b/faiss/python/CMakeLists.txt
-index d8d93349..6652318b 100644
+index 3fc46f4c5..02f24897d 100644
 --- a/faiss/python/CMakeLists.txt
 +++ b/faiss/python/CMakeLists.txt
-@@ -142,6 +142,35 @@ else()
-   target_compile_options(swigfaiss_sve PRIVATE /bigobj)
- endif()
+@@ -189,12 +189,12 @@ set_property(TARGET faiss_example_external_module PROPERTY SWIG_COMPILE_OPTIONS
  
-+# If Linux, then set all public PROPERTIES
-+# Enable swifaiss to load the python loader from the directory where _swigfaiss.so lies.
-+set_target_properties(swigfaiss PROPERTIES
-+  SUFFIX .so
-+  INSTALL_RPATH "$ORIGIN/."
-+  BUILD_WITH_INSTALL_RPATH TRUE
-+)
-+
-+# Enable swifaiss_avx2 to load the python loader from the directory where _swigfaiss.so lies.
-+set_target_properties(swigfaiss_avx2 PROPERTIES
-+  SUFFIX .so
-+  INSTALL_RPATH "$ORIGIN/."
-+  BUILD_WITH_INSTALL_RPATH TRUE
-+)
-+
-+# Enable swifaiss_avx512 to load the python loader from the directory where _swigfaiss.so lies.
-+set_target_properties(swigfaiss_avx512 PROPERTIES
-+  SUFFIX .so
-+  INSTALL_RPATH "$ORIGIN/."
-+  BUILD_WITH_INSTALL_RPATH TRUE
-+)
-+
-+# Enable swifaiss_sve to load the python loader from the directory where _swigfaiss.so lies.
-+set_target_properties(swigfaiss_sve PROPERTIES
-+  SUFFIX .so
-+  INSTALL_RPATH "$ORIGIN/."
-+  BUILD_WITH_INSTALL_RPATH TRUE
-+)
-+
- if(FAISS_ENABLE_GPU)
-   find_package(CUDAToolkit REQUIRED)
-   if(FAISS_ENABLE_RAFT)
-@@ -157,6 +186,7 @@ find_package(OpenMP REQUIRED)
+ if(NOT WIN32)
+   # NOTE: Python does not recognize the dylib extension.
+-  set_target_properties(swigfaiss PROPERTIES SUFFIX .so)
+-  set_target_properties(swigfaiss_avx2 PROPERTIES SUFFIX .so)
+-  set_target_properties(swigfaiss_avx512 PROPERTIES SUFFIX .so)
+-  set_target_properties(swigfaiss_avx512_spr PROPERTIES SUFFIX .so)
+-  set_target_properties(swigfaiss_sve PROPERTIES SUFFIX .so)
+-  set_target_properties(faiss_example_external_module PROPERTIES SUFFIX .so)
++  set_target_properties(swigfaiss PROPERTIES SUFFIX .so INSTALL_RPATH "$ORIGIN/." BUILD_WITH_INSTALL_RPATH TRUE)
++  set_target_properties(swigfaiss_avx2 PROPERTIES SUFFIX .so INSTALL_RPATH "$ORIGIN/." BUILD_WITH_INSTALL_RPATH TRUE)
++  set_target_properties(swigfaiss_avx512 PROPERTIES SUFFIX .so INSTALL_RPATH "$ORIGIN/." BUILD_WITH_INSTALL_RPATH TRUE)
++  set_target_properties(swigfaiss_avx512_spr PROPERTIES SUFFIX .so INSTALL_RPATH "$ORIGIN/." BUILD_WITH_INSTALL_RPATH TRUE)
++  set_target_properties(swigfaiss_sve PROPERTIES SUFFIX .so INSTALL_RPATH "$ORIGIN/." BUILD_WITH_INSTALL_RPATH TRUE)
++  set_target_properties(faiss_example_external_module PROPERTIES SUFFIX .so INSTALL_RPATH "$ORIGIN/." BUILD_WITH_INSTALL_RPATH TRUE)
+ else()
+   # we need bigobj for the swig wrapper
+   target_compile_options(swigfaiss PRIVATE /bigobj)
+@@ -280,7 +280,7 @@ target_include_directories(swigfaiss_sve PRIVATE ${PROJECT_SOURCE_DIR}/../..)
+ target_include_directories(faiss_example_external_module PRIVATE ${PROJECT_SOURCE_DIR}/../..)
  
- target_link_libraries(swigfaiss PRIVATE
-   faiss
-+  faiss_python_callbacks
-   Python::Module
-   Python::NumPy
-   OpenMP::OpenMP_CXX
-@@ -164,6 +194,7 @@ target_link_libraries(swigfaiss PRIVATE
+ find_package(Python REQUIRED
+-  COMPONENTS Development NumPy
++  COMPONENTS Development.Module NumPy
+ )
  
- target_link_libraries(swigfaiss_avx2 PRIVATE
-   faiss_avx2
-+  faiss_python_callbacks
-   Python::Module
-   Python::NumPy
-   OpenMP::OpenMP_CXX
-@@ -171,6 +202,7 @@ target_link_libraries(swigfaiss_avx2 PRIVATE
- 
- target_link_libraries(swigfaiss_avx512 PRIVATE
-   faiss_avx512
-+  faiss_python_callbacks
-   Python::Module
-   Python::NumPy
-   OpenMP::OpenMP_CXX
-@@ -178,6 +210,7 @@ target_link_libraries(swigfaiss_avx512 PRIVATE
- 
- target_link_libraries(swigfaiss_sve PRIVATE
-   faiss_sve
-+  faiss_python_callbacks
-   Python::Module
-   Python::NumPy
-   OpenMP::OpenMP_CXX
+ add_library(faiss_python_callbacks EXCLUDE_FROM_ALL

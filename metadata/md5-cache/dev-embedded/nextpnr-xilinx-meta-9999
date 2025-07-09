@@ -1,13 +1,11 @@
 BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=compile install unpack
-DEPEND=dev-embedded/nextpnr-xilinx
 DESCRIPTION=Metadata for the nextpnr-xilinx xc7 flow
 EAPI=8
 HOMEPAGE=https://github.com/gatecat/nextpnr-xilinx-meta
 INHERIT=git-r3
 LICENSE=CC0-1.0
 PROPERTIES=live
-RDEPEND=dev-embedded/nextpnr-xilinx
 SLOT=0
 _eclasses_=git-r3	875eb471682d3e1f18da124be97dcc81
-_md5_=590beae6897c8e128f5a0a19b3989609
+_md5_=248f4b2055b1c2d18ef25b7a01068cc8

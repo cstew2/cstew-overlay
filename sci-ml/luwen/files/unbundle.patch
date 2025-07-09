@@ -1,0 +1,25 @@
+diff --git a/crates/luwen-if/build.rs b/crates/luwen-if/build.rs
+index 51c654a..a2849fb 100644
+--- a/crates/luwen-if/build.rs
++++ b/crates/luwen-if/build.rs
+@@ -27,20 +27,6 @@ fn compiled_proto_file_by_name(
+     out_dir: &str,
+ ) -> Result<(), Box<dyn std::error::Error>> {
+     let first_try = try_to_compiled_proto_file_by_name(name, None, out_dir);
+-    match first_try {
+-        Err(e) if e.kind() == std::io::ErrorKind::NotFound => {
+-            // If we couldn't find the system protoc then use the vendored
+-            try_to_compiled_proto_file_by_name(
+-                name,
+-                Some(protoc_bin_vendored::protoc_bin_path()?),
+-                out_dir,
+-            )?;
+-        }
+-        other => {
+-            other?;
+-        }
+-    }
+-
+     Ok(())
+ }
+ 

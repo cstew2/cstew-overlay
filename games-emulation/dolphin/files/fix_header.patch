@@ -1,0 +1,13 @@
+diff --git a/Source/Core/Core/CoreTiming.cpp b/Source/Core/Core/CoreTiming.cpp
+index 6d1ab99262..7845f0ba4b 100644
+--- a/Source/Core/Core/CoreTiming.cpp
++++ b/Source/Core/Core/CoreTiming.cpp
+@@ -23,6 +23,8 @@
+ #include "Core/PowerPC/PowerPC.h"
+ #include "Core/System.h"
+ 
++#include "Core/HW/SystemTimers.h"
++
+ #include "VideoCommon/Fifo.h"
+ #include "VideoCommon/OnScreenDisplay.h"
+ #include "VideoCommon/PerformanceMetrics.h"

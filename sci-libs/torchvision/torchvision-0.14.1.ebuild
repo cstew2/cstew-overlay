@@ -1,10 +1,10 @@
-# Copyright 2020-2023 Gentoo Authors
+# Copyright 2020-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 PYTHON_COMPAT=(python3_{12,13})
-
+DISTUTILS_USE_PEP517=setuptools
 inherit distutils-r1
 
 DESCRIPTION="Datasets, transforms and models to specific to computer vision"
@@ -23,7 +23,7 @@ RDEPEND="
 	dev-python/six[${PYTHON_USEDEP}]
 	dev-python/tqdm[${PYTHON_USEDEP}]
 	dev-python/scipy[${PYTHON_USEDEP}]
-	sci-libs/pytorch[${PYTHON_USEDEP}]
+	sci-ml/pytorch[${PYTHON_USEDEP}]
 	media-video/ffmpeg
 	dev-qt/qtcore:5
 "

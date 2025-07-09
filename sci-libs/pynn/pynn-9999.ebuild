@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -27,7 +27,7 @@ DEPEND="dev-python/numpy
 		doc? ( dev-python/sphinx )
 		mpi? ( dev-python/mpi4py
 			   virtual/mpi )
-		test? ( dev-python/jinja
+		test? ( dev-python/jinja2
 			   dev-python/pytest-conv
 			   dev-python/flake8
 			   dev-python/mpi4py

@@ -1,0 +1,16 @@
+diff --git a/lib/include/prjxray/memory_mapped_file.h b/lib/include/prjxray/memory_mapped_file.h
+index 6aeb8210..be50adb8 100644
+--- a/lib/include/prjxray/memory_mapped_file.h
++++ b/lib/include/prjxray/memory_mapped_file.h
+@@ -12,9 +12,11 @@
+ 
+ #include <memory>
+ #include <string>
++#include <cstdint>
+ 
+ #include <absl/types/span.h>
+ 
++
+ namespace prjxray {
+ 
+ class MemoryMappedFile {

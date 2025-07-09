@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -26,7 +26,8 @@ DEPEND="dev-embedded/yosys
 		"
 RDEPEND="${DEPEND}"
 BDEPEND=""
-PATCHES=( "${FILESDIR}/use_system_libs.patch" )
+PATCHES=( ${FILESDIR}/"use_system_libs.patch"
+		  ${FILESDIR}/"fix_includes.patch" )
 
 src_configure() {
 	if use test ; then

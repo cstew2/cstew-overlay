@@ -1,10 +1,10 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 PYTHON_COMPAT=(python3_{12,13})
-
+DISTUTILS_USE_PEP517=setuptools
 inherit distutils-r1
 
 DESCRIPTION=""
@@ -18,7 +18,7 @@ IUSE="test"
 DEPEND=">=dev-python/numpy-1.7
 		>=dev-python/opt-einsum-2.3.2
 		>=dev-python/pyro-api-0.1.1
-		>=sci-libs/pytorch-1.11.0
+		>=sci-ml/pytorch-1.11.0
 		>=dev-python/tqdm-4.36"
 RDEPEND="${DEPEND}"
 BDEPEND=""

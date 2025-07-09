@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -21,7 +21,7 @@ IUSE="docs test"
 DEPEND="dev-python/numpy
 		dev-python/sympy
 		dev-python/pyparsing
-		dev-python/jinja
+		dev-python/jinja2
 		docs? ( dev-python/sphinx
 				dev-python/ipython )
 		dev-python/versioneer

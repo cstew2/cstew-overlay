@@ -1,56 +1,54 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 287c60b9..1f8fdf1e 100644
+index 0da84b70..60cc0330 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -446,7 +446,7 @@ if(WIN32)
+@@ -582,8 +582,8 @@ if(WIN32)
    endif()
  else()
    if(NOT ROCM_LINK_LINE)
--    set(ROCM_LINK_LINE "-Wl,-rpath=$HIPSYCL_ROCM_PATH/lib -Wl,-rpath=$HIPSYCL_ROCM_PATH/hip/lib ${ROCM_LIBS}" CACHE STRING "Arguments passed to compiler to link ROCm libraries to SYCL applications")
-+    set(ROCM_LINK_LINE "-Wl,-rpath=$HIPSYCL_ROCM_PATH/lib64 -Wl,-rpath=$HIPSYCL_ROCM_PATH/hip/lib64 ${ROCM_LIBS}" CACHE STRING "Arguments passed to compiler to link ROCm libraries to SYCL applications")
-   endif()
+-    set(ROCM_LINK_LINE "-Wl,-rpath=$ACPP_ROCM_PATH/lib -Wl,-rpath=$ACPP_ROCM_PATH/hip/lib ${ROCM_LIBS}" CACHE STRING "Arguments passed to compiler to link ROCm libraries to SYCL applications")
+-  endif()
++    set(ROCM_LINK_LINE "-Wl,-rpath=$ACPP_ROCM_PATH/lib64 -Wl,-rpath=$ACPP_ROCM_PATH/hip/lib64 ${ROCM_LIBS}" CACHE STRING "Arguments passed to compiler to link ROCm libraries to SYCL applications")
++   endif()
  endif()
  
-@@ -625,36 +625,38 @@ configure_file(
-   ${PROJECT_BINARY_DIR}/include/hipSYCL/pcuda/detail/hip_prefixed_runtime.hpp)
+ if(WIN32)
+@@ -776,36 +776,34 @@ configure_file(
+   ${ACPP_BINARY_ROOT}/include/hipSYCL/pcuda/detail/hip_prefixed_runtime.hpp)
  
  
 +include(GNUInstallDirs)
-+
  
 -install(DIRECTORY include/CL DESTINATION include/AdaptiveCpp/ FILES_MATCHING PATTERN "*.hpp")
 -install(DIRECTORY include/SYCL DESTINATION include/AdaptiveCpp/ FILES_MATCHING PATTERN "*.hpp")
-+install(DIRECTORY include/CL DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/ FILES_MATCHING PATTERN "*.hpp")
-+install(DIRECTORY include/SYCL DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/ FILES_MATCHING PATTERN "*.hpp")
  
 -install(DIRECTORY include/hipSYCL DESTINATION include/AdaptiveCpp/ FILES_MATCHING PATTERN "*.hpp")
 -install(DIRECTORY include/hipSYCL DESTINATION include/AdaptiveCpp/ FILES_MATCHING PATTERN "*.h")
 -install(DIRECTORY include/hipSYCL/std DESTINATION include/AdaptiveCpp/hipSYCL/ )
-+install(DIRECTORY include/hipSYCL DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/ FILES_MATCHING PATTERN "*.hpp")
-+install(DIRECTORY include/hipSYCL DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/ FILES_MATCHING PATTERN "*.h")
-+install(DIRECTORY include/hipSYCL/std DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/hipSYCL/ )
++install(DIRECTORY include/CL DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/ FILES_MATCHING PATTERN "*.hpp")
++install(DIRECTORY include/SYCL DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/ FILES_MATCHING PATTERN "*.hpp")
  
--install(FILES ${PROJECT_BINARY_DIR}/include/hipSYCL/common/config.hpp DESTINATION include/AdaptiveCpp/hipSYCL/common/)
--install(FILES ${PROJECT_BINARY_DIR}/include/hipSYCL/pcuda/detail/cuda_prefixed_runtime.hpp DESTINATION include/AdaptiveCpp/hipSYCL/pcuda/detail/)
--install(FILES ${PROJECT_BINARY_DIR}/include/hipSYCL/pcuda/detail/hip_prefixed_runtime.hpp DESTINATION include/AdaptiveCpp/hipSYCL/pcuda/detail/)
-+install(FILES ${PROJECT_BINARY_DIR}/include/hipSYCL/common/config.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/hipSYCL/common/)
-+install(FILES ${PROJECT_BINARY_DIR}/include/hipSYCL/pcuda/detail/cuda_prefixed_runtime.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/hipSYCL/pcuda/detail/)
-+install(FILES ${PROJECT_BINARY_DIR}/include/hipSYCL/pcuda/detail/hip_prefixed_runtime.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/hipSYCL/pcuda/detail/)
+-install(FILES ${ACPP_BINARY_ROOT}/include/hipSYCL/common/config.hpp DESTINATION include/AdaptiveCpp/hipSYCL/common/)
+-install(FILES ${ACPP_BINARY_ROOT}/include/hipSYCL/pcuda/detail/cuda_prefixed_runtime.hpp DESTINATION include/AdaptiveCpp/hipSYCL/pcuda/detail/)
+-install(FILES ${ACPP_BINARY_ROOT}/include/hipSYCL/pcuda/detail/hip_prefixed_runtime.hpp DESTINATION include/AdaptiveCpp/hipSYCL/pcuda/detail/)
++install(FILES ${ACPP_BINARY_ROOT}/include/hipSYCL/common/config.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/hipSYCL/common/)
++install(FILES ${ACPP_BINARY_ROOT}/include/hipSYCL/pcuda/detail/cuda_prefixed_runtime.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/hipSYCL/pcuda/detail/)
++install(FILES ${ACPP_BINARY_ROOT}/include/hipSYCL/pcuda/detail/hip_prefixed_runtime.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/hipSYCL/pcuda/detail/)
  
  # This part of the installation process can be simplified once the source directory has been
  # renamed from hipSYCL to AdaptiveCpp.
 -install(DIRECTORY include/hipSYCL/ DESTINATION include/AdaptiveCpp/AdaptiveCpp FILES_MATCHING PATTERN "*.hpp")
 -install(DIRECTORY include/hipSYCL/ DESTINATION include/AdaptiveCpp/AdaptiveCpp FILES_MATCHING PATTERN "*.h")
 -install(DIRECTORY include/hipSYCL/std/ DESTINATION include/AdaptiveCpp/AdaptiveCpp/std )
--install(FILES ${PROJECT_BINARY_DIR}/include/hipSYCL/common/config.hpp DESTINATION include/AdaptiveCpp/AdaptiveCpp/common/)
--install(FILES ${PROJECT_BINARY_DIR}/include/hipSYCL/pcuda/detail/cuda_prefixed_runtime.hpp DESTINATION include/AdaptiveCpp/AdaptiveCpp/pcuda/detail/)
--install(FILES ${PROJECT_BINARY_DIR}/include/hipSYCL/pcuda/detail/hip_prefixed_runtime.hpp DESTINATION include/AdaptiveCpp/AdaptiveCpp/pcuda/detail/)
+-install(FILES ${ACPP_BINARY_ROOT}/include/hipSYCL/common/config.hpp DESTINATION include/AdaptiveCpp/AdaptiveCpp/common/)
+-install(FILES ${ACPP_BINARY_ROOT}/include/hipSYCL/pcuda/detail/cuda_prefixed_runtime.hpp DESTINATION include/AdaptiveCpp/AdaptiveCpp/pcuda/detail/)
+-install(FILES ${ACPP_BINARY_ROOT}/include/hipSYCL/pcuda/detail/hip_prefixed_runtime.hpp DESTINATION include/AdaptiveCpp/AdaptiveCpp/pcuda/detail/)
 +install(DIRECTORY include/hipSYCL/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/AdaptiveCpp FILES_MATCHING PATTERN "*.hpp")
 +install(DIRECTORY include/hipSYCL/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/AdaptiveCpp FILES_MATCHING PATTERN "*.h")
 +install(DIRECTORY include/hipSYCL/std/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/AdaptiveCpp/std )
-+install(FILES ${PROJECT_BINARY_DIR}/include/hipSYCL/common/config.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/AdaptiveCpp/common/)
-+install(FILES ${PROJECT_BINARY_DIR}/include/hipSYCL/pcuda/detail/cuda_prefixed_runtime.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/AdaptiveCpp/pcuda/detail/)
-+install(FILES ${PROJECT_BINARY_DIR}/include/hipSYCL/pcuda/detail/hip_prefixed_runtime.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/AdaptiveCpp/pcuda/detail/)
++install(FILES ${ACPP_BINARY_ROOT}/include/hipSYCL/common/config.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/AdaptiveCpp/common/)
++install(FILES ${ACPP_BINARY_ROOT}include/hipSYCL/pcuda/detail/cuda_prefixed_runtime.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/AdaptiveCpp/pcuda/detail/)
++install(FILES ${ACPP_BINARY_ROOT}/include/hipSYCL/pcuda/detail/hip_prefixed_runtime.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/AdaptiveCpp/AdaptiveCpp/pcuda/detail/)
  
  
  if(NOT WIN32)
@@ -67,8 +65,8 @@ index 287c60b9..1f8fdf1e 100644
 +install(PROGRAMS bin/acpp DESTINATION ${CMAKE_INSTALL_BINDIR} RENAME syclcc-clang)
  
  
- install(FILES ${ACPP_CONFIG_FILE_PATH}/acpp-core.json DESTINATION ${ACPP_CONFIG_FILE_INSTALL_DIR})
-@@ -666,7 +668,7 @@ if(WITH_ROCM_BACKEND)
+ install(FILES ${ACPP_BINARY_ROOT}/acpp-core.json DESTINATION ${ACPP_CONFIG_FILE_INSTALL_DIR})
+@@ -817,7 +815,7 @@ if(WITH_ROCM_BACKEND)
  endif()
  
  include(CMakePackageConfigHelpers)
@@ -77,7 +75,7 @@ index 287c60b9..1f8fdf1e 100644
  
  
  
-@@ -674,7 +676,7 @@ include(GNUInstallDirs)
+@@ -825,7 +823,7 @@ include(GNUInstallDirs)
  
  
  set(HIPSYCL_INSTALL_CMAKE_DIR
@@ -86,7 +84,7 @@ index 287c60b9..1f8fdf1e 100644
  
  # Set relative paths for install root in the following variables so that
  # configure_package_config_file will generate paths relative whatever is
-@@ -722,7 +724,7 @@ mark_as_advanced(
+@@ -873,7 +871,7 @@ mark_as_advanced(
  # Legacy module (Open SYCL)
  
  set(OPENSYCL_INSTALL_CMAKE_DIR
@@ -95,7 +93,7 @@ index 287c60b9..1f8fdf1e 100644
  
  # Set relative paths for install root in the following variables so that
  # configure_package_config_file will generate paths relative whatever is
-@@ -770,7 +772,7 @@ mark_as_advanced(
+@@ -921,7 +919,7 @@ mark_as_advanced(
  
  
  set(ADAPTIVECPP_INSTALL_CMAKE_DIR
@@ -104,68 +102,8 @@ index 287c60b9..1f8fdf1e 100644
  
  # Set relative paths for install root in the following variables so that
  # configure_package_config_file will generate paths relative whatever is
-diff --git a/bin/acpp b/bin/acpp
-index a61490e2..db0a0417 100755
---- a/bin/acpp
-+++ b/bin/acpp
-@@ -513,16 +513,16 @@ class acpp_config:
-   def _get_rocm_substitution_vars(self):
-     return {
-       'ACPP_ROCM_PATH' : self.rocm_path,
--      'ACPP_ROCM_LIB_PATH' : os.path.join(self.rocm_path, "lib"),
-+      'ACPP_ROCM_LIB_PATH' : os.path.join(self.rocm_path, "lib64"),
-       'ACPP_PATH' : self.acpp_installation_path,
--      'ACPP_LIB_PATH' : os.path.join(self.acpp_installation_path, "lib")
-+      'ACPP_LIB_PATH' : os.path.join(self.acpp_installation_path, "lib64")
-     }
- 
-   def _get_cuda_substitution_vars(self):
-     vars = {
-       'ACPP_CUDA_PATH' : self.cuda_path,
-       'ACPP_PATH' : self.acpp_installation_path,
--      'ACPP_LIB_PATH' : os.path.join(self.acpp_installation_path, "lib")
-+      'ACPP_LIB_PATH' : os.path.join(self.acpp_installation_path, "lib64")
-     }
-     if sys.platform.startswith("win32"):
-       vars['ACPP_CUDA_LIB_PATH'] = os.path.join(self.cuda_path, "lib", "x64")
-@@ -534,7 +534,7 @@ class acpp_config:
-   def _get_omp_substitution_vars(self):
-     return {
-       'ACPP_PATH' : self.acpp_installation_path,
--      'ACPP_LIB_PATH' : os.path.join(self.acpp_installation_path, "lib")
-+      'ACPP_LIB_PATH' : os.path.join(self.acpp_installation_path, "lib64")
-     }
- 
-   def _substitute_template_string(self, template_string, substitution_dict):
-@@ -677,7 +677,7 @@ class acpp_config:
- 
-   @property
-   def runtime_backends(self):
--    backend_path = os.path.join(self.acpp_installation_path, "lib", "hipSYCL")
-+    backend_path = os.path.join(self.acpp_installation_path, "lib64", "hipSYCL")
-     content = os.listdir(backend_path)
-     return [c for c in content if os.path.isfile(os.path.join(backend_path, c))]
- 
-@@ -759,7 +759,7 @@ class acpp_config:
-     if sys.platform.startswith('win32'):
-       return os.path.join(self.acpp_installation_path, "bin", "acpp-clang.dll")
-     else:
--      return os.path.join(self.acpp_installation_path, "lib", "libacpp-clang.so")
-+      return os.path.join(self.acpp_installation_path, "lib64", "libacpp-clang.so")
- 
-   @property
-   def sequential_link_line(self):
-@@ -1644,7 +1644,7 @@ class compiler:
-     self._targets = config.targets
-     self._common_compiler_args = config.common_compiler_args
-     self._acpp_path = config.acpp_installation_path
--    self._acpp_lib_path = os.path.join(self._acpp_path, "lib/")
-+    self._acpp_lib_path = os.path.join(self._acpp_path, "lib64/")
-     self._acpp_include_path = config.acpp_include_path
-     self._is_explicit_multipass = config.is_explicit_multipass
-     self._save_temps = config.save_temps
 diff --git a/src/common/CMakeLists.txt b/src/common/CMakeLists.txt
-index b9f009ab..e28f5ce1 100644
+index c9aee57a..07fca720 100644
 --- a/src/common/CMakeLists.txt
 +++ b/src/common/CMakeLists.txt
 @@ -1,3 +1,4 @@
@@ -173,7 +111,7 @@ index b9f009ab..e28f5ce1 100644
  
  add_library(acpp-common SHARED
      filesystem.cpp
-@@ -47,7 +48,7 @@ endif()
+@@ -53,7 +54,7 @@ endif()
  
  install(TARGETS acpp-common
          EXPORT install_exports
@@ -186,19 +124,11 @@ index b9f009ab..e28f5ce1 100644
 +        LIBRARY DESTINATION ${LIBDIR}
 +        ARCHIVE DESTINATION ${LIBDIR})
 diff --git a/src/compiler/CMakeLists.txt b/src/compiler/CMakeLists.txt
-index e72b6f0d..f9397e40 100644
+index 7a1ae3e6..53119dff 100644
 --- a/src/compiler/CMakeLists.txt
 +++ b/src/compiler/CMakeLists.txt
-@@ -3,6 +3,7 @@ project(acpp-clang)
- 
- get_filename_component(CLANG_BINARY_PREFIX ${CLANG_EXECUTABLE_PATH} DIRECTORY)
- 
-+
- if(NOT HIPSYCL_DEBUG_LEVEL)
-   set(HIPSYCL_DEBUG_LEVEL 2 CACHE INTEGER)
- endif()
-@@ -133,10 +134,12 @@ function(configure_target)
-     target_link_libraries(${target} clang LLVMSupport)
+@@ -233,10 +233,12 @@ function(configure_target)
+     add_dependencies(${target} intrinsics_gen)
    endif()
  
 +  include(GNUInstallDirs)
@@ -212,30 +142,38 @@ index e72b6f0d..f9397e40 100644
 +          ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
  endfunction(configure_target)
  
- configure_target(TARGET acpp-clang)
+ if(ACPP_LLVM_COMPONENT)
 diff --git a/src/compiler/llvm-to-backend/CMakeLists.txt b/src/compiler/llvm-to-backend/CMakeLists.txt
-index 4c340161..0eafe835 100644
+index 1a0f29ca..9978d5c8 100644
 --- a/src/compiler/llvm-to-backend/CMakeLists.txt
 +++ b/src/compiler/llvm-to-backend/CMakeLists.txt
-@@ -39,7 +39,7 @@ function(create_llvm_based_library)
-   # We need symbolic functions for stdpar
-   target_link_libraries(${target} PRIVATE ${HIPSYCL_STDPAR_RT_LINKER_FLAGS})
- 
--  install(TARGETS ${target} DESTINATION lib/hipSYCL/llvm-to-backend)
-+  install(TARGETS ${target} DESTINATION ${CMAKE_INSTALL_LIBDIR}/hipSYCL/llvm-to-backend)
+@@ -59,9 +59,9 @@ function(create_llvm_based_library)
+   
+   set(install_subdir hipSYCL/llvm-to-backend)
+   install(TARGETS ${target} 
+-    RUNTIME DESTINATION bin/${install_subdir}
+-    LIBRARY DESTINATION lib/${install_subdir}
+-    ARCHIVE DESTINATION lib/${install_subdir})
++    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}/${install_subdir}
++    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/${install_subdir}
++    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/${install_subdir})
  endfunction()
  
  function(create_llvm_to_backend_library)
-@@ -86,7 +86,7 @@ function(create_llvm_to_backend_tool)
-   target_compile_definitions(${target}-tool PRIVATE -DHIPSYCL_TOOL_COMPONENT)
-   target_link_libraries(${target}-tool PRIVATE ${target})
+@@ -113,9 +113,9 @@ function(create_llvm_to_backend_tool)
  
--  install(TARGETS ${target}-tool DESTINATION lib/hipSYCL/llvm-to-backend)
-+  install(TARGETS ${target}-tool DESTINATION ${CMAKE_INSTALL_LIBDIR}/hipSYCL/llvm-to-backend)
+   set(install_subdir hipSYCL/llvm-to-backend)
+   install(TARGETS ${target}-tool
+-    RUNTIME DESTINATION bin/${install_subdir}
+-    LIBRARY DESTINATION lib/${install_subdir}
+-    ARCHIVE DESTINATION lib/${install_subdir})
++    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}/${install_subdir}
++    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/${install_subdir}
++    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/${install_subdir})
  endfunction()
  
  function(add_hipsycl_llvm_backend)
-@@ -134,7 +134,7 @@ if(WITH_SSCP_COMPILER)
+@@ -176,7 +176,7 @@ if(WITH_SSCP_COMPILER)
      if(NOT LLVMSPIRV_BRANCH)
        set(LLVMSPIRV_BRANCH llvm_release_${LLVM_VERSION_MAJOR}0)
      endif()
@@ -245,10 +183,10 @@ index 4c340161..0eafe835 100644
      set(LLVMSPIRV_PATH ${LLVMSPIRV_INSTALLDIR}/bin/llvm-spirv)
      set(LLVMSPIRV_RELATIVE_PATH ${LLVMSPIRV_RELATIVE_INSTALLDIR}/bin/llvm-spirv)
 diff --git a/src/compiler/llvm-to-backend/amdgpu/LLVMToAmdgpu.cpp b/src/compiler/llvm-to-backend/amdgpu/LLVMToAmdgpu.cpp
-index a46f2945..b2d18c6e 100644
+index 402eaa05..a62398fc 100644
 --- a/src/compiler/llvm-to-backend/amdgpu/LLVMToAmdgpu.cpp
 +++ b/src/compiler/llvm-to-backend/amdgpu/LLVMToAmdgpu.cpp
-@@ -265,7 +265,7 @@ bool LLVMToAmdgpuTranslator::toBackendFlavor(llvm::Module &M, PassHandler& PH) {
+@@ -300,7 +300,7 @@ bool LLVMToAmdgpuTranslator::toBackendFlavor(llvm::Module &M, PassHandler& PH) {
  
    std::string BuiltinBitcodeFile = 
      common::filesystem::join_path(common::filesystem::get_install_directory(),
@@ -258,10 +196,10 @@ index a46f2945..b2d18c6e 100644
    if(!this->linkBitcodeFile(M, BuiltinBitcodeFile))
      return false;
 diff --git a/src/compiler/llvm-to-backend/host/LLVMToHost.cpp b/src/compiler/llvm-to-backend/host/LLVMToHost.cpp
-index 1e88c1f3..4075c7c0 100644
+index 3d12af61..09750161 100644
 --- a/src/compiler/llvm-to-backend/host/LLVMToHost.cpp
 +++ b/src/compiler/llvm-to-backend/host/LLVMToHost.cpp
-@@ -93,7 +93,7 @@ bool LLVMToHostTranslator::toBackendFlavor(llvm::Module &M, PassHandler &PH) {
+@@ -129,7 +129,7 @@ bool LLVMToHostTranslator::toBackendFlavor(llvm::Module &M, PassHandler &PH) {
      BuiltinBitcodeFileName = "libkernel-sscp-host-fast-full.bc";
    std::string BuiltinBitcodeFile =
        common::filesystem::join_path(common::filesystem::get_install_directory(),
@@ -271,20 +209,20 @@ index 1e88c1f3..4075c7c0 100644
    if (!this->linkBitcodeFile(M, BuiltinBitcodeFile))
      return false;
 diff --git a/src/compiler/llvm-to-backend/ptx/LLVMToPtx.cpp b/src/compiler/llvm-to-backend/ptx/LLVMToPtx.cpp
-index 9413165b..51326e0a 100644
+index 4a3d7c5d..f3a594e2 100644
 --- a/src/compiler/llvm-to-backend/ptx/LLVMToPtx.cpp
 +++ b/src/compiler/llvm-to-backend/ptx/LLVMToPtx.cpp
-@@ -202,7 +202,7 @@ bool LLVMToPtxTranslator::toBackendFlavor(llvm::Module &M, PassHandler& PH) {
+@@ -179,7 +179,7 @@ bool LLVMToPtxTranslator::toBackendFlavor(llvm::Module &M, PassHandler& PH) {
  
    std::string BuiltinBitcodeFile = 
      common::filesystem::join_path(common::filesystem::get_install_directory(),
 -      {"lib", "hipSYCL", "bitcode", "libkernel-sscp-ptx-full.bc"});
 +      {"lib64", "hipSYCL", "bitcode", "libkernel-sscp-ptx-full.bc"});
    
-   std::string LibdeviceFile;
-   if(!LibdevicePath::get(LibdeviceFile)) {
+   std::string LibdeviceFile = getDeviceLibPath();
+   HIPSYCL_DEBUG_INFO << "LLVMToPtx: Using libdevice at " << LibdeviceFile << "\n";
 diff --git a/src/compiler/llvm-to-backend/spirv/LLVMToSpirv.cpp b/src/compiler/llvm-to-backend/spirv/LLVMToSpirv.cpp
-index 968f3e05..c67aa111 100644
+index d3d95398..90f31c0a 100644
 --- a/src/compiler/llvm-to-backend/spirv/LLVMToSpirv.cpp
 +++ b/src/compiler/llvm-to-backend/spirv/LLVMToSpirv.cpp
 @@ -224,7 +224,7 @@ bool LLVMToSpirvTranslator::toBackendFlavor(llvm::Module &M, PassHandler& PH) {
@@ -297,11 +235,11 @@ index 968f3e05..c67aa111 100644
    if (!this->linkBitcodeFile(M, BuiltinBitcodeFile, M.getTargetTriple(), M.getDataLayoutStr()))
      return false;
 diff --git a/src/libkernel/sscp/CMakeLists.txt b/src/libkernel/sscp/CMakeLists.txt
-index 89e44ecb..cabd3477 100644
+index 672553a4..eb3ec432 100644
 --- a/src/libkernel/sscp/CMakeLists.txt
 +++ b/src/libkernel/sscp/CMakeLists.txt
-@@ -23,7 +23,7 @@ function(libkernel_generate_bitcode_library)
-       DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${source}
+@@ -37,7 +37,7 @@ function(libkernel_generate_bitcode_library)
+       DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${source} ${target_depends}
        VERBATIM)
  
 -  install(FILES ${target_output_file} DESTINATION lib/hipSYCL/bitcode)
@@ -309,8 +247,8 @@ index 89e44ecb..cabd3477 100644
  endfunction()
  
  function(libkernel_generate_bitcode_target)
-@@ -63,7 +63,7 @@ function(libkernel_generate_bitcode_target)
-     DEPENDS ${output_files}
+@@ -81,7 +81,7 @@ function(libkernel_generate_bitcode_target)
+     DEPENDS ${output_files} ${target_depends}
    )
  
 -  install(FILES ${linked_output} DESTINATION lib/hipSYCL/bitcode)
@@ -319,7 +257,7 @@ index 89e44ecb..cabd3477 100644
    add_custom_target(libkernel-sscp-${target} ALL
      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 diff --git a/src/runtime/CMakeLists.txt b/src/runtime/CMakeLists.txt
-index 113dccd3..cb2f822e 100644
+index 1ddf7b82..7f55247d 100644
 --- a/src/runtime/CMakeLists.txt
 +++ b/src/runtime/CMakeLists.txt
 @@ -1,6 +1,6 @@
@@ -339,7 +277,7 @@ index 113dccd3..cb2f822e 100644
  add_library(acpp-rt SHARED
    allocator.cpp
    allocation_tracker.cpp
-@@ -102,12 +100,10 @@ endif()
+@@ -106,12 +104,10 @@ endif()
  
  install(TARGETS acpp-rt
          EXPORT install_exports
@@ -356,7 +294,7 @@ index 113dccd3..cb2f822e 100644
  
  if(WITH_CUDA_BACKEND)
    add_library(rt-backend-cuda SHARED
-@@ -140,9 +136,9 @@ if(WITH_CUDA_BACKEND)
+@@ -147,9 +143,9 @@ if(WITH_CUDA_BACKEND)
    endif()
  
    install(TARGETS rt-backend-cuda
@@ -369,7 +307,7 @@ index 113dccd3..cb2f822e 100644
  endif()
  
  if(WITH_ROCM_BACKEND)
-@@ -186,9 +182,9 @@ if(WITH_ROCM_BACKEND)
+@@ -197,9 +193,9 @@ if(WITH_ROCM_BACKEND)
    endif()
  
    install(TARGETS rt-backend-hip
@@ -382,7 +320,7 @@ index 113dccd3..cb2f822e 100644
  endif()
  
  if(WITH_LEVEL_ZERO_BACKEND)
-@@ -216,8 +212,8 @@ if(WITH_LEVEL_ZERO_BACKEND)
+@@ -231,8 +227,8 @@ if(WITH_LEVEL_ZERO_BACKEND)
    endif()
  
    install(TARGETS rt-backend-ze
@@ -393,7 +331,7 @@ index 113dccd3..cb2f822e 100644
  endif()
  
  if(WITH_OPENCL_BACKEND)
-@@ -276,8 +272,8 @@ if(WITH_OPENCL_BACKEND)
+@@ -286,8 +282,8 @@ if(WITH_OPENCL_BACKEND)
    endif()
  
    install(TARGETS rt-backend-ocl
@@ -404,7 +342,7 @@ index 113dccd3..cb2f822e 100644
  endif()
  
  if(WITH_CPU_BACKEND)
-@@ -345,8 +341,8 @@ if(WITH_CPU_BACKEND)
+@@ -387,8 +383,8 @@ if(WITH_CPU_BACKEND)
    endif()
  
    install(TARGETS rt-backend-omp
@@ -417,20 +355,22 @@ index 113dccd3..cb2f822e 100644
  endif()
  
 diff --git a/src/runtime/backend_loader.cpp b/src/runtime/backend_loader.cpp
-index b61a9d40..0fb2bf39 100644
+index 634954f4..8f15717d 100644
 --- a/src/runtime/backend_loader.cpp
 +++ b/src/runtime/backend_loader.cpp
-@@ -71,7 +71,7 @@ std::vector<fs::path> get_plugin_search_paths()
-   if (dladdr(reinterpret_cast<void*>(&get_plugin_search_paths), &info)) {
-     paths.emplace_back(fs::path{info.dli_fname}.parent_path() / "hipSYCL");
+@@ -111,8 +111,8 @@ std::vector<fs::path> get_plugin_search_paths()
+     paths.emplace_back(fs::path(install_dir) / ACPP_BACKEND_LIB_FOLDER / "hipSYCL");
    }
--  const auto install_prefixed_path = fs::path{HIPSYCL_INSTALL_PREFIX} / "lib" / "hipSYCL";
+ 
+-  const auto install_prefixed_path = fs::path{HIPSYCL_INSTALL_PREFIX} / ACPP_BACKEND_LIB_FOLDER / "hipSYCL";
+-
 +  const auto install_prefixed_path = fs::path{HIPSYCL_INSTALL_PREFIX} / "lib64" / "hipSYCL";
- #else
-   if(HMODULE handle = GetModuleHandleA(HIPSYCL_RT_LIBRARY_NAME))
-   {
++  
+   if(paths.empty()
+       || !fs::is_directory(paths.back())
+       || (fs::is_directory(install_prefixed_path)
 diff --git a/src/tools/acpp-appdb-tool/CMakeLists.txt b/src/tools/acpp-appdb-tool/CMakeLists.txt
-index f21d7d19..0c556743 100644
+index 980815d1..36f38988 100644
 --- a/src/tools/acpp-appdb-tool/CMakeLists.txt
 +++ b/src/tools/acpp-appdb-tool/CMakeLists.txt
 @@ -11,6 +11,5 @@ target_link_libraries(acpp-appdb-tool PRIVATE acpp-common)
@@ -442,20 +382,20 @@ index f21d7d19..0c556743 100644
 -install(TARGETS acpp-appdb-tool DESTINATION bin)
 +install(TARGETS acpp-appdb-tool DESTINATION ${CMAKE_INSTALL_BINDIR})
 diff --git a/src/tools/acpp-hcf-tool/CMakeLists.txt b/src/tools/acpp-hcf-tool/CMakeLists.txt
-index 28119152..82de9ba7 100644
+index 4a7ce6ed..22200efa 100644
 --- a/src/tools/acpp-hcf-tool/CMakeLists.txt
 +++ b/src/tools/acpp-hcf-tool/CMakeLists.txt
 @@ -5,4 +5,4 @@ target_include_directories(acpp-hcf-tool PRIVATE
      ${HIPSYCL_SOURCE_DIR}/include
-     ${PROJECT_BINARY_DIR}/include)
+     ${ACPP_BINARY_ROOT}/include)
  
 -install(TARGETS acpp-hcf-tool DESTINATION bin)
 +install(TARGETS acpp-hcf-tool DESTINATION ${CMAKE_INSTALL_BINDIR})
 diff --git a/src/tools/acpp-info/CMakeLists.txt b/src/tools/acpp-info/CMakeLists.txt
-index 28ea69a1..32b73867 100644
+index 6fa0a804..d08f7b80 100644
 --- a/src/tools/acpp-info/CMakeLists.txt
 +++ b/src/tools/acpp-info/CMakeLists.txt
-@@ -11,6 +11,5 @@ target_link_libraries(acpp-info PRIVATE acpp-rt)
+@@ -15,6 +15,5 @@ endif()
  # Make sure that acpp-info uses compatible sanitizer flags for sanitized runtime builds
  target_link_libraries(acpp-info PRIVATE ${ACPP_RT_SANITIZE_FLAGS})
  target_compile_options(acpp-info PRIVATE ${ACPP_RT_SANITIZE_FLAGS})

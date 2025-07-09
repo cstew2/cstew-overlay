@@ -1,9 +1,10 @@
-# Copyright 2020-2021 Gentoo Authors
+# Copyright 2020-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 PYTHON_COMPAT=(python3_{12,13})
+DISTUTILS_USE_PEP517=setuptools
 inherit distutils-r1
 
 DESCRIPTION="Astun parser for python"
@@ -21,8 +22,6 @@ RDEPEND="
 PATCHES=(
 	"${FILESDIR}/astunparse-1.6.2-tests.patch"
 )
-
-distutils_enable_tests setup.py
 
 python_install_all() {
 	distutils-r1_python_install_all
