@@ -2,7 +2,7 @@ diff --git a/faiss/python/CMakeLists.txt b/faiss/python/CMakeLists.txt
 index 3fc46f4c5..02f24897d 100644
 --- a/faiss/python/CMakeLists.txt
 +++ b/faiss/python/CMakeLists.txt
-@@ -189,12 +189,12 @@ set_property(TARGET faiss_example_external_module PROPERTY SWIG_COMPILE_OPTIONS
+@@ -189,11 +189,11 @@ set_property(TARGET faiss_example_external_module PROPERTY SWIG_COMPILE_OPTIONS
  
  if(NOT WIN32)
    # NOTE: Python does not recognize the dylib extension.
@@ -21,12 +21,3 @@ index 3fc46f4c5..02f24897d 100644
  else()
    # we need bigobj for the swig wrapper
    target_compile_options(swigfaiss PRIVATE /bigobj)
-@@ -280,7 +280,7 @@ target_include_directories(swigfaiss_sve PRIVATE ${PROJECT_SOURCE_DIR}/../..)
- target_include_directories(faiss_example_external_module PRIVATE ${PROJECT_SOURCE_DIR}/../..)
- 
- find_package(Python REQUIRED
--  COMPONENTS Development NumPy
-+  COMPONENTS Development.Module NumPy
- )
- 
- add_library(faiss_python_callbacks EXCLUDE_FROM_ALL
