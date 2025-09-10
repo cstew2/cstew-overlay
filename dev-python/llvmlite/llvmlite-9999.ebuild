@@ -23,3 +23,5 @@ RDEPEND="${DEPEND}"
 BDEPEND="test? ( dev-python/pytest )"
 
 S="${WORKDIR}/${PN}-${PV}"
+
+PATCHES=( "${FILESDIR}/llvm_version.patch" )
