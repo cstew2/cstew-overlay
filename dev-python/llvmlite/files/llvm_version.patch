@@ -1,5 +1,5 @@
 diff --git a/ffi/CMakeLists.txt b/ffi/CMakeLists.txt
-index 5b78073..6a61dac 100755
+index 5b78073..19847eb 100755
 --- a/ffi/CMakeLists.txt
 +++ b/ffi/CMakeLists.txt
 @@ -13,7 +13,7 @@ include(GNUInstallDirs)
@@ -7,7 +7,7 @@ index 5b78073..6a61dac 100755
  set(CMAKE_CXX_STANDARD 17)
  
 -find_package(LLVM REQUIRED CONFIG)
-+find_package(LLVM 20...<21 REQUIRED CONFIG)
++find_package(LLVM 20.1...<21 REQUIRED CONFIG)
  
  message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
  message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
