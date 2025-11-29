@@ -26,6 +26,7 @@ DEPEND="dev-libs/boost[python]
 		nexus? ( dev-embedded/oxide )
 		gowin? ( dev-embedded/apicula )
 		himbaechel? ( dev-embedded/nextpnr-xilinx-meta )
+		xilinx? ( dev-embedded/x-ray )
 		gui? ( dev-qt/qtbase
 			   dev-qt/qtcore:5
 			   dev-qt/qtopengl:5 )
@@ -33,6 +34,8 @@ DEPEND="dev-libs/boost[python]
 		"
 RDEPEND="${DEPEND}"
 BDEPEND=""
+
+PATCHES=( "${FILESDIR}/metadata.patch" )
 
 src_configure() {
 	local mycmakeargs=(
@@ -45,29 +48,30 @@ src_configure() {
 
 	sed -i '/add_subdirectory(tests\/gui)/d' "${S}/CMakeLists.txt"
 
-	UARCHS="example"
+	UARCHS=""
 
 	ARCHS="generic"
 	if use ice40 ; then
 		ARCHS+=";ice40"
-		mycmakeargs+=( -DICESTORM_INSTALL_PREFIX="/usr/share/" )
+		mycmakeargs+=( -DICESTORM_INSTALL_PREFIX="${EPREFIX}/usr/share/icestorm/database" )
 	elif use ecp5 ; then
 		ARCHS+=";ecp5"
-		mycmakeargs+=( -DTRELLIS_INSTALL_PREFIX="/usr/share/" )
+		mycmakeargs+=( -DTRELLIS_INSTALL_PREFIX="${EPREFIX}/usr/share/trellis/database" )
 	elif use nexus ; then
 		ARCHS+=";nexus"
-		mycmakeargs+=( -DOXIDE_INSTALL_PREFIX="/usr/share/" )
+		mycmakeargs+=( -DOXIDE_INSTALL_PREFIX="${EPREFIX}/usr/share/nexus/database" )
 	elif use himbaechel ; then
 		ARCHS+=";himbaechel"
 		if use xilinx ; then
 			UARCHS+=";xilinx"
-			mycmakeargs+=( -DHIMBAECHEL_PRJXRAY_DB="/usr/share/" )
-			#mycmakeargs+=( -DHIMBAECHEL_XILINX_DEVICES="xc7a100t" ) #pypy3 required
+			mycmakeargs+=( -DHIMBAECHEL_PRJXRAY_DB="${EPREFIX}/usr/share/x-ray/database" )
+			mycmakeargs+=( -DHIMBAECHEL_NEXTPNR_META="${EPREFIX}/usr/share/x-ray/metadata/artix7" )
+			mycmakeargs+=( -DHIMBAECHEL_XILINX_DEVICES="xc7a100t" )
 		elif use gowin ; then
 			UARCHS+=";gowin"
 		elif use ngultra ; then
 			UARCHS+=";ng-ultra"
-			mycmakeargs+=( -DHIMBAECHEL_PRJBEYOND_DB="/usr/share/" )
+			mycmakeargs+=( -DHIMBAECHEL_PRJBEYOND_DB="/usr/share/prjbeyond/database" )
 		fi
 	fi
 

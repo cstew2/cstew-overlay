@@ -20,5 +20,3 @@ IUSE="test"
 DEPEND="dev-python/numpy"
 RDEPEND="${DEPEND}"
 BDEPEND=""
-
-PATCHES=(${FILESDIR}/"fix_setuptools.patch")

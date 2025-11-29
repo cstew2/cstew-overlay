@@ -1,0 +1,30 @@
+diff --git a/matplotloom/loom.py b/matplotloom/loom.py
+index 4105361..f5a67ad 100644
+--- a/matplotloom/loom.py
++++ b/matplotloom/loom.py
+@@ -8,8 +8,6 @@ from tempfile import TemporaryDirectory
+ import matplotlib.pyplot as plt
+ from matplotlib.figure import Figure
+ 
+-from IPython.display import Video, Image
+-
+ class Loom:
+     """
+     A class for creating animations from matplotlib figures.
+@@ -292,7 +290,7 @@ class Loom:
+                 if frame_filename.exists():
+                     frame_filename.unlink()
+ 
+-    def show(self, **kwargs) -> Union[Video, Image]:
++    def show(self, **kwargs):
+         """
+         Display the created animation in a Jupyter notebook.
+ 
+@@ -321,6 +319,7 @@ class Loom:
+         The animation file must have been successfully created by the `save_video`
+         method before calling this method.
+         """
++        from IPython.display import Video, Image
+         if self.file_format in {"mp4", "mkv"}:
+             return Video(self.output_filepath, **kwargs)
+         elif self.file_format in {"gif", "apng"}:

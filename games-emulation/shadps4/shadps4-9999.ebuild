@@ -3,11 +3,11 @@
 
 EAPI=8
 
-inherit cmake
+inherit cmake git-r3
 
 DESCRIPTION="This is a sample skeleton ebuild file"
-HOMEPAGE="https://foo.example.org/"
-SRC_URI="ftp://foo.example.org/${P}.tar.gz"
+HOMEPAGE="shadps4.net/"
+EGIT_SRC_URI="https://github.com/shadps4-emu/shadPS4.git"
 
 LICENSE=""
 SLOT="0"

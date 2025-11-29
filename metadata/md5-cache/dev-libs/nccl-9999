@@ -1,0 +1,13 @@
+BDEPEND=app-alternatives/ninja >=dev-build/cmake-3.28.5 >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=compile configure install prepare test unpack
+DESCRIPTION=Optimized primitives for collective multi-GPU communication
+EAPI=8
+HOMEPAGE=https://developer.nvidia.com/nccl
+INHERIT=cmake cuda git-r3
+IUSE=nvtx rdma profiler
+KEYWORDS=~amd64
+LICENSE=Apache-2.0-with-LLVM-exceptions BSD
+PROPERTIES=live
+SLOT=0
+_eclasses_=toolchain-funcs	98d9f464d912ae6b7316fb8a3721f5db	flag-o-matic	a7afe42e95fb46ce9691605acfb24672	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	3a59a39e97af0f7c03f49cf3c22f262b	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	22e4e58d68692975dc74424dc9b12fb7	cuda	8b660e223a1695e3884ee4c7dc2c5059	git-r3	875eb471682d3e1f18da124be97dcc81
+_md5_=7c4e8a4b2b4775d5c9db76e5dc1461d3

@@ -1,4 +1,4 @@
-BDEPEND=test? ( dev-python/pytest dev-python/pytest-xdist ) python_targets_python3_12? ( dev-lang/python:3.12 ) python_targets_python3_13? ( dev-lang/python:3.13 ) >=dev-python/setuptools-75.8.2[python_targets_python3_12(-)?,python_targets_python3_13(-)?]
+BDEPEND=test? ( dev-python/pytest dev-python/pytest-xdist ) python_targets_python3_12? ( dev-lang/python:3.12 ) python_targets_python3_13? ( dev-lang/python:3.13 ) >=dev-python/gpep517-16[python_targets_python3_12(-)?,python_targets_python3_13(-)?] >=dev-python/setuptools-78.1.0[python_targets_python3_12(-)?,python_targets_python3_13(-)?]
 DEFINED_PHASES=compile configure install prepare test
 DEPEND=dev-python/numpy dev-python/sympy dev-python/pyparsing dev-python/jinja2 docs? ( dev-python/sphinx dev-python/ipython )
 DESCRIPTION=Brian is a free, open source simulator for spiking neural networks.
@@ -12,5 +12,5 @@ RDEPEND=dev-python/numpy dev-python/sympy dev-python/pyparsing dev-python/jinja2
 REQUIRED_USE=|| ( python_targets_python3_12 python_targets_python3_13 )
 SLOT=0
 SRC_URI=https://github.com/brian-team/brian2/archive/refs/tags/2.5.0.3.tar.gz -> brian-2.5.0.3.tar.gz
-_eclasses_=toolchain-funcs	6afdb6107430c1832ca7e16aacbf8fa1	multilib	b2a329026f2e404e9e371097dda47f96	flag-o-matic	16d3941ed2dc39f4819368ae51bc0b72	out-of-source-utils	dbf9e34ee8964084651e25907fa8f52c	multibuild	4650a65187015567b4e041bb9bfdb364	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	python-utils-r1	b7726144f5af59e186d66746d0f513e5	python-r1	fa2daad0051275fa416115c76e53b1de	distutils-r1	57cca9c4edd0e2a2591feae559933c10
-_md5_=9e2ccd2e1c1ba6c9daf6c2078a492dcb
+_eclasses_=toolchain-funcs	98d9f464d912ae6b7316fb8a3721f5db	flag-o-matic	a7afe42e95fb46ce9691605acfb24672	out-of-source-utils	dbf9e34ee8964084651e25907fa8f52c	multibuild	4650a65187015567b4e041bb9bfdb364	multilib	a199af442898963433d6f038a88cce9c	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	3a59a39e97af0f7c03f49cf3c22f262b	python-utils-r1	dbb8c4d794033ad7e7221eaf567a6c90	python-r1	0e15b2ab9cfc87d7474678201d6bca38	distutils-r1	d35f403697c0f86d762e7560bb5cd143
+_md5_=354728f9e2a9e8ee7e992d6331575820

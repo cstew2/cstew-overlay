@@ -182,7 +182,7 @@ src_install() {
 
 	! use debugger     && SKIP_COMPONENTS+=( "cuda-gdb" )
 	! use examples     && SKIP_COMPONENTS+=( "Demo_Suite" )
-	! use profiler     && SKIP_COMPONENTS+=( "cuda-cupti" "cuda-profiler-api" "nvprof" "nvvp")
+	! use profiler     && SKIP_COMPONENTS+=( "cuda-cupti" "cuda-profiler-api" "nvprof" "nvvp" )
 	! use sanitizer    && SKIP_COMPONENTS+=( "compute-sanitizer" )
 
 	dodir "${CUDA_PATH}"

@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -6,8 +6,8 @@ EAPI=8
 inherit git-r3
 
 DESCRIPTION="Project X-Ray Database: XC7 Series"
-HOMEPAGE="https://github.com/SymbiFlow/prjxray-db"
-EGIT_REPO_URI="https://github.com/SymbiFlow/prjxray-db.git"
+HOMEPAGE="f4pga.github.io/prjxray-db"
+EGIT_REPO_URI="https://github.com/f4pga/prjxray-db.git"
 
 LICENSE="CC0-1.0"
 SLOT="0"

@@ -3,13 +3,11 @@
 
 EAPI=8
 
-PYTHON_COMPAT=(python3_{12,13})
-
 inherit git-r3 cmake
 
-DESCRIPTION="Documenting the Xilinx 7-series bit-stream format."
-HOMEPAGE="https://symbiflow.github.io/prjxray-db/"
-EGIT_REPO_URI="https://github.com/SymbiFlow/prjxray.git"
+DESCRIPTION="Documenting the Xilinx 7-series bit-stream format"
+HOMEPAGE="f4pga.github.io/prjxray-db/"
+EGIT_REPO_URI="https://github.com/f4pga/prjxray.git"
 
 LICENSE="ISC"
 SLOT="0"
@@ -39,10 +37,6 @@ src_configure() {
 	sed -i 's/CMAKE_CXX_STANDARD 14/CMAKE_CXX_STANDARD 17/' CMakeLists.txt || die
 
 	cmake_src_configure
-}
-
-src_compile() {
-	cmake_src_compile
 }
 
 src_install() {

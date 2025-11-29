@@ -1,0 +1,22 @@
+diff --git a/himbaechel/uarch/xilinx/CMakeLists.txt b/himbaechel/uarch/xilinx/CMakeLists.txt
+index 246ca3f6..4a4a983d 100644
+--- a/himbaechel/uarch/xilinx/CMakeLists.txt
++++ b/himbaechel/uarch/xilinx/CMakeLists.txt
+@@ -22,6 +22,9 @@ add_nextpnr_himbaechel_microarchitecture(${uarch}
+     CORE_SOURCES ${SOURCES}
+ )
+ 
++set(${HIMBAECHEL_NEXTPNR_META} "" CACHE STRING
++    "Path to a nextpnr-xilinx-meta")
++
+ set(HIMBAECHEL_PRJXRAY_DB "" CACHE STRING
+     "Path to a project x-ray database")
+ if (NOT HIMBAECHEL_PRJXRAY_DB AND NOT IMPORT_BBA_FILES)
+@@ -45,6 +48,7 @@ foreach (device ${HIMBAECHEL_XILINX_DEVICES})
+         TARGET  nextpnr-himbaechel-xilinx-bba
+         COMMAND ${XilinxChipdb_Python3_EXECUTABLE}
+             ${CMAKE_CURRENT_SOURCE_DIR}/gen/xilinx_gen.py
++	    --metadata ${HIMBAECHEL_NEXTPNR_META}
+             --xray ${HIMBAECHEL_PRJXRAY_DB}/artix7
+             --device ${device}
+             --bba ${CMAKE_CURRENT_BINARY_DIR}/chipdb-${device}.bba.new

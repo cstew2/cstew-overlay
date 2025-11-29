@@ -2,10 +2,10 @@ BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=compile install unpack
 DESCRIPTION=Project X-Ray Database: XC7 Series
 EAPI=8
-HOMEPAGE=https://github.com/SymbiFlow/prjxray-db
+HOMEPAGE=f4pga.github.io/prjxray-db
 INHERIT=git-r3
 LICENSE=CC0-1.0
 PROPERTIES=live
 SLOT=0
 _eclasses_=git-r3	875eb471682d3e1f18da124be97dcc81
-_md5_=84315a4c00b76e8c408431832db8b297
+_md5_=48a24fcbb64e049a4edd54ceef9b7eb3
