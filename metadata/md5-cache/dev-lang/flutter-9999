@@ -10,5 +10,5 @@ LICENSE=BSD
 PROPERTIES=live
 RDEPEND=dev-util/android-studio net-misc/curl dev-vcs/git app-arch/unzip app-arch/zip app-arch/xz-utils virtual/glu
 SLOT=0
-_eclasses_=toolchain-funcs	98d9f464d912ae6b7316fb8a3721f5db	bash-completion-r1	767861f3744f589ee5291c1698b1c082	git-r3	875eb471682d3e1f18da124be97dcc81
+_eclasses_=toolchain-funcs	58a918e3a42d0156f010dcfd43725be5	bash-completion-r1	9e91505e030725688d1e953321a47501	git-r3	2f8cdb10b033f92c3136aa6488a31c98
 _md5_=fb45eaca9e16eace02e72b5f335d830e

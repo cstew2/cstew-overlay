@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 04adc88..d1c3726 100644
+index 3e79225..30c7826 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -20,7 +20,7 @@ if(UNIX AND NOT MACOS AND NOT LINUX_QUAZIP_STATIC)
@@ -11,7 +11,15 @@ index 04adc88..d1c3726 100644
      src/common.cpp src/common.h
      src/dialogs/aboutdialog.cpp src/dialogs/aboutdialog.h
      src/dialogs/configeditor.cpp src/dialogs/configeditor.h
-@@ -91,13 +91,6 @@ if(UNIX AND NOT MACOS AND NOT LINUX_QUAZIP_STATIC)
+@@ -54,7 +54,6 @@ target_link_libraries(mupen64plus-qt PRIVATE
+     SDL2
+ )
+ 
+-
+ # Resources:
+ set(mupen64plusqt_resource_files
+     "resources/images/controller.png"
+@@ -91,13 +90,6 @@ if(UNIX AND NOT MACOS AND NOT LINUX_QUAZIP_STATIC)
  endif()
  
  install(TARGETS mupen64plus-qt
@@ -22,7 +30,7 @@ index 04adc88..d1c3726 100644
 -
 -qt_generate_deploy_app_script(
 -    TARGET mupen64plus-qt
--    FILENAME_VARIABLE deploy_script
+-    OUTPUT_SCRIPT deploy_script
 -    NO_UNSUPPORTED_PLATFORM_ERROR
 -)
 -install(SCRIPT ${deploy_script})

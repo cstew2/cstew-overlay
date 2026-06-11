@@ -1,9 +1,9 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-PYTHON_COMPAT=(python3_{12,13})
+PYTHON_COMPAT=(python3_{13,14})
 
 inherit git-r3 cmake
 
@@ -64,9 +64,9 @@ src_configure() {
 		ARCHS+=";himbaechel"
 		if use xilinx ; then
 			UARCHS+=";xilinx"
-			mycmakeargs+=( -DHIMBAECHEL_PRJXRAY_DB="${EPREFIX}/usr/share/x-ray/database" )
-			mycmakeargs+=( -DHIMBAECHEL_NEXTPNR_META="${EPREFIX}/usr/share/x-ray/metadata/artix7" )
 			mycmakeargs+=( -DHIMBAECHEL_XILINX_DEVICES="xc7a100t" )
+			mycmakeargs+=( -DHIMBAECHEL_PRJXRAY_DB="${EPREFIX}/usr/share/x-ray/database" )
+			mycmakeargs+=( -DHIMBAECHEL_NEXTPNR_META="${EPREFIX}/usr/share/x-ray/metadata/" )
 		elif use gowin ; then
 			UARCHS+=";gowin"
 		elif use ngultra ; then

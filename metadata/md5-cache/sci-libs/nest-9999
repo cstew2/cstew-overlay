@@ -1,14 +1,15 @@
 BDEPEND=test? ( dev-python/pytest dev-python/pytest-xdist ) >=dev-vcs/git-1.8.2.1[curl] app-alternatives/ninja >=dev-build/cmake-3.28.5
-DEFINED_PHASES=compile configure install prepare test unpack
-DEPEND=>=sci-libs/gsl-1.11 >=dev-libs/boost-1.69 mpi? ( virtual/mpi ) test? ( dev-python/pytest dev-python/pytest-timeout dev-python/pytest-xdist dev-python/numpy dev-python/pandas dev-python/scipy dev-python/mpi4py dev-python/terminaltables dev-python/pycodestyle dev-util/cppcheck ) docs? ( dev-python/PyYAML dev-python/sphinx dev-python/ipython ) python? ( dev-python/numpy dev-python/scipy )
+DEFINED_PHASES=compile configure install prepare setup test unpack
+DEPEND=sci-libs/gsl dev-libs/boost python? ( dev-python/numpy dev-python/scipy dev-python/matplotlib ) mpi? ( virtual/mpi dev-python/mpi4py ) hdf5? ( sci-libs/hdf5 ) test? ( dev-python/pytest dev-python/pytest-cov dev-python/pytest-xdist dev-python/flake8 dev-python/pandas dev-python/scipy dev-python/mypy dev-python/black dev-python/isort ) docs? ( dev-python/PyYAML dev-python/sphinx dev-python/ipython dev-python/csvkit dev-python/tdqm ) examples? ( dev-python/networkx dev-python/seaborn dev-python/ipython dev-python/imageio dev-python/cycler )
 DESCRIPTION=NEST is a simulator for spiking neural network models
 EAPI=8
 HOMEPAGE=https://github.com/nest/nest-simulator
-INHERIT=git-r3 cmake
-IUSE=docs test +python mpi
+INHERIT=git-r3 python-single-r1 cmake
+IUSE=docs +python test mpi openmp examples hdf5 python_single_target_python3_13 python_single_target_python3_14
 LICENSE=GPL-2
 PROPERTIES=live
-RDEPEND=>=sci-libs/gsl-1.11 >=dev-libs/boost-1.69 mpi? ( virtual/mpi ) test? ( dev-python/pytest dev-python/pytest-timeout dev-python/pytest-xdist dev-python/numpy dev-python/pandas dev-python/scipy dev-python/mpi4py dev-python/terminaltables dev-python/pycodestyle dev-util/cppcheck ) docs? ( dev-python/PyYAML dev-python/sphinx dev-python/ipython ) python? ( dev-python/numpy dev-python/scipy )
+RDEPEND=sci-libs/gsl dev-libs/boost python? ( dev-python/numpy dev-python/scipy dev-python/matplotlib ) mpi? ( virtual/mpi dev-python/mpi4py ) hdf5? ( sci-libs/hdf5 ) test? ( dev-python/pytest dev-python/pytest-cov dev-python/pytest-xdist dev-python/flake8 dev-python/pandas dev-python/scipy dev-python/mypy dev-python/black dev-python/isort ) docs? ( dev-python/PyYAML dev-python/sphinx dev-python/ipython dev-python/csvkit dev-python/tdqm ) examples? ( dev-python/networkx dev-python/seaborn dev-python/ipython dev-python/imageio dev-python/cycler )
+REQUIRED_USE=^^ ( python_single_target_python3_13 python_single_target_python3_14 )
 SLOT=0
-_eclasses_=git-r3	875eb471682d3e1f18da124be97dcc81	toolchain-funcs	98d9f464d912ae6b7316fb8a3721f5db	flag-o-matic	a7afe42e95fb46ce9691605acfb24672	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	3a59a39e97af0f7c03f49cf3c22f262b	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	22e4e58d68692975dc74424dc9b12fb7
-_md5_=6ee8d94eb4e5ee1bddbadc46fbe77a0b
+_eclasses_=git-r3	2f8cdb10b033f92c3136aa6488a31c98	eapi9-pipestatus	d2c134036ac31c3085aebc9147f572bd	multiprocessing	45d0620f25c2f063ad6276ecd9ed9399	toolchain-funcs	58a918e3a42d0156f010dcfd43725be5	python-utils-r1	3ce55b5ac9c0a92cc4aeb1f88010d707	python-single-r1	47d8ac9be330c9366112b78fd4f8ce57	flag-o-matic	fd3558f73f6503093adee69adf41020d	ninja-utils	d063ea1900a793f93eb095010d6d9156	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	3395ce6618fc5c7af03335471b896644
+_md5_=6aa6cdfc60df64ea232e0993892877db

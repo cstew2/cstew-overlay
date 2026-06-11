@@ -1,0 +1,26 @@
+diff --git a/astropy/io/ascii/setup_package.py b/astropy/io/ascii/setup_package.py
+index aaf9d30661..1730d63d3b 100644
+--- a/astropy/io/ascii/setup_package.py
++++ b/astropy/io/ascii/setup_package.py
+@@ -5,7 +5,7 @@ from pathlib import Path
+ from numpy import get_include as get_numpy_include
+ from setuptools import Extension
+ 
+-ROOT = Path(__file__).parent.relative_to(Path.cwd())
++ROOT = Path(__file__).resolve().parent.relative_to(Path.cwd())
+ 
+ 
+ def get_extensions():
+diff --git a/astropy/table/setup_package.py b/astropy/table/setup_package.py
+index d5e8514a40..d5e10fceb3 100644
+--- a/astropy/table/setup_package.py
++++ b/astropy/table/setup_package.py
+@@ -6,7 +6,7 @@ from pathlib import Path
+ from numpy import get_include as get_numpy_include
+ from setuptools import Extension
+ 
+-ROOT = Path(__file__).parent.relative_to(Path.cwd())
++ROOT = Path(__file__).resolve().parent.relative_to(Path.cwd())
+ 
+ 
+ def get_extensions():

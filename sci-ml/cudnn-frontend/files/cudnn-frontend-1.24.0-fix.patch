@@ -1,0 +1,16 @@
+diff --git a/samples/cpp/utils/helpers.h b/samples/cpp/utils/helpers.h
+index a953959..9ab20cd 100644
+--- a/samples/cpp/utils/helpers.h
++++ b/samples/cpp/utils/helpers.h
+@@ -1,9 +1,10 @@
+ #pragma once
+ 
+ #include <vector>
+-#include <stdexcept>
++#include <memory>
+ #include <sstream>
+ 
++#include <cudnn_graph.h>
+ #include <cuda_runtime.h>
+ #include <cuda_fp16.h>
+ 

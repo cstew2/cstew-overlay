@@ -1,12 +1,12 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=(python3_{12,13})
+PYTHON_COMPAT=(python3_{13,14})
 
-inherit git-r3 cmake
+inherit git-r3 python-single-r1 cmake
 
 DESCRIPTION="NEST is a simulator for spiking neural network models"
 HOMEPAGE="https://github.com/nest/nest-simulator"
@@ -15,41 +15,61 @@ EGIT_REPO_URI="https://github.com/nest/nest-simulator.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="docs test +python mpi"
+IUSE="docs +python test mpi openmp examples hdf5"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-DEPEND=">=sci-libs/gsl-1.11
-		>=dev-libs/boost-1.69
-		mpi? ( virtual/mpi )
+DEPEND="sci-libs/gsl
+		dev-libs/boost
+		python? ( dev-python/numpy
+				dev-python/scipy
+				dev-python/matplotlib )
+		mpi? ( virtual/mpi
+			   dev-python/mpi4py )
+		hdf5? ( sci-libs/hdf5 )
 		test? ( dev-python/pytest
-				dev-python/pytest-timeout
+				dev-python/pytest-cov
 				dev-python/pytest-xdist
-				dev-python/numpy
+				dev-python/flake8
 				dev-python/pandas
 				dev-python/scipy
-				dev-python/mpi4py
-				dev-python/terminaltables
-				dev-python/pycodestyle
-				dev-util/cppcheck )
+				dev-python/mypy
+				dev-python/black
+				dev-python/isort )
 		docs? ( dev-python/PyYAML
 				dev-python/sphinx
-				dev-python/ipython )
-		python?	( dev-python/numpy
-				  dev-python/scipy )"
+				dev-python/ipython
+				dev-python/csvkit
+				dev-python/tdqm )
+		examples? ( dev-python/networkx
+					dev-python/seaborn
+					dev-python/ipython
+					dev-python/imageio
+					dev-python/cycler )"
 RDEPEND="${DEPEND}"
 BDEPEND="test? ( dev-python/pytest
 				 dev-python/pytest-xdist )"
 
 S="${WORKDIR}/${PN}-${PV}"
 
-src_configure() {
-	default
+PATCHES=( "${FILESDIR}"/python-lib.patch )
 
-	sed -i 's/\${PYEXECDIR}/lib/' "${S}/pynest/CMakeLists.txt"
+src_configure() {
+	local site_dir=$(python_get_sitedir)
 
 	local mycmakeargs=(
-		-Dwith-mpi="$(usex mpi ON OFF)"
+		-DPython_EXECUTABLE="${PYTHON}"
+		-DPYEXECDIR="${site_dir#${EPREFIX}/usr/}"
 		-Dwith-python="$(usex python ON OFF)"
+		-Dwith-mpi="$(usex mpi ON OFF)"
+		-Dwith-openmp="$(usex openmp ON OFF)"
+		-Dwith-hdf5="$(usex hdf5 ON OFF)"
+		-Dwith-gsl=ON
 	)
 
 	cmake_src_configure
+}
+
+src_install() {
+	cmake_src_install
+	python_optimize
 }

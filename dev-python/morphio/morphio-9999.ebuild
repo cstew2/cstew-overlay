@@ -1,12 +1,12 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=(python3_{12,13})
+PYTHON_COMPAT=(python3_{13,14})
 
-inherit git-r3 cmake distutils-r1
+inherit git-r3 cmake
 
 DESCRIPTION="A python and C++ library for reading and writing neuronal morphologies"
 HOMEPAGE="https://github.com/BlueBrain/MorphIO/"

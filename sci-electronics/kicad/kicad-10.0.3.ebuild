@@ -1,9 +1,9 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-PYTHON_COMPAT=(python3_{12,13})
+PYTHON_COMPAT=( python3_{11..14} )
 WX_GTK_VER="3.2-gtk3"
 
 inherit check-reqs cmake flag-o-matic optfeature python-single-r1 toolchain-funcs wxwidgets xdg-utils
@@ -18,13 +18,10 @@ else
 	MY_PV="${PV/_rc/-rc}"
 	MY_P="${PN}-${MY_PV}"
 	SRC_URI="https://gitlab.com/kicad/code/${PN}/-/archive/${MY_PV}/${MY_P}.tar.bz2"
-	SRC_URI+="
-		https://gitlab.com/kicad/code/kicad/-/commit/5774338af2e22e1ff541ad9ab368e459e2a2add2.patch -> ${PN}-9.0.0-protobuf-30.patch
-	"
 	S="${WORKDIR}/${MY_P}"
 
 	if [[ ${PV} != *_rc* ]] ; then
-		KEYWORDS="amd64"
+		KEYWORDS="~amd64 ~arm64 ~riscv ~x86"
 	fi
 fi
 
@@ -36,7 +33,6 @@ fi
 # Licensed under MIT: argparse, compoundfilereader, delaunator, fmt, json_schema_validator, magic_enum nanodbc,
 #                     nlohmann/json, nlohmann/fifo_map, pboettch/json-schema-validator, picoSHA2, rectpack2d,
 #                     sentry-native, thread-pool, tinyspline_lib
-# Licensed under MIT and BSD: glew
 # Licensed under BSD: pybind11
 # Licensed under BSD2: gzip-hpp
 # Licensed under GPLv2 (or later): dxflib, math_for_graphics, potrace,
@@ -46,9 +42,10 @@ fi
 # Licensed under CC BY-SA 4.0: all the demo files provided in demos/*
 # Licensed under clause-3 BSD: ibis/kibis files in eeschema/sim/kibis
 # Licensed under CC0: uopamp.lib.spice in some directories in qa/data/eeschema/spice_netlists/
-LICENSE="GPL-2+ GPL-3+ Boost-1.0 BSD BSD-2 Apache-2.0 ISC MIT ZLIB CC-BY-SA-4.0 CC0-1.0"
+# Licensed under WTFPL-2 and Apache-2.0: bundled GLAD (replaces former system glew dep)
+LICENSE="GPL-2+ GPL-3+ Boost-1.0 BSD BSD-2 Apache-2.0 ISC MIT ZLIB CC-BY-SA-4.0 CC0-1.0 WTFPL-2"
 SLOT="0"
-IUSE="doc examples nls openmp test"
+IUSE="doc examples nls openmp test wayland"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
@@ -57,25 +54,32 @@ RESTRICT="!test? ( test )"
 # Contains bundled pybind but it's patched for wx
 # See https://gitlab.com/kicad/code/kicad/-/commit/74e4370a9b146b21883d6a2d1df46c7a10bd0424
 # Depend on opencascade:0 to get unslotted variant (so we know path to it), bug #833301
-# Depend wxGTK version needs to be limited due to switch from EGL to GLX, bug #911120
+# Depends on abseil-cpp via protobuf targets
 COMMON_DEPEND="
+	app-arch/zstd:=
 	app-crypt/libsecret
+	app-text/poppler[cairo]
+	dev-cpp/abseil-cpp:=
 	dev-db/unixODBC
 	dev-libs/boost:=[context,nls]
-	dev-libs/libgit2:=
+	>=dev-libs/libgit2-1.5:=
+	dev-libs/libspnav
 	>=dev-libs/protobuf-27.2:=[protobuf,protoc]
 	>=dev-libs/nng-1.10.0:=
+	media-libs/fontconfig
 	media-libs/freeglut
-	media-libs/glew:0=
+	media-libs/freetype:2
 	>=media-libs/glm-0.9.9.1
+	media-libs/harfbuzz:=
 	media-libs/mesa[X(+)]
 	net-misc/curl
 	>=sci-libs/opencascade-7.5.0:0=
 	>=x11-libs/cairo-1.8.8:=
 	>=x11-libs/pixman-0.30
-	>sci-electronics/ngspice-27[shared]
-	sys-libs/zlib
-	>=x11-libs/wxGTK-3.2.2.1-r3:${WX_GTK_VER}[X,opengl]
+	>=sci-electronics/ngspice-28[shared]
+	virtual/zlib:=
+	x11-libs/wxGTK:${WX_GTK_VER}=[X,opengl]
+	wayland? ( >=dev-libs/wayland-1.20 )
 	$(python_gen_cond_dep '
 		dev-libs/boost:=[context,nls,python,${PYTHON_USEDEP}]
 		>=dev-python/wxpython-4.2.0:*[${PYTHON_USEDEP}]
@@ -93,8 +97,10 @@ DEPEND="${COMMON_DEPEND}"
 RDEPEND="${COMMON_DEPEND}
 	sci-electronics/electronics-menu
 "
-BDEPEND=">=dev-lang/swig-4.0
-	doc? ( app-text/doxygen )"
+BDEPEND="app-alternatives/ninja
+	>=dev-lang/swig-4.0
+	doc? ( app-text/doxygen )
+	test? ( $(python_gen_cond_dep 'dev-python/pytest[${PYTHON_USEDEP}]') )"
 
 if [[ ${PV} == 9999 ]] ; then
 	# x11-misc-util/macros only required on live ebuilds
@@ -103,15 +109,10 @@ fi
 
 CHECKREQS_DISK_BUILD="1500M"
 
-PATCHES=(
-	"${DISTDIR}/${P}-protobuf-30.patch" # drop in 9.0.1
-)
-
 pkg_setup() {
 	[[ ${MERGE_TYPE} != binary ]] && use openmp && tc-check-openmp
 
 	python-single-r1_pkg_setup
-	setup-wxwidgets
 	check-reqs_pkg_setup
 }
 
@@ -123,19 +124,23 @@ src_unpack() {
 	fi
 }
 
+PATCHES=(
+	"${FILESDIR}"/${PN}-10.0.0-fix-cmake4-compat.patch # Bug 970924
+)
+
 src_prepare() {
 	filter-lto # Bug 927482
 	cmake_src_prepare
 }
 
 src_configure() {
+	setup-wxwidgets
 	xdg_environment_reset
 
 	local mycmakeargs=(
 		-DKICAD_DOCS="${EPREFIX}/usr/share/doc/${PN}-doc-${PV}"
 
 		-DKICAD_SCRIPTING_WXPYTHON=ON
-		-DKICAD_USE_EGL=OFF
 
 		-DKICAD_BUILD_I18N="$(usex nls)"
 		-DKICAD_I18N_UNIX_STRICT_PATH="$(usex nls)"
@@ -146,14 +151,25 @@ src_configure() {
 		-DPYTHON_LIBRARY="$(python_get_library_path)"
 
 		-DKICAD_INSTALL_DEMOS="$(usex examples)"
-		-DCMAKE_SKIP_RPATH="ON"
 
 		-DOCC_INCLUDE_DIR="${CASROOT}"/include/opencascade
 		-DOCC_LIBRARY_DIR="${CASROOT}"/$(get_libdir)/opencascade
 
 		-DKICAD_SPICE_QA="$(usex test)"
 		-DKICAD_BUILD_QA_TESTS="$(usex test)"
+
+		-DKICAD_WAYLAND="$(usex wayland)"
 	)
+
+	if ! [[ ${PV} == *9999* ]]; then
+		mycmakeargs+=(
+			-DCMAKE_POLICY_DEFAULT_CMP0167="OLD"
+
+			# 939141
+			-DCMAKE_DISABLE_FIND_PACKAGE_Git="yes"
+			-DKICAD_VERSION="${PVR}"
+		)
+	fi
 
 	cmake_src_configure
 }
@@ -175,9 +191,7 @@ src_test() {
 		qa_cli
 	)
 
-	# LD_LIBRARY_PATH is there to help it pick up the just-built libraries
-	LD_LIBRARY_PATH="${BUILD_DIR}/common:${BUILD_DIR}/common/gal:${BUILD_DIR}/3d-viewer/3d_cache/sg:${LD_LIBRARY_PATH}" \
-		cmake_src_test
+	cmake_src_test
 }
 
 src_install() {

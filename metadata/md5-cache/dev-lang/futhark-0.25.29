@@ -12,5 +12,5 @@ RDEPEND=>=dev-haskell/aeson-2.0.0.0:=[profile?] >=dev-haskell/ansi-terminal-0.6.
 RESTRICT=!test? ( test )
 SLOT=0/0.25.29
 SRC_URI=https://hackage.haskell.org/package/futhark-0.25.29/futhark-0.25.29.tar.gz
-_eclasses_=multiprocessing	1e32df7deee68372153dca65f4a7c21f	ghc-package	94e9e8c87736070ff088bc34d0f45f7c	toolchain-funcs	98d9f464d912ae6b7316fb8a3721f5db	multilib	a199af442898963433d6f038a88cce9c	haskell-cabal	85fd5ab7b9e5ddf0d7e402676ad452f5
+_eclasses_=multiprocessing	45d0620f25c2f063ad6276ecd9ed9399	ghc-package	72a691379521620cee2b91159683f88f	toolchain-funcs	58a918e3a42d0156f010dcfd43725be5	multilib	fc812e8eb2170022c28272d80a1f9e77	haskell-cabal	601749bf7114add521ede8e0268ae542
 _md5_=53752eb1f8109218e4129f8103c55974

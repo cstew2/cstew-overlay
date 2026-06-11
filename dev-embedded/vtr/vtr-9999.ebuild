@@ -1,9 +1,10 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-PYTHON_COMPAT=(python3_{12,13})
+PYTHON_COMPAT=(python3_{13,14})
+#EGIT_SUBMODULES=()
 
 inherit git-r3
 
@@ -25,7 +26,6 @@ DEPEND="media-libs/freetype
 RDEPEND="${DEPEND}"
 BDEPEND="sys-devel/flex
 		 sys-devel/bison
-		 dev-util/cmake
 		 doc? ( app-doc/doxygen
 				dev-python/sphinx
 				dev-python/sphinx_rtd_theme

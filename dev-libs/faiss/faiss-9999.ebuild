@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_EXT=1
-PYTHON_COMPAT=(python3_{12,13})
+PYTHON_COMPAT=(python3_{13,14})
 DISTUTILS_USE_PEP517=setuptools
 inherit git-r3 cmake distutils-r1 cuda
 

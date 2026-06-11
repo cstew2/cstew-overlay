@@ -1,0 +1,15 @@
+BDEPEND=>=dev-vcs/git-1.8.2.1[curl] >=dev-build/meson-1.2.3 app-alternatives/ninja dev-build/meson-format-array
+DEFINED_PHASES=compile configure install postinst postrm prepare test unpack
+DEPEND=|| ( dev-lang/vala:0.56 ) x11-libs/libnotify dev-libs/glib dev-libs/libgee net-libs/libsoup dev-db/sqlite gui-libs/libadwaita dev-libs/json-glib dev-libs/libical[vala] dev-libs/gxml app-crypt/libsecret gui-libs/gtksourceview[vala] dev-libs/icu xdg? ( sys-apps/xdg-desktop-portal ) spell? ( app-text/libspelling ) evolution? ( mail-client/evolution )
+DESCRIPTION=Task manager
+EAPI=8
+HOMEPAGE=https://useplanify.com/
+INHERIT=git-r3 vala meson
+IUSE=man xdg spell evolution
+KEYWORDS=~amd64
+LICENSE=GPL-3.0
+PROPERTIES=live
+RDEPEND=|| ( dev-lang/vala:0.56 ) x11-libs/libnotify dev-libs/glib dev-libs/libgee net-libs/libsoup dev-db/sqlite gui-libs/libadwaita dev-libs/json-glib dev-libs/libical[vala] dev-libs/gxml app-crypt/libsecret gui-libs/gtksourceview[vala] dev-libs/icu xdg? ( sys-apps/xdg-desktop-portal ) spell? ( app-text/libspelling ) evolution? ( mail-client/evolution )
+SLOT=0
+_eclasses_=git-r3	2f8cdb10b033f92c3136aa6488a31c98	toolchain-funcs	58a918e3a42d0156f010dcfd43725be5	flag-o-matic	fd3558f73f6503093adee69adf41020d	vala	b2f2aa400d77b841d952dda847e24d53	multiprocessing	45d0620f25c2f063ad6276ecd9ed9399	ninja-utils	d063ea1900a793f93eb095010d6d9156	eapi9-pipestatus	d2c134036ac31c3085aebc9147f572bd	python-utils-r1	3ce55b5ac9c0a92cc4aeb1f88010d707	sysroot	4c36abaf94ebd3ab32f8abea9a444121	rust-toolchain	76468983281b0a7fc167ca224f84ecfd	meson	12065b402c6d78a2aec926ed8dfd964f
+_md5_=5637b1513cb2e3871139a4fa3aa0e67c
