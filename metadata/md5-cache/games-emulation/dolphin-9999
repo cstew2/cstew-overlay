@@ -12,5 +12,5 @@ RDEPEND=app-arch/bzip2:= >=app-arch/lz4-1.8:= app-arch/xz-utils >=app-arch/zstd-
 REQUIRED_USE=mgba? ( gui ) llvm? ( ^^ ( llvm_slot_18 llvm_slot_19 llvm_slot_20 ) )
 RESTRICT=!test? ( test )
 SLOT=0
-_eclasses_=toolchain-funcs	58a918e3a42d0156f010dcfd43725be5	flag-o-matic	fd3558f73f6503093adee69adf41020d	multiprocessing	45d0620f25c2f063ad6276ecd9ed9399	ninja-utils	d063ea1900a793f93eb095010d6d9156	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	3395ce6618fc5c7af03335471b896644	llvm-utils	e7edb4086e31c8537574b263d899f826	llvm-r1	7fb804a45baeadb298e57882952251f4	pax-utils	5555f2e75744739fe100ee62c22d28fe	git-r3	2f8cdb10b033f92c3136aa6488a31c98
+_eclasses_=toolchain-funcs	58a918e3a42d0156f010dcfd43725be5	flag-o-matic	fd3558f73f6503093adee69adf41020d	multiprocessing	45d0620f25c2f063ad6276ecd9ed9399	ninja-utils	d063ea1900a793f93eb095010d6d9156	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	3530055400d05e64deaba3042af30af6	llvm-utils	e7edb4086e31c8537574b263d899f826	llvm-r1	e558c35fbd4579d7a50dc777145e3af5	pax-utils	5555f2e75744739fe100ee62c22d28fe	git-r3	e6c2f983e006e805160436c75a0c1562
 _md5_=2a867e3a8f60fe41187443e1a9938e06

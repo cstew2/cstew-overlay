@@ -1,0 +1,18 @@
+BDEPEND=>=virtual/jdk-17 virtual/pkgconfig dev-libs/glib:2 x11-libs/gtk+:3 alsa? ( media-libs/alsa-lib ) jack? ( virtual/jack ) fluidsynth? ( media-sound/fluidsynth ) fluidalsa? ( media-sound/fluidsynth[alsa] ) fluidjack? ( media-sound/fluidsynth[jack] ) fluidsdl? ( media-sound/fluidsynth[sdl] ) fluidoss? ( media-sound/fluidsynth[oss] ) fluidpipewire? ( media-sound/fluidsynth[pipewire] ) fluidportaudio? ( media-sound/fluidsynth[portaudio] ) fluidpulseaudio? ( media-sound/fluidsynth[pulseaudio] ) lv2? ( media-libs/lilv media-libs/suil dev-qt/qtbase:6[gui,widgets] dev-qt/qt5compat:6 ) html? ( >=net-libs/webkit-gtk-2.42:4.1 ) app-arch/unzip dev-java/maven-bin >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=compile install postinst postrm preinst prepare pretend unpack
+DEPEND=>=virtual/jdk-17 virtual/pkgconfig dev-libs/glib:2 x11-libs/gtk+:3 alsa? ( media-libs/alsa-lib ) jack? ( virtual/jack ) fluidsynth? ( media-sound/fluidsynth ) fluidalsa? ( media-sound/fluidsynth[alsa] ) fluidjack? ( media-sound/fluidsynth[jack] ) fluidsdl? ( media-sound/fluidsynth[sdl] ) fluidoss? ( media-sound/fluidsynth[oss] ) fluidpipewire? ( media-sound/fluidsynth[pipewire] ) fluidportaudio? ( media-sound/fluidsynth[portaudio] ) fluidpulseaudio? ( media-sound/fluidsynth[pulseaudio] ) lv2? ( media-libs/lilv media-libs/suil dev-qt/qtbase:6[gui,widgets] dev-qt/qt5compat:6 ) html? ( >=net-libs/webkit-gtk-2.42:4.1 )
+DESCRIPTION=TuxGuitar is a multitrack guitar tablature editor and player written in Java-SWT
+EAPI=8
+HOMEPAGE=https://www.tuxguitar.app/ https://github.com/helge17/tuxguitar
+IDEPEND=dev-util/desktop-file-utils x11-misc/shared-mime-info
+INHERIT=git-r3 xdg
+IUSE=alsa fluidalsa fluidjack fluidsdl fluidoss fluidpipewire fluidportaudio fluidpulseaudio fluidsynth html jack lv2 oss timidity
+KEYWORDS=~amd64
+LICENSE=LGPL-2.1
+PROPERTIES=live
+RDEPEND=>=virtual/jre-17 media-sound/fluid-soundfont timidity? ( alsa? ( media-sound/timidity++[alsa] ) oss? ( media-sound/timidity++[oss] ) media-sound/timidity++ ) dev-libs/glib:2 x11-libs/gtk+:3 alsa? ( media-libs/alsa-lib ) jack? ( virtual/jack ) fluidsynth? ( media-sound/fluidsynth ) fluidalsa? ( media-sound/fluidsynth[alsa] ) fluidjack? ( media-sound/fluidsynth[jack] ) fluidsdl? ( media-sound/fluidsynth[sdl] ) fluidoss? ( media-sound/fluidsynth[oss] ) fluidpipewire? ( media-sound/fluidsynth[pipewire] ) fluidportaudio? ( media-sound/fluidsynth[portaudio] ) fluidpulseaudio? ( media-sound/fluidsynth[pulseaudio] ) lv2? ( media-libs/lilv media-libs/suil dev-qt/qtbase:6[gui,widgets] dev-qt/qt5compat:6 ) html? ( >=net-libs/webkit-gtk-2.42:4.1 )
+RESTRICT=network-sandbox
+SLOT=0
+SRC_URI=amd64? ( https://download.eclipse.org/eclipse/downloads/drops4/R-4.37-202509050730/swt-4.37-gtk-linux-x86_64.zip -> swt-4.37-gtk-linux-x86_64.zip )
+_eclasses_=git-r3	e6c2f983e006e805160436c75a0c1562	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	xdg	3ef49a87c52c8b77c476351195dfe575
+_md5_=a11d60e56319a8b1d6471430d94833c4

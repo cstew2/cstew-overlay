@@ -10,5 +10,5 @@ LICENSE=GPL-2
 PROPERTIES=live
 RDEPEND=>=app-misc/openrgb-0.7:= dev-qt/qtcore:5 dev-qt/qtgui:5[-gles2-only] dev-qt/qtwidgets:5[-gles2-only] media-libs/openal
 SLOT=0
-_eclasses_=git-r3	2f8cdb10b033f92c3136aa6488a31c98	toolchain-funcs	58a918e3a42d0156f010dcfd43725be5	qmake-utils	28f99dba9219112f4785f46ed426a021
+_eclasses_=git-r3	e6c2f983e006e805160436c75a0c1562	qt-utils	5b7ae92788820ab4495683740521513c	toolchain-funcs	58a918e3a42d0156f010dcfd43725be5	qmake-utils	91f1d001b598c8e4730a7a36b2c1849d
 _md5_=34e5374302c43e8fc2c6eac10c595e00

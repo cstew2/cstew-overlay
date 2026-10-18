@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=scikit-build-core
-PYTHON_COMPAT=( python3_{11..14} )
+PYTHON_COMPAT=(python3_{13,14})
 EGIT_SUBMODULES=()
 
 inherit git-r3 cmake distutils-r1

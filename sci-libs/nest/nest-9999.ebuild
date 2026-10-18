@@ -58,8 +58,6 @@ src_configure() {
 
 	local mycmakeargs=(
 		-DPython_EXECUTABLE="${PYTHON}"
-		-DPYEXECDIR="${site_dir#${EPREFIX}/usr/}"
-		-Dwith-python="$(usex python ON OFF)"
 		-Dwith-mpi="$(usex mpi ON OFF)"
 		-Dwith-openmp="$(usex openmp ON OFF)"
 		-Dwith-hdf5="$(usex hdf5 ON OFF)"

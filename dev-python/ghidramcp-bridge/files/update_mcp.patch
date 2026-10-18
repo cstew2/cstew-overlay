@@ -1,0 +1,58 @@
+diff --git a/src/ghidra_mcp/server.py b/src/ghidra_mcp/server.py
+index d9110fc..028544b 100644
+--- a/src/ghidra_mcp/server.py
++++ b/src/ghidra_mcp/server.py
+@@ -4,8 +4,8 @@ from __future__ import annotations
+ 
+ from typing import Any, Literal
+ 
+-from mcp.server.fastmcp import FastMCP
+-from mcp.server.fastmcp.exceptions import ToolError
++from mcp.server.mcpserver import MCPServer
++from mcp.server.mcpserver.exceptions import ToolError
+ 
+ from ghidra_mcp.backend import BackendError, GhidraBackend
+ 
+@@ -28,13 +28,14 @@ def create_server(
+     host: str = "127.0.0.1",
+     port: int = 8081,
+     capabilities: set[str] | None = None,
+-) -> FastMCP:
++) -> MCPServer:
+     """Builds the MCP server.
+ 
+     `capabilities` comes from the backend's /health. When it is None (backend not reachable at
+     startup) every tool is registered.
+     """
+-    mcp = FastMCP("ghidra-mcp", instructions=INSTRUCTIONS, host=host, port=port)
++    mcp = MCPServer("ghidra-mcp")
++    mcp.run(instructions=INSTRUCTIONS, host=host, port=port)
+     gui_context = capabilities is None or CAP_GUI_CONTEXT in capabilities
+ 
+     def call(method: str, endpoint: str, **params: Any) -> Any:
+diff --git a/tests/test_headless_integration.py b/tests/test_headless_integration.py
+index 64a29b4..6181040 100644
+--- a/tests/test_headless_integration.py
++++ b/tests/test_headless_integration.py
+@@ -13,7 +13,7 @@ from pathlib import Path
+ 
+ import pytest
+ import requests
+-from mcp.server.fastmcp.exceptions import ToolError
++from mcp.server.mcpserver.exceptions import ToolError
+ 
+ ROOT = Path(__file__).resolve().parent.parent
+ FIXTURES = Path(__file__).resolve().parent / "fixtures"
+diff --git a/tests/test_server.py b/tests/test_server.py
+index c0774f7..9626120 100644
+--- a/tests/test_server.py
++++ b/tests/test_server.py
+@@ -2,7 +2,7 @@ import asyncio
+ import json
+ 
+ import pytest
+-from mcp.server.fastmcp.exceptions import ToolError
++from mcp.server.mcpserver.exceptions import ToolError
+ 
+ from ghidra_mcp.backend import GhidraBackend
+ from ghidra_mcp.server import GUI_ONLY_TOOLS, create_server

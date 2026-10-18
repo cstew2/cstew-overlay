@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile install preinst prepare setup
+DEPEND=>=virtual/jdk-21 dev-util/ghidra app-arch/unzip >=dev-java/java-config-2.2.0-r3
+DESCRIPTION=MCP Extension for Ghidra
+EAPI=8
+HOMEPAGE=https://github.com/LaurieWired/GhidraMCP
+INHERIT=java-pkg-2
+KEYWORDS=~amd64
+LICENSE=Apache2.0
+RDEPEND=>=virtual/jdk-21 dev-util/ghidra app-arch/unzip >=dev-java/java-config-2.2.0-r3
+SLOT=0
+SRC_URI=https://github.com/LaurieWired/GhidraMCP/archive/refs/tags/2.0.tar.gz -> ghidramcp-2.0.tar.gz
+_eclasses_=java-utils-2	4fa0be92748bc228f31bd845d285d7f9	java-pkg-2	438c2725ea326202d7fc1eb31af76813
+_md5_=41084d629798e560edce8d7f1f11b741

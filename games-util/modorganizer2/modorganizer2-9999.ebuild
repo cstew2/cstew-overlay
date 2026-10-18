@@ -1,3 +1,4 @@
+
 # Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
@@ -11,7 +12,6 @@ inherit git-r3 distutils-r1
 DESCRIPTION=" An easy-to-use Mod Organizer 2 installer for Linux "
 HOMEPAGE="https://github.com/Furglitch/modorganizer2-linux-installer"
 EGIT_REPO_URI="https://github.com/Furglitch/modorganizer2-linux-installer.git"
-EGIT_BRANCH="rewrite"
 
 LICENSE="GPL-3"
 SLOT="0"

@@ -44,10 +44,12 @@ src_install() {
 		narch="sbsa"
 	fi
 
-	local cuda_pv=$(ver_cut 2- $(best_version dev-util/nvidia-cuda-toolkit))
+	local cuda_pkg="dev-util/nvidia-cuda-toolkit"
+	local cuda_full=$(best_version ${cuda_pkg})
+	local cuda_v=${cuda_full#${cuda_pkg}-}
 
 	# allow slotted install
-	local CUDNN_PATH="${CUDNN_PATH:-${EPREFIX}/opt/cuda-${cuda_pv}}"
+	local CUDNN_PATH="${CUDNN_PATH:-${EPREFIX}/opt/cuda-${cuda_v}}"
 
 	cd "${WORKDIR}/cudnn-linux-${narch}-${PV}_cuda13-archive" || die
 

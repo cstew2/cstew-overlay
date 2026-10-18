@@ -39,9 +39,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 # since CUDA 11, the bundled toolkit driver (== ${DRIVER_PV}) and the
 # actual required minimum driver version are different.
 RDEPEND="
-	!clang? (
-		<sys-devel/gcc-$(( GCC_MAX_VER + 1 ))_pre[cxx]
-	)
+	<sys-devel/gcc-$(( GCC_MAX_VER + 1 ))_pre[cxx]
 	clang? (
 		<llvm-core/clang-$(( CLANG_MAX_VER + 1 ))_pre
 	)
@@ -67,9 +65,7 @@ BDEPEND="
 	')
 "
 
-#CUDA_PATH="/opt/cuda-${PV}" #950207
 CUDA_PATH="/opt/cuda-${PV}"
-#CUDA_PATH="/opt/cuda"
 QA_PREBUILT="${CUDA_PATH#/}/*"
 
 python_check_deps() {
@@ -344,6 +340,7 @@ src_install() {
 		PKG_CONFIG_PATH=${EPREFIX}${CUDA_PATH}/pkgconfig
 		LDPATH=${EPREFIX}${CUDA_PATH}/$(get_libdir):${EPREFIX}${CUDA_PATH}/nvvm/lib64${ldpathextradirs}
 		CUDA_PATH=${EPREFIX}${CUDA_PATH}
+		CUDA_HOME=${EPREFIX}${CUDA_PATH}
 	EOF
 
 	# CUDA prepackages libraries, don't revdep-build on them
@@ -358,28 +355,7 @@ src_install() {
 		SANDBOX_PREDICT="/proc/self/task"
 	EOF
 
-	# TODO drop and replace with runtime detection similar to what python does {{{
-	# ATTENTION: change requires revbump, see link below for supported GCC # versions
-	# https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#system-requirements
-
-	# Generate GCC version list dynamically from 10 to GCC_MAX_VER
-	# (keeping the legacy versions 8.5 and 9.5 for compatibility)
-	local cuda_supported_gcc=( 8.5 9.5 )
-	for ((ver=10; ver<=GCC_MAX_VER; ver++)); do
-		cuda_supported_gcc+=( "${ver}" )
-	done
-
-	sed \
-		-e "s:CUDA_SUPPORTED_GCC:${cuda_supported_gcc[*]}:g" \
-		"${FILESDIR}"/cuda-config.in > "${ED}/${CUDA_PATH}/bin/cuda-config" || die
-	fperms +x "${CUDA_PATH}/bin/cuda-config"
-	# }}}
-
-	# skip til cudnn has been changed #950207
-	# if [[ "${SLOT}" != "${PV}" ]]; then
-	# 	dosym -r "${CUDA_PATH}" "${CUDA_PATH%"-${PV}"}"
-	# fi
-
+	newbin "${FILESDIR}"/cuda-config.bash cuda-config
 	fowners -R root:root "${CUDA_PATH}"
 }
 

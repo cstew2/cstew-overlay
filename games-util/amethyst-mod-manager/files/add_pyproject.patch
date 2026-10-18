@@ -1,0 +1,45 @@
+diff --git a/pyproject.toml b/pyproject.toml
+new file mode 100644
+index 00000000..d696d2c8
+--- /dev/null
++++ b/pyproject.toml
+@@ -0,0 +1,39 @@
++[build-system]
++requires = ["setuptools", "wheel"]
++build-backend = "setuptools.build_meta"
++
++[project]
++name = "Amethyst-Mod-Manager"
++dynamic = ["version"]
++description = "A Linux native mod manager for a variety of games"
++readme = "README.md"
++license = "GPL-3.0"
++
++dependencies = [
++	     "PySide6",
++	     "py7zr",
++	     "Pillow",
++	     "lz4",
++	     "zstandard",
++	     "requests",
++	     "keyring",
++	     "jeepney",
++	     "msgpack",
++	     "bsdiff4",
++	     "cryptography",
++	     "SecretStorage",
++	     "certifi"
++]
++
++[project.scripts]
++amethyst-mod-manager = "gui_qt.app:run"
++amethyst-mod-manager-cli = "cli:main"
++
++[tool.setuptools]
++package-dir = {"" = "src"}
++
++[tool.setuptools.packages.find]
++where = ["src"]
++
++[tool.setuptools.dynamic]
++version = { attr = "version.__version__" }

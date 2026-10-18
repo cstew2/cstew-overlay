@@ -3,9 +3,9 @@
 
 EAPI=8
 
-DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=(python3_{13,14})
-inherit git-r3 distutils-r1
+DISTUTILS_USE_PEP517=setuptools
+inherit distutils-r1 git-r3
 
 DESCRIPTION="Core functionality for performing astrophysics with Python"
 HOMEPAGE="https://www.astropy.org/"
@@ -17,6 +17,7 @@ KEYWORDS=""
 IUSE="test"
 
 RDEPEND="
+	dev-python/extension-helpers[${PYTHON_USEDEP}]
 	dev-python/numpy[${PYTHON_USEDEP}]
 	dev-python/pyerfa[${PYTHON_USEDEP}]
 	dev-python/pyyaml[${PYTHON_USEDEP}]
@@ -25,7 +26,6 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}"
 BDEPEND="
-	dev-python/extension-helpers[${PYTHON_USEDEP}]
 	test? (
 		dev-libs/libxml2
 		dev-python/h5py[${PYTHON_USEDEP}]

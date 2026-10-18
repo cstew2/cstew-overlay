@@ -9,5 +9,5 @@ KEYWORDS=~amd64 ~arm ~arm64 ~ppc ~ppc64 ~x86
 LICENSE=OFL
 PROPERTIES=live
 SLOT=0
-_eclasses_=font	6d0c60c855c05ae2ba808d300440ded2	git-r3	2f8cdb10b033f92c3136aa6488a31c98
+_eclasses_=font	9248ee2e9ac35c888e1ae71773a632f4	git-r3	e6c2f983e006e805160436c75a0c1562
 _md5_=beb010e29feeed3c8e5e086b90c97ed7

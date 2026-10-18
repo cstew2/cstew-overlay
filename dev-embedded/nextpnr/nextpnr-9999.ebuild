@@ -4,7 +4,6 @@
 EAPI=8
 
 PYTHON_COMPAT=(python3_{13,14})
-
 inherit git-r3 cmake
 
 DESCRIPTION="place-and-route tool"
@@ -27,9 +26,7 @@ DEPEND="dev-libs/boost[python]
 		gowin? ( dev-embedded/apicula )
 		himbaechel? ( dev-embedded/nextpnr-xilinx-meta )
 		xilinx? ( dev-embedded/x-ray )
-		gui? ( dev-qt/qtbase
-			   dev-qt/qtcore:5
-			   dev-qt/qtopengl:5 )
+		gui? ( dev-qt/qtbase )
 		python? ( dev-lang/python )
 		"
 RDEPEND="${DEPEND}"

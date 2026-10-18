@@ -1,7 +1,9 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
+
+EGIT_SUBMODULES=()
 
 inherit git-r3 cmake
 
@@ -34,7 +36,8 @@ src_configure() {
 		)
 	fi
 
-	sed -i 's/CMAKE_CXX_STANDARD 14/CMAKE_CXX_STANDARD 17/' CMakeLists.txt || die
+	sed -i 's/CMAKE_CXX_STANDARD 14/CMAKE_CXX_STANDARD 17/' ./CMakeLists.txt || die
+	sed -i '3i\#include <cassert>' ./tools/bits2rbt/header.cc || die
 
 	cmake_src_configure
 }

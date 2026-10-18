@@ -1,11 +1,11 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 PYTHON_COMPAT=(python3_{13,14})
 DISTUTILS_USE_PEP517=setuptools
-inherit distutils-r1 python-r1 git-r3 udev desktop linux-mod
+inherit distutils-r1 python-r1 git-r3 udev desktop linux-mod-r1
 
 DESCRIPTION="Drivers for Razer peripherals on GNU/Linux"
 HOMEPAGE="https://openrazer.github.io/"

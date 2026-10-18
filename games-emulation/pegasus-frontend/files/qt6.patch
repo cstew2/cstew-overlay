@@ -1,0 +1,624 @@
+diff --git a/.gitmodules b/.gitmodules
+index d08e9697..1de2143e 100644
+--- a/.gitmodules
++++ b/.gitmodules
+@@ -7,4 +7,4 @@
+ 	url = https://github.com/mmatyas/pegasus-theme-grid.git
+ [submodule "thirdparty/SortFilterProxyModel"]
+ 	path = thirdparty/SortFilterProxyModel
+-	url = https://github.com/mmatyas/SortFilterProxyModel.git
++	url = https://github.com/RaymiiOrg/SortFilterProxyModel.git
+diff --git a/src/backend/AppSettings.cpp b/src/backend/AppSettings.cpp
+index 765a6f18..0a0996ab 100644
+--- a/src/backend/AppSettings.cpp
++++ b/src/backend/AppSettings.cpp
+@@ -230,7 +230,7 @@ void AppSettings::parse_gamedirs(const std::function<void(const QString&)>& call
+             continue;
+ 
+         QTextStream stream(&config_file);
+-        stream.setCodec("UTF-8");
++        stream.setEncoding(QStringConverter::Utf8);
+ 
+         QString line;
+         while (stream.readLineInto(&line, LINE_MAX_LEN)) {
+diff --git a/src/backend/Log.cpp b/src/backend/Log.cpp
+index 27fec62e..d0e4c9e8 100644
+--- a/src/backend/Log.cpp
++++ b/src/backend/Log.cpp
+@@ -55,7 +55,7 @@ public:
+     Terminal()
+         : m_stream(stdout)
+     {
+-        m_stream.setCodec("UTF-8");
++        m_stream.setEncoding(QStringConverter::Utf8);
+     }
+ 
+     void info(const QString& msg) override {
+@@ -100,7 +100,7 @@ public:
+             return;
+         }
+ 
+-        m_stream.setCodec("UTF-8");
++        m_stream.setEncoding(QStringConverter::Utf8);
+         m_stream.setDevice(&m_file);
+     }
+ 
+diff --git a/src/backend/Paths.h b/src/backend/Paths.h
+index da9c8771..387ff046 100644
+--- a/src/backend/Paths.h
++++ b/src/backend/Paths.h
+@@ -17,9 +17,8 @@
+ 
+ #pragma once
+ 
+-class QString;
+-class QStringList;
+-
++#include <QString>
++#include <QStringList>
+ 
+ namespace paths {
+ 
+diff --git a/src/backend/ScriptRunner.h b/src/backend/ScriptRunner.h
+index aa10ec38..9beaf239 100644
+--- a/src/backend/ScriptRunner.h
++++ b/src/backend/ScriptRunner.h
+@@ -17,8 +17,7 @@
+ 
+ #pragma once
+ 
+-class QStringList;
+-
++#include <QStringList>
+ 
+ enum class ScriptEvent : unsigned char {
+     QUIT,
+diff --git a/src/backend/imggen/BlurhashProvider.cpp b/src/backend/imggen/BlurhashProvider.cpp
+index 6351dd7c..5a693b9b 100644
+--- a/src/backend/imggen/BlurhashProvider.cpp
++++ b/src/backend/imggen/BlurhashProvider.cpp
+@@ -144,26 +144,26 @@ QImage BlurhashProvider::requestImage(const QString& hash_url, QSize* out_size,
+         ? QSize(24, 24)
+         : requested_size;
+ 
+-    const unsigned components_raw = decode_base83(hash.leftRef(1));
++    const unsigned components_raw = decode_base83(hash.first(1));
+     const unsigned components_x = (components_raw % 9) + 1;
+     const unsigned components_y = (components_raw / 9) + 1;
+     const size_t color_cnt = components_x * components_y;
+     if (static_cast<unsigned>(hash.length()) != 4 + 2 * color_cnt) // 2 head + 4 DC + 2 * (nx * ny - 1) AC
+         return {};
+ 
+-    const unsigned max_ac_raw = decode_base83(hash.midRef(1, 1));
++    const unsigned max_ac_raw = decode_base83(hash.mid(1, 1));
+     const float max_ac = (max_ac_raw + 1) / 166.f;
+ 
+     const std::vector<FpColor> colors = [color_cnt, max_ac, &hash](){
+         std::vector<FpColor> out;
+         out.reserve(color_cnt);
+ 
+-        const unsigned avg_color_raw = decode_base83(hash.midRef(2, 4));
++        const unsigned avg_color_raw = decode_base83(hash.mid(2, 4));
+         out.emplace_back(decode_dc(avg_color_raw));
+ 
+         for (size_t i = 1; i < color_cnt; i++) {
+             const int str_start = 4 + i * 2;
+-            const unsigned color_raw = decode_base83(hash.midRef(str_start, 2));
++            const unsigned color_raw = decode_base83(hash.mid(str_start, 2));
+             out.emplace_back(decode_ac(color_raw, max_ac));
+         }
+ 
+diff --git a/src/backend/model/Api.cpp b/src/backend/model/Api.cpp
+index 36f2f5bf..225802b8 100644
+--- a/src/backend/model/Api.cpp
++++ b/src/backend/model/Api.cpp
+@@ -46,7 +46,7 @@ void ApiObject::setGameData(std::vector<model::Collection*>&& collections, std::
+     Q_ASSERT(m_all_games && m_all_games->entries().empty());
+     Q_ASSERT(m_collections && m_collections->entries().empty());
+ 
+-    for (model::Game* const game : qAsConst(games)) {
++    for (model::Game* const game : std::as_const(games)) {
+         game->moveToThread(thread());
+         game->setParent(this);
+ 
+@@ -61,7 +61,7 @@ void ApiObject::setGameData(std::vector<model::Collection*>&& collections, std::
+         }
+     }
+ 
+-    for (model::Collection* const coll : qAsConst(collections)) {
++    for (model::Collection* const coll : std::as_const(collections)) {
+         coll->moveToThread(thread());
+         coll->setParent(this);
+     }
+diff --git a/src/backend/model/gaming/Collection.h b/src/backend/model/gaming/Collection.h
+index 5bf9e7af..dd24a871 100644
+--- a/src/backend/model/gaming/Collection.h
++++ b/src/backend/model/gaming/Collection.h
+@@ -18,13 +18,11 @@
+ #pragma once
+ 
+ #include "GameListModel.h"
++#include "model/gaming/Game.h"
++#include "model/gaming/Assets.h"
+ 
+ #include <QString>
+ 
+-#ifdef Q_CC_MSVC
+-// MSVC has troubles with forward declared QML model types
+-#include "model/gaming/Game.h"
+-#endif
+ 
+ namespace model { class Assets; }
+ namespace model { class Game; }
+diff --git a/src/backend/model/gaming/Game.h b/src/backend/model/gaming/Game.h
+index 38cbf6d0..8dfc47cc 100644
+--- a/src/backend/model/gaming/Game.h
++++ b/src/backend/model/gaming/Game.h
+@@ -19,15 +19,12 @@
+ 
+ #include "CollectionListModel.h"
+ #include "GameFileListModel.h"
++#include "model/gaming/Collection.h"
++#include "model/gaming/GameFile.h"
+ 
+ #include <QDateTime>
+ #include <QStringList>
+ 
+-#ifdef Q_CC_MSVC
+-// MSVC has troubles with forward declared QML model types
+-#include "model/gaming/Collection.h"
+-#include "model/gaming/GameFile.h"
+-#endif
+ 
+ namespace model { class Assets; }
+ namespace model { class GameFile; }
+diff --git a/src/backend/model/internal/GamepadManagerSDL2.cpp b/src/backend/model/internal/GamepadManagerSDL2.cpp
+index c1d09129..589ce3e4 100644
+--- a/src/backend/model/internal/GamepadManagerSDL2.cpp
++++ b/src/backend/model/internal/GamepadManagerSDL2.cpp
+@@ -306,7 +306,7 @@ void write_mappings(const std::vector<std::string>& mappings)
+     }
+ 
+     QTextStream db_stream(&db_file);
+-    db_stream.setCodec("UTF-8");
++    db_stream.setEncoding(QStringConverter::Utf8);
+ 
+     for (const std::string& mapping : mappings)
+         db_stream << mapping.data() << '\n';
+@@ -384,7 +384,7 @@ void GamepadManagerSDL2::load_user_gamepaddb(const QString& dir)
+     Log::info(LOGMSG("SDL: loading controller mappings from `%1`").arg(path));
+ 
+     QTextStream db_stream(&db_file);
+-    db_stream.setCodec("UTF-8");
++    db_stream.setEncoding(QStringConverter::Utf8);
+ 
+     QString line;
+     int linenum = 0;
+diff --git a/src/backend/model/internal/settings/Locales.cpp b/src/backend/model/internal/settings/Locales.cpp
+index 5b37015e..beafd795 100644
+--- a/src/backend/model/internal/settings/Locales.cpp
++++ b/src/backend/model/internal/settings/Locales.cpp
+@@ -38,7 +38,7 @@ std::vector<model::LocaleEntry> find_available_locales()
+     std::vector<model::LocaleEntry> locales;
+     locales.reserve(static_cast<size_t>(qm_files.count()));
+ 
+-    for (const QString& filename : qAsConst(qm_files)) {
++    for (const QString& filename : std::as_const(qm_files)) {
+         const int locale_tag_len = filename.length() - QM_PREFIX_LEN - QM_SUFFIX_LEN;
+         Q_ASSERT(locale_tag_len > 0);
+ 
+diff --git a/src/backend/model/internal/settings/Settings.cpp b/src/backend/model/internal/settings/Settings.cpp
+index 5f1f7742..ef75b903 100644
+--- a/src/backend/model/internal/settings/Settings.cpp
++++ b/src/backend/model/internal/settings/Settings.cpp
+@@ -51,7 +51,7 @@ void rewrite_gamedircfg(const std::function<void(QTextStream&)>& callback)
+     }
+ 
+     QTextStream stream(&config_file);
+-    stream.setCodec("UTF-8");
++    stream.setEncoding(QStringConverter::Utf8);
+     callback(stream);
+     Log::info(LOGMSG("Game directory list saved"));
+ }
+@@ -145,7 +145,7 @@ QStringList Settings::gameDirs() const
+     });
+ 
+     QStringList dirlist;
+-    for (const QString& dir : qAsConst(dirset))
++    for (const QString& dir : std::as_const(dirset))
+         dirlist.append(dir);
+ 
+     dirlist.sort();
+@@ -177,7 +177,7 @@ void Settings::addGameDir(const QString& path)
+ 
+ 
+     rewrite_gamedircfg([&dirset](QTextStream& stream){
+-        for (const QString& dir : qAsConst(dirset)) {
++        for (const QString& dir : std::as_const(dirset)) {
+             stream << dir << '\n';
+         }
+     });
+@@ -214,7 +214,7 @@ void Settings::removeGameDirs(const QVariantList& idx_var_list)
+ 
+ 
+     rewrite_gamedircfg([&dirlist](QTextStream& stream){
+-        for (const QString& dir : qAsConst(dirlist)) {
++        for (const QString& dir : std::as_const(dirlist)) {
+             stream << dir << '\n';
+         }
+     });
+diff --git a/src/backend/model/internal/settings/Themes.cpp b/src/backend/model/internal/settings/Themes.cpp
+index 254a8ad2..8a2fab65 100644
+--- a/src/backend/model/internal/settings/Themes.cpp
++++ b/src/backend/model/internal/settings/Themes.cpp
+@@ -106,7 +106,7 @@ std::vector<model::ThemeEntry> find_available_themes()
+             // add the qrc/file protocol prefix
+             const bool is_builtin = basedir.startsWith(':');
+             qml_path = is_builtin
+-                ? QLatin1String("qrc://") % qml_path.midRef(1)
++                ? QLatin1String("qrc://") % qml_path.mid(1)
+                 : QUrl::fromLocalFile(qml_path).toString();
+ 
+             themes.emplace_back(
+diff --git a/src/backend/parsers/MetaFile.cpp b/src/backend/parsers/MetaFile.cpp
+index 459ab169..ed31ef08 100644
+--- a/src/backend/parsers/MetaFile.cpp
++++ b/src/backend/parsers/MetaFile.cpp
+@@ -46,7 +46,7 @@ bool read_file(const QString& path,
+         return false;
+ 
+     QTextStream stream(&file);
+-    stream.setCodec("UTF-8");
++    stream.setEncoding(QStringConverter::Utf8);
+     read_stream(stream, onAttributeFound, onError);
+     return true;
+ }
+@@ -58,7 +58,7 @@ void read_file(QFile& file,
+ {
+     Q_ASSERT(file.isOpen() && file.isReadable());
+     QTextStream stream(&file);
+-    stream.setCodec("UTF-8");
++    stream.setEncoding(QStringConverter::Utf8);
+     return read_stream(stream, onAttributeFound, onError);
+ }
+ 
+@@ -93,7 +93,7 @@ void read_stream(QTextStream& stream,
+         if (line.startsWith('#'))
+             continue;
+ 
+-        const QStringRef trimmed_line = line.leftRef(-1).trimmed();
++        const QStringView trimmed_line = line.first(-1).trimmed();
+         if (trimmed_line.isEmpty()) {
+             close_current_attrib();
+             continue;
+@@ -125,10 +125,10 @@ void read_stream(QTextStream& stream,
+         // keyval pair (after the multiline check)
+         const int key_end = trimmed_line.indexOf(CH_COLON);
+         if (key_end > 0) {
+-            entry.key = trimmed_line.left(key_end).trimmed().toString().toLower();
++            entry.key = trimmed_line.first(key_end).trimmed().toString().toLower();
+ 
+             // the value can be empty here, if it's purely multiline
+-            const QStringRef value_part = trimmed_line.mid(key_end + 1).trimmed();
++            const QStringView value_part = trimmed_line.mid(key_end + 1).trimmed();
+             if (!value_part.isEmpty())
+                 entry.values.emplace_back(value_part.toString());
+ 
+diff --git a/src/backend/parsers/MetaFile.h b/src/backend/parsers/MetaFile.h
+index a8c5aa12..5c9abc0a 100644
+--- a/src/backend/parsers/MetaFile.h
++++ b/src/backend/parsers/MetaFile.h
+@@ -34,6 +34,11 @@ struct Entry {
+     QString key;
+     std::vector<QString> values;
+ 
++    Entry(size_t line, QString key, std::vector<QString> values)
++	: line(line),
++	  key(std::move(key)),
++	  values(std::move(values)) {}
++	
+     void reset();
+     MOVE_ONLY(Entry)
+ };
+@@ -41,6 +46,10 @@ struct Error {
+     size_t line;
+     QString message;
+ 
++    Error(size_t line, QString message)
++	: line(line),
++	  message(std::move(message)) {}
++	
+     MOVE_ONLY(Error)
+ };
+ 
+diff --git a/src/backend/parsers/SettingsFile.cpp b/src/backend/parsers/SettingsFile.cpp
+index 45c645f3..e2ed2533 100644
+--- a/src/backend/parsers/SettingsFile.cpp
++++ b/src/backend/parsers/SettingsFile.cpp
+@@ -251,8 +251,8 @@ void LoadContext::handle_key_attrib(const size_t lineno, const QString& key, con
+ 
+     QVector<QKeySequence> keyseqs;
+ 
+-    const auto key_strs = val.splitRef(',', Qt::SkipEmptyParts);
+-    for (const QStringRef& strref : key_strs) {
++    const auto key_strs = QStringView{val}.split(',', Qt::SkipEmptyParts);
++    for (const QStringView& strref : key_strs) {
+         const QString str = strref
+             .trimmed()
+             .toString()
+@@ -269,7 +269,7 @@ void LoadContext::handle_key_attrib(const size_t lineno, const QString& key, con
+             keyseqs.append(std::move(keyseq));
+     }
+ 
+-    for (const QKeySequence& keyseq : qAsConst(keyseqs))
++    for (const QKeySequence& keyseq : std::as_const(keyseqs))
+         AppSettings::keys.add_key(key_event, keyseq);
+ }
+ 
+@@ -290,7 +290,7 @@ void SaveContext::save() const
+     }
+ 
+     QTextStream stream(&config_file);
+-    stream.setCodec("UTF-8");
++    stream.setEncoding(QStringConverter::Utf8);
+ 
+     print_general(stream);
+     print_providers(stream);
+diff --git a/src/backend/parsers/SettingsFile.h b/src/backend/parsers/SettingsFile.h
+index e1af19bf..52fc8eed 100644
+--- a/src/backend/parsers/SettingsFile.h
++++ b/src/backend/parsers/SettingsFile.h
+@@ -20,6 +20,7 @@
+ #include "types/KeyEventType.h"
+ #include "utils/HashMap.h"
+ 
++#include <QKeySequence>
+ #include <QString>
+ #include <QStringList>
+ #include <QTextStream>
+diff --git a/src/backend/platform/AndroidHelpers.cpp b/src/backend/platform/AndroidHelpers.cpp
+index fcf57e01..24fc67aa 100644
+--- a/src/backend/platform/AndroidHelpers.cpp
++++ b/src/backend/platform/AndroidHelpers.cpp
+@@ -193,7 +193,7 @@ QString to_document_uri(const QString& path)
+         if (most_specific_root == primary_storage_path())
+             return QStringLiteral("primary:");
+ 
+-        QVector<QStringRef> parts = most_specific_root.splitRef(QChar('/'));
++        QVector<QStringView> parts = most_specific_root.splitRef(QChar('/'));
+         return parts.last().toString() + QChar(':');
+     }();
+     const QString rel_dir = prefix + storage_root.relativeFilePath(abs_dir);
+diff --git a/src/backend/providers/android_apps/AndroidAppsMetadata.cpp b/src/backend/providers/android_apps/AndroidAppsMetadata.cpp
+index 8c71616c..1e687951 100644
+--- a/src/backend/providers/android_apps/AndroidAppsMetadata.cpp
++++ b/src/backend/providers/android_apps/AndroidAppsMetadata.cpp
+@@ -157,7 +157,7 @@ void MetadataHelper::fill_from_network(
+ QJsonDocument MetadataHelper::parse_reply(const QByteArray& html_raw) const
+ {
+     QTextStream html_stream(html_raw);
+-    html_stream.setCodec("UTF-8");
++    html_stream.setEncoding(QStringConverter::Utf8);
+     const QString content = html_stream.read(1 * 1024 * 1024); // up to 1 MB
+ 
+     QJsonObject json_root;
+diff --git a/src/backend/providers/es2/Es2Games.cpp b/src/backend/providers/es2/Es2Games.cpp
+index 68b100a6..30551842 100644
+--- a/src/backend/providers/es2/Es2Games.cpp
++++ b/src/backend/providers/es2/Es2Games.cpp
+@@ -33,20 +33,20 @@
+ 
+ 
+ namespace {
+-QVector<QStringRef> split_list(const QString& str)
++QVector<QStringView> split_list(const QString& str)
+ {
+     // FIXME: don't leave statics around
+     static const QRegularExpression separator(QStringLiteral("[,\\s]"));
+-    return str.splitRef(separator, Qt::SkipEmptyParts);
++    return QStringView{str}.split(separator, Qt::SkipEmptyParts);
+ }
+ 
+ /// returns a list of unique, '*.'-prefixed lowercase file extensions
+ QStringList parse_filters(const QString& filters_raw) {
+     const QString filters_lowercase = filters_raw.toLower();
+-    const QVector<QStringRef> filter_refs = split_list(filters_lowercase);
++    const QVector<QStringView> filter_refs = split_list(filters_lowercase);
+ 
+     QStringList filter_list;
+-    for (const QStringRef& filter_ref : filter_refs)
++    for (const QStringView& filter_ref : filter_refs)
+         filter_list.append(QChar('*') + filter_ref.trimmed());
+ 
+     filter_list.removeDuplicates();
+@@ -81,7 +81,7 @@ std::vector<QString> read_mame_blacklists(const QString& log_tag, const std::vec
+         const QString line_tail = QStringLiteral("</%1>").arg(blacklist_entry.second);
+ 
+         QTextStream stream(&file);
+-        stream.setCodec("UTF-8");
++        stream.setEncoding(QStringConverter::Utf8);
+ 
+         QString line;
+         int hit_count = 0;
+@@ -127,7 +127,7 @@ size_t find_games_for(
+     }();
+ 
+     // use the blacklist maybe
+-    const QVector<QStringRef> platforms = split_list(sysentry.platforms);
++    const QVector<QStringView> platforms = split_list(sysentry.platforms);
+     const bool use_blacklist = VEC_CONTAINS(platforms, QLatin1String("arcade"))
+                             || VEC_CONTAINS(platforms, QLatin1String("neogeo"));
+ 
+diff --git a/src/backend/providers/es2/Es2Metadata.cpp b/src/backend/providers/es2/Es2Metadata.cpp
+index 564a2737..96f66202 100644
+--- a/src/backend/providers/es2/Es2Metadata.cpp
++++ b/src/backend/providers/es2/Es2Metadata.cpp
+@@ -66,7 +66,7 @@ QFileInfo shell_to_finfo(const QDir& base_dir, const QString& shell_filepath)
+         return {};
+ 
+     const QString real_path = shell_filepath.startsWith(QLatin1String("~/"))
+-        ? paths::homePath() + shell_filepath.midRef(1)
++	? paths::homePath() + QStringView{shell_filepath}.mid(1)
+         : shell_filepath;
+     return QFileInfo(base_dir, real_path);
+ }
+diff --git a/src/backend/providers/es2/Es2Systems.cpp b/src/backend/providers/es2/Es2Systems.cpp
+index 0b08c059..89a4e12f 100644
+--- a/src/backend/providers/es2/Es2Systems.cpp
++++ b/src/backend/providers/es2/Es2Systems.cpp
+@@ -46,7 +46,7 @@ QString find_systems_xml(const std::vector<QString>& possible_config_dirs)
+ }
+ 
+ HashMap<QLatin1String, QString>::iterator
+-find_by_str_ref(HashMap<QLatin1String, QString>& map, const QStringRef& str)
++find_by_str_ref(HashMap<QLatin1String, QString>& map, const QStringView& str)
+ {
+     HashMap<QLatin1String, QString>::iterator it;
+     for (it = map.begin(); it != map.end(); ++it)
+diff --git a/src/backend/providers/gog/GogGamelist.cpp b/src/backend/providers/gog/GogGamelist.cpp
+index a0b9cdc1..fbd58b36 100644
+--- a/src/backend/providers/gog/GogGamelist.cpp
++++ b/src/backend/providers/gog/GogGamelist.cpp
+@@ -125,7 +125,7 @@ std::vector<GogEntry> find_game_entries(const HashMap<QString, std::vector<QStri
+             QFile config_file(gameinfo_path);
+             if (config_file.open(QFile::ReadOnly | QFile::Text)) {
+                 QTextStream stream(&config_file);
+-                stream.setCodec("UTF-8");
++                stream.setEncoding(QStringConverter::Utf8);
+ 
+                 QString line;
+                 unsigned short lineno = 0;
+diff --git a/src/backend/providers/launchbox/LaunchBoxGamelistXml.cpp b/src/backend/providers/launchbox/LaunchBoxGamelistXml.cpp
+index 98624e6a..7b76aaec 100644
+--- a/src/backend/providers/launchbox/LaunchBoxGamelistXml.cpp
++++ b/src/backend/providers/launchbox/LaunchBoxGamelistXml.cpp
+@@ -112,7 +112,7 @@ void apply_game_fields(
+                 }
+                 break;
+             case GameField::PLAYMODE:
+-                for (const QStringRef& ref : pair.second.splitRef(QChar(';')))
++                for (const QStringView& ref : pair.second.splitRef(QChar(';')))
+                     game.genreList().append(ref.trimmed().toString());
+                 break;
+             case GameField::EMULATOR_ID:
+diff --git a/src/backend/providers/pegasus_favorites/Favorites.cpp b/src/backend/providers/pegasus_favorites/Favorites.cpp
+index 1d47d605..68bb769c 100644
+--- a/src/backend/providers/pegasus_favorites/Favorites.cpp
++++ b/src/backend/providers/pegasus_favorites/Favorites.cpp
+@@ -65,7 +65,7 @@ Provider& Favorites::run(SearchContext& sctx)
+     const QDir base_dir = QFileInfo(m_db_path).dir();
+ 
+     QTextStream db_stream(&db_file);
+-    db_stream.setCodec("UTF-8");
++    db_stream.setEncoding(QStringConverter::Utf8);
+ 
+     QString line;
+     while (db_stream.readLineInto(&line)) {
+@@ -132,9 +132,9 @@ void Favorites::start_processing()
+             }
+ 
+             QTextStream db_stream(&db_file);
+-            db_stream.setCodec("UTF-8");
++            db_stream.setEncoding(QStringConverter::Utf8);
+ 
+-            for (const QString& fav : qAsConst(m_active_task))
++            for (const QString& fav : std::as_const(m_active_task))
+                 db_stream << fav << Qt::endl;
+ 
+             QMutexLocker lock(&m_task_guard);
+diff --git a/src/backend/providers/pegasus_metadata/PegasusMetadata.cpp b/src/backend/providers/pegasus_metadata/PegasusMetadata.cpp
+index 27431126..4605b9fc 100644
+--- a/src/backend/providers/pegasus_metadata/PegasusMetadata.cpp
++++ b/src/backend/providers/pegasus_metadata/PegasusMetadata.cpp
+@@ -359,8 +359,8 @@ void Metadata::apply_game_entry(ParserState& ps, const metafile::Entry& entry, S
+             {
+                 const auto rx_match = rx_count_range.match(first_line_of(ps, entry));
+                 if (rx_match.hasMatch()) {
+-                    const short a = rx_match.capturedRef(1).toShort();
+-                    const short b = rx_match.capturedRef(3).toShort();
++                    const short a = rx_match.captured(1).toShort();
++                    const short b = rx_match.captured(3).toShort();
+                     ps.cur_game->setPlayerCount(std::max(a, b));
+                 }
+             }
+@@ -405,7 +405,7 @@ void Metadata::apply_game_entry(ParserState& ps, const metafile::Entry& entry, S
+ 
+                 const auto rx_match_a = rx_percent.match(line);
+                 if (rx_match_a.hasMatch()) {
+-                    ps.cur_game->setRating(line.leftRef(line.length() - 1).toFloat() / 100.f);
++		    ps.cur_game->setRating(QStringView{line}.left(line.length() - 1).toFloat() / 100.f);
+                     return;
+                 }
+                 const auto rx_match_b = rx_float.match(line);
+diff --git a/src/backend/providers/steam/SteamGamelist.cpp b/src/backend/providers/steam/SteamGamelist.cpp
+index 80085e04..ea00641c 100644
+--- a/src/backend/providers/steam/SteamGamelist.cpp
++++ b/src/backend/providers/steam/SteamGamelist.cpp
+@@ -69,7 +69,7 @@ std::pair<QString, QString> Gamelist::read_manifest_file(const QString& manifest
+     QString title;
+ 
+     QTextStream stream(&manifest);
+-    stream.setCodec("UTF-8");
++    stream.setEncoding(QStringConverter::Utf8);
+ 
+     while (!stream.atEnd() && (appid.isEmpty() || title.isEmpty())) {
+         const QString line = stream.readLine();
+diff --git a/src/backend/providers/steam/SteamProvider.cpp b/src/backend/providers/steam/SteamProvider.cpp
+index 24098d33..e86b92f5 100644
+--- a/src/backend/providers/steam/SteamProvider.cpp
++++ b/src/backend/providers/steam/SteamProvider.cpp
+@@ -88,7 +88,7 @@ void find_installdirs_in_vdf(
+         entry_regexes.emplace_back(pattern);
+ 
+     QTextStream stream(&vdf);
+-    stream.setCodec("UTF-8");
++    stream.setEncoding(QStringConverter::Utf8);
+ 
+     while (!stream.atEnd()) {
+         const QString line = stream.readLine();
+diff --git a/src/backend/utils/CommandTokenizer.cpp b/src/backend/utils/CommandTokenizer.cpp
+index 7b485eea..396b9bae 100644
+--- a/src/backend/utils/CommandTokenizer.cpp
++++ b/src/backend/utils/CommandTokenizer.cpp
+@@ -75,7 +75,7 @@ QStringList tokenize_command(const QString& str)
+         const bool fully_quoted = starts_with_quote && (ch == str.at(o_end - 1));
+         const int mid_from = starts_with_quote ? o_start + 1 : o_start;
+         const int mid_len = fully_quoted ? len - 2 : len;
+-        results.append(str.midRef(mid_from, mid_len).trimmed().toString());
++        results.append(QStringView{str}.mid(mid_from, mid_len).trimmed().toString());
+ 
+         o_start = o_end;
+     }
+diff --git a/src/backend/utils/FolderListModel.cpp b/src/backend/utils/FolderListModel.cpp
+index 6f38e73c..c8b5f7bb 100644
+--- a/src/backend/utils/FolderListModel.cpp
++++ b/src/backend/utils/FolderListModel.cpp
+@@ -156,7 +156,7 @@ void FolderListModel::cd(const QString& dirName)
+         // adding dotdot manually to avoid getting stuck in the file system
+         m_files.emplace_back(QStringLiteral(".."), true);
+ 
+-        for (const auto& fi : qAsConst(filist))
++        for (const auto& fi : std::as_const(filist))
+             m_files.emplace_back(fi.fileName(), fi.isDir());
+     }
+ 
+diff --git a/tests/backend/providers/pegasus/test_PegasusProvider.cpp b/tests/backend/providers/pegasus/test_PegasusProvider.cpp
+index 5b02d8b3..ef05bc85 100644
+--- a/tests/backend/providers/pegasus/test_PegasusProvider.cpp
++++ b/tests/backend/providers/pegasus/test_PegasusProvider.cpp
+@@ -487,7 +487,7 @@ void test_PegasusProvider::nonASCII()
+         QFile metafile(metapath);
+         QVERIFY(metafile.open(QFile::WriteOnly | QFile::Text));
+         QTextStream stream(&metafile);
+-        stream.setCodec("UTF-8");
++        stream.setEncoding(QStringConverter::Utf8);
+         stream << QStringLiteral("collection: Test\nextension: ext\n\n");
+ 
+         for (const TestEntry& entry : entries) {
+diff --git a/thirdparty/SortFilterProxyModel b/thirdparty/SortFilterProxyModel
+index 2061f813..3f390de7 160000
+--- a/thirdparty/SortFilterProxyModel
++++ b/thirdparty/SortFilterProxyModel
+@@ -1 +1 @@
+-Subproject commit 2061f8136ba372fd06c1928a610258b7d88cb144
++Subproject commit 3f390de7c0383775f4b03d644efe75a3f9f3561e-dirty

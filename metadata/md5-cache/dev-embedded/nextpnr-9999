@@ -1,6 +1,6 @@
 BDEPEND=>=dev-vcs/git-1.8.2.1[curl] app-alternatives/ninja >=dev-build/cmake-3.28.5
 DEFINED_PHASES=compile configure install prepare test unpack
-DEPEND=dev-libs/boost[python] dev-cpp/eigen dev-embedded/yosys ice40? ( dev-embedded/icestorm ) ecp5? ( dev-embedded/trellis ) cyclonev? ( dev-embedded/mistral ) nexus? ( dev-embedded/oxide ) gowin? ( dev-embedded/apicula ) himbaechel? ( dev-embedded/nextpnr-xilinx-meta ) xilinx? ( dev-embedded/x-ray ) gui? ( dev-qt/qtbase dev-qt/qtcore:5 dev-qt/qtopengl:5 ) python? ( dev-lang/python )
+DEPEND=dev-libs/boost[python] dev-cpp/eigen dev-embedded/yosys ice40? ( dev-embedded/icestorm ) ecp5? ( dev-embedded/trellis ) cyclonev? ( dev-embedded/mistral ) nexus? ( dev-embedded/oxide ) gowin? ( dev-embedded/apicula ) himbaechel? ( dev-embedded/nextpnr-xilinx-meta ) xilinx? ( dev-embedded/x-ray ) gui? ( dev-qt/qtbase ) python? ( dev-lang/python )
 DESCRIPTION=place-and-route tool
 EAPI=8
 HOMEPAGE=https://github.com/YosysHQ/nextpnr
@@ -8,7 +8,7 @@ INHERIT=git-r3 cmake
 IUSE=gui python openmp chipdb ipo ice40 ecp5 cyclonev nexus gowin himbaechel xilinx ngultra
 LICENSE=ISC
 PROPERTIES=live
-RDEPEND=dev-libs/boost[python] dev-cpp/eigen dev-embedded/yosys ice40? ( dev-embedded/icestorm ) ecp5? ( dev-embedded/trellis ) cyclonev? ( dev-embedded/mistral ) nexus? ( dev-embedded/oxide ) gowin? ( dev-embedded/apicula ) himbaechel? ( dev-embedded/nextpnr-xilinx-meta ) xilinx? ( dev-embedded/x-ray ) gui? ( dev-qt/qtbase dev-qt/qtcore:5 dev-qt/qtopengl:5 ) python? ( dev-lang/python )
+RDEPEND=dev-libs/boost[python] dev-cpp/eigen dev-embedded/yosys ice40? ( dev-embedded/icestorm ) ecp5? ( dev-embedded/trellis ) cyclonev? ( dev-embedded/mistral ) nexus? ( dev-embedded/oxide ) gowin? ( dev-embedded/apicula ) himbaechel? ( dev-embedded/nextpnr-xilinx-meta ) xilinx? ( dev-embedded/x-ray ) gui? ( dev-qt/qtbase ) python? ( dev-lang/python )
 SLOT=0
-_eclasses_=git-r3	2f8cdb10b033f92c3136aa6488a31c98	toolchain-funcs	58a918e3a42d0156f010dcfd43725be5	flag-o-matic	fd3558f73f6503093adee69adf41020d	multiprocessing	45d0620f25c2f063ad6276ecd9ed9399	ninja-utils	d063ea1900a793f93eb095010d6d9156	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	3395ce6618fc5c7af03335471b896644
-_md5_=4b95683d7bf6ac69c1d34e3590a54bef
+_eclasses_=git-r3	e6c2f983e006e805160436c75a0c1562	toolchain-funcs	58a918e3a42d0156f010dcfd43725be5	flag-o-matic	fd3558f73f6503093adee69adf41020d	multiprocessing	45d0620f25c2f063ad6276ecd9ed9399	ninja-utils	d063ea1900a793f93eb095010d6d9156	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	3530055400d05e64deaba3042af30af6
+_md5_=089ab40d53fdfc2c716fe26e589e7765

@@ -1,0 +1,13 @@
+BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=configure unpack
+DEPEND=dev-qt/qtbase:6 dev-qt/qtdeclarative:6 dev-qt/qtmultimedia:6[qml] dev-qt/qtsvg
+DESCRIPTION=A customizable graphical frontend for launching emulators and managing your game collection
+EAPI=8
+HOMEPAGE=pegasus-frontend.org
+INHERIT=git-r3 qmake-utils
+LICENSE=GPL-3
+PROPERTIES=live
+RDEPEND=dev-qt/qtbase:6 dev-qt/qtdeclarative:6 dev-qt/qtmultimedia:6[qml] dev-qt/qtsvg
+SLOT=0
+_eclasses_=git-r3	e6c2f983e006e805160436c75a0c1562	qt-utils	5b7ae92788820ab4495683740521513c	toolchain-funcs	58a918e3a42d0156f010dcfd43725be5	qmake-utils	91f1d001b598c8e4730a7a36b2c1849d
+_md5_=6df93fe9e8c0a334b1f97b3b68583a6f

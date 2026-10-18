@@ -1,0 +1,53 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 3e0aec03e..74c7defe1 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -27,6 +27,8 @@ option(DISABLE_KODI "Set to ON to disable kodi in menu" OFF)
+ option(ENABLE_PULSE "Set to ON to enable pulse audio (versus alsa)" OFF)
+ option(ENABLE_TTS "Set to ON to enable text to speech" OFF)
+ option(USE_SYSTEM_PUGIXML "Set to ON to use system-wide pugixml library" OFF)
++option(USE_SYSTEM_ID3V2 "Set to ON to use system-wide id3v2 library" OFF)
++option(USE_SYSTEM_NANOSVG "Set to ON to use system-wide nanosvg library" OFF)
+ 
+ add_definitions(-w)
+ 
+@@ -363,6 +365,16 @@ if(USE_SYSTEM_PUGIXML)
+   find_package(pugixml REQUIRED)
+ endif()
+ 
++if(USE_SYSTEM_ID3V2)
++  MESSAGE("Use system id3v2")
++  find_package(id3v2 REQUIRED)
++endif()
++
++if(USE_SYSTEM_NANOSVG)
++  MESSAGE("Use system nanosvg")
++  find_package(nanosvg REQUIRED)
++endif()
++
+ #add libCEC_INCLUDE_DIR
+ if(CEC)
+   if(DEFINED libCEC_FOUND)
+diff --git a/external/CMakeLists.txt b/external/CMakeLists.txt
+index 5996336b6..269665bee 100644
+--- a/external/CMakeLists.txt
++++ b/external/CMakeLists.txt
+@@ -1,10 +1,16 @@
+ # set up the external libraries that aren't popular enough to be found on most 
+ # package managers are included with the project (in the 'external' folder)
+ 
+-add_subdirectory("nanosvg")
++if (NOT USE_SYSTEM_NANOSVG)
++   add_subdirectory("nanosvg")
++endif()
++
+ if (NOT USE_SYSTEM_PUGIXML)
+   add_subdirectory("pugixml")
+ endif()
+ 
+-add_subdirectory("id3v2lib")
++if (NOT USE_SYSTEM_ID3V2)
++   add_subdirectory("id3v2lib")
++endif()
++
+ add_subdirectory("libcheevos")

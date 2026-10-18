@@ -8,4 +8,4 @@ RDEPEND==dev-util/nvidia-cuda-toolkit-13*
 RESTRICT=bindist test
 SLOT=0/9.23.0
 SRC_URI=amd64? ( https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/linux-x86_64/cudnn-linux-x86_64-9.23.0.39_cuda13-archive.tar.xz ) arm64? ( https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/linux-sbsa/cudnn-linux-sbsa-9.23.0.39_cuda13-archive.tar.xz )
-_md5_=2671ba74a5627d9666f454195bea36ce
+_md5_=c2efd51bd1e101a3515a2d82e415eb2a

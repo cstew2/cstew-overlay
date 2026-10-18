@@ -1,15 +1,51 @@
+diff --git a/cmake/ConfigureSummary.cmake b/cmake/ConfigureSummary.cmake
+index af5766c60..a551bc9be 100644
+--- a/cmake/ConfigureSummary.cmake
++++ b/cmake/ConfigureSummary.cmake
+@@ -220,7 +220,7 @@ function( NEST_PRINT_CONFIG_SUMMARY )
+     message( "" )
+   endif()
+   message( "PyNEST will be installed to:" )
+-  message( "    ${CMAKE_INSTALL_PREFIX}/${PYEXECDIR}" )
++  message( "    ${PYEXECDIR}/nest/" )
+   message( "" )
+   message( "--------------------------------------------------------------------------------" )
+   message( "" )
 diff --git a/cmake/ProcessOptions.cmake b/cmake/ProcessOptions.cmake
-index 1bc7cd71e..ffb056f77 100644
+index 2c476d98d..738dc73f5 100644
 --- a/cmake/ProcessOptions.cmake
 +++ b/cmake/ProcessOptions.cmake
-@@ -343,7 +343,9 @@ endfunction()
+@@ -343,6 +343,7 @@ function( NEST_FIND_PYTHON )
+   set( Python_VERSION_MINOR "${Python_VERSION_MINOR}" PARENT_SCOPE )
+   set( Python_INCLUDE_DIRS "${Python_INCLUDE_DIRS}" PARENT_SCOPE )
+   set( Python_LIBRARIES "${Python_LIBRARIES}" PARENT_SCOPE )
++  set( Python_SITEARCH "${Python_SITEARCH}" PARENT_SCOPE )
  
- function( NEST_POST_PROCESS_WITH_PYTHON )
-   if ( Python_FOUND )
--    set( PYEXECDIR "${CMAKE_INSTALL_LIBDIR}/python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}/site-packages" PARENT_SCOPE )
-+    if ( NOT DEFINED PYEXECDIR )
-+       set( PYEXECDIR "${CMAKE_INSTALL_LIBDIR}/python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}/site-packages" PARENT_SCOPE )
-+    endif ()    
-   endif()
+   # Cython is required only when no pre-generated file is supplied.
+   if ( NOT NESTKERNEL_API_CXX )
+@@ -353,9 +354,9 @@ function( NEST_FIND_PYTHON )
  endfunction()
  
+ function( NEST_SETUP_PYTHON )
+-  set( PYEXECDIR
+-    "${CMAKE_INSTALL_LIBDIR}/python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}/site-packages"
+-    PARENT_SCOPE )
++  if ( NOT DEFINED PYEXECDIR )
++    set( PYEXECDIR "${Python_SITEARCH}" PARENT_SCOPE )
++  endif()
+ endfunction()
+ 
+ function( NEST_PROCESS_WITH_OPENMP )
+diff --git a/pynest/CMakeLists.txt b/pynest/CMakeLists.txt
+index 1e45851ed..917503e10 100644
+--- a/pynest/CMakeLists.txt
++++ b/pynest/CMakeLists.txt
+@@ -76,7 +76,7 @@ if( NOT "${SKBUILD}" STREQUAL "" )
+   install( TARGETS nestkernel_api DESTINATION ./nest )
+ else()
+   install( DIRECTORY nest/ ${PROJECT_BINARY_DIR}/pynest/nest/
+-    DESTINATION ${CMAKE_INSTALL_PREFIX}/${PYEXECDIR}/nest
++    DESTINATION ${PYEXECDIR}/nest
+     PATTERN "versionchecker.py.in" EXCLUDE
+   )
+   install( DIRECTORY examples/
